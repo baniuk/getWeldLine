@@ -18,18 +18,42 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="targetver.h">
+    <ClInclude Include="..\SDK\C_Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDK\C_Image_Container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDK\C_Matrix_Container.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Levmar_prototypes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\SDK\C_DumpAll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="LM_test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LM_test.cpp">
+    <ClCompile Include="..\SDK\C_Error.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SDK\C_Image_Container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SDK\C_Matrix_Container.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Levmar_fcn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SDK\C_DumpAll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
