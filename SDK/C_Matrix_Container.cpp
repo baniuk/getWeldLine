@@ -9,6 +9,12 @@ C_Matrix_Container::C_Matrix_Container(void)
 	data = NULL;
 }
 
+C_Matrix_Container::C_Matrix_Container( unsigned int rows, unsigned int cols )
+{
+	data = NULL;
+	this->AllocateData(rows,cols);
+}
+
 C_Matrix_Container::~C_Matrix_Container(void)
 {
 	if(data) {delete[] (double*)data;     data=NULL;}
@@ -174,7 +180,9 @@ BOOL C_Matrix_Container::DotMulti(C_Matrix_Container* matrix)
 {
 	#ifdef _DEBUG
 	if(data==NULL)
-		_RPTF0(_CRT_ASSERT, "Matrix not initialized!!\n");
+		_RPTF0(_CRT_ASSERT, "DotMulti::Matrix not initialized!!\n");
+	if(matrix->data==NULL)
+		_RPTF0(_CRT_ASSERT, "DotMulti::Param matrix not initialized!!\n");
 	#endif
 	unsigned long r;
 	if(_rows!=matrix->_rows || _cols!=matrix->_cols)

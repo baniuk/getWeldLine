@@ -9,12 +9,13 @@
 #include <wx/defs.h>
 #include <wx/debug.h>
 
-// Ver 1.3.1 by PB
+// Ver 1.3.2 by PB
 
 class C_Matrix_Container
 {
 public:
 	C_Matrix_Container(void);
+	C_Matrix_Container(unsigned int rows, unsigned int cols);
 	unsigned int _rows, _cols;
 	double* data;
 	void AllocateData(unsigned int rows, unsigned int cols);
