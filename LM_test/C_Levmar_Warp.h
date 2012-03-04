@@ -1,12 +1,12 @@
 /**
- * \file    Levmar_prototypes.h
+ * \file    C_Levmar_Warp.h
  * \brief	Warper do biblioteki levmar		
  * \details Zawiera definicje funkcji wykorzystuj¹cych biblioteke levmar
  * \author  PB
  * \date    2012/03/01
  */
-#ifndef _LEVMAR_PROT_H_
-#define _LEVMAR_PROT_H_
+#ifndef _C_Levmar_Warp_H_
+#define _C_Levmar_Warp_H_
 
 #include <levmar.h>
 #include <C_Matrix_Container.h>

@@ -1,12 +1,20 @@
 /**
- * \file    LineWeldApprox.cpp
+ * \file    C_LineWeldApprox.cpp
  * \brief	Zbiór podstawowch funkcji do detekcji linii spawu	
  * \details Zbiór podstawowch funkcji do detekcji linii spawu	
  * \author  PB
  * \date    2012/03/01
  */
-#include "LineWeldApprox.h"
+#include "C_LineWeldApprox.h"
 
+C_LineWeldApprox::C_LineWeldApprox()
+{
+
+}
+C_LineWeldApprox::~C_LineWeldApprox()
+{
+
+}
 /** 
  * Approximates one line of image. Approximation functions are evaluated for vector xtradata::x->x and then its output values are compared to 
  * vector y. Vector y and xtradata::x->x are the same size
@@ -37,7 +45,7 @@
  * @param[in] x		user data - values of domain of x. Approximation function is evaluated for these data and fitted to x
  * \return Number of iterations or -1 if failed
 */
-int getLineApproxGaussLinWeighted( C_Matrix_Container *w, C_Matrix_Container *p, C_Matrix_Container *y, C_Matrix_Container *x, C_Matrix_Container *lb, C_Matrix_Container *ub, int iter, double opts[LM_OPTS_SZ], double info[LM_INFO_SZ] )
+int C_LineWeldApprox::getLineApproxGaussLinWeighted( C_Matrix_Container *w, C_Matrix_Container *p, C_Matrix_Container *y, C_Matrix_Container *x, C_Matrix_Container *lb, C_Matrix_Container *ub, int iter, double opts[LM_OPTS_SZ], double info[LM_INFO_SZ] )
 {
 	C_Matrix_Container *tmp_w;
 	int ret;
