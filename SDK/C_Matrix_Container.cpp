@@ -56,7 +56,7 @@ void C_Matrix_Container::ImportFromMatlab(double* in,unsigned int row, unsigned 
 			this->SetPixel(r,c,in[a++]);
 }
 
-void C_Matrix_Container::CloneObject(C_Matrix_Container* dest)
+void C_Matrix_Container::CloneObject(C_Matrix_Container* dest) const
 {
 	#ifdef _DEBUG
 	if(data==NULL)
@@ -90,7 +90,7 @@ void C_Matrix_Container::Ones(void)
 		data[a] = 1.0;
 }
 
-inline unsigned long C_Matrix_Container::GetNumofElements(void)
+inline unsigned long C_Matrix_Container::GetNumofElements(void) const
 {
 	#ifdef _DEBUG
 	if(data==NULL)
@@ -98,7 +98,7 @@ inline unsigned long C_Matrix_Container::GetNumofElements(void)
 	#endif
 	return _rows*_cols;
 }
-void C_Matrix_Container::GetPixel(unsigned int row, unsigned int col,double &pixel)
+void C_Matrix_Container::GetPixel(unsigned int row, unsigned int col,double &pixel) const
 {
 	#ifdef _DEBUG
 	if(data==NULL)
@@ -111,7 +111,7 @@ void C_Matrix_Container::GetPixel(unsigned int row, unsigned int col,double &pix
 	pixel = data[row*_cols+col];
 }
 
-inline double C_Matrix_Container::GetPixel(unsigned int row, unsigned int col)
+inline double C_Matrix_Container::GetPixel(unsigned int row, unsigned int col) const
 {
 	#ifdef _DEBUG
 	if(data==NULL)
@@ -192,7 +192,7 @@ BOOL C_Matrix_Container::DotMulti(C_Matrix_Container* matrix)
 	return true;
 }
 
-void C_Matrix_Container::getMinMax(double& min, double& max)
+void C_Matrix_Container::getMinMax( double& min, double& max ) const
 {
 	#ifdef _DEBUG
 	if(data==NULL)

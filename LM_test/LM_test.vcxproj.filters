@@ -30,13 +30,13 @@
     <ClInclude Include="..\SDK\C_Matrix_Container.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Levmar_prototypes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\SDK\C_DumpAll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LineWeldApprox.h">
+    <ClInclude Include="C_Levmar_Warp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C_LineWeldApprox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -53,13 +53,13 @@
     <ClCompile Include="..\SDK\C_Matrix_Container.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Levmar_fcn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\SDK\C_DumpAll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LineWeldApprox.cpp">
+    <ClCompile Include="C_LineWeldApprox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C_Levmar_Warp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

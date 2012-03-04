@@ -3,8 +3,8 @@
 
 #include <windows.h>
 #include <tchar.h>
-#include "Levmar_prototypes.h"
-#include "LineWeldApprox.h"
+#include "C_Levmar_Warp.h"
+#include "C_LineWeldApprox.h"
 #include <C_Matrix_Container.h>
 #include <C_Image_Container.h>
 #include <C_Error.h>
@@ -101,7 +101,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 		/// getLineApproxGaussLinWeighted TestCase5_1
 		/** Test funkcji aproxymuj¹cej profil High level */
-	{
+/*	{
 		double info[LM_INFO_SZ];
 		int ret;
 		C_DumpAll getLineApproxGaussLinWeighted_test_1("getLineApproxGaussLinWeighted_test_1.out");
@@ -123,7 +123,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		getLineApproxGaussLinWeighted_test_1.AddEntry(info,LM_INFO_SZ,"info");
 		getLineApproxGaussLinWeighted_test_1.AddEntry(&profil,"profil");
 	}
-
+*/
 
 	return 0;
 }

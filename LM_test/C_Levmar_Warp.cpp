@@ -1,11 +1,11 @@
 /**
- * \file    Levmar_fcn.cpp
+ * \file    C_Levamr_Warp.cpp
  * \brief	Warper do biblioteki levmar	
  * \details Zawiera definicje funkcji wykorzystuj¹cych biblioteke levmar
  * \author  PB
  * \date    2012/03/01
  */
-#include "Levmar_prototypes.h"
+#include "C_Levmar_Warp.h"
 
 /** 
  Evaluates approximation function defined by sum of Gauss and Linear function\n

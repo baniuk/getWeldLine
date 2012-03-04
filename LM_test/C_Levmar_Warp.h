@@ -1,12 +1,12 @@
 /**
- * \file    Levmar_prototypes.h
+ * \file    C_Levmar_Warp.h
  * \brief	Warper do biblioteki levmar		
  * \details Zawiera definicje funkcji wykorzystuj¹cych biblioteke levmar
  * \author  PB
  * \date    2012/03/01
  */
-#ifndef _LEVMAR_PROT_H_
-#define _LEVMAR_PROT_H_
+#ifndef _C_Levmar_Warp_H_
+#define _C_Levmar_Warp_H_
 
 #include <levmar.h>
 #include <C_Matrix_Container.h>
@@ -18,6 +18,31 @@
 #error Example program assumes that levmar has been compiled with double precision, see LM_DBL_PREC!
 #endif
 
+/// Typy aproxymacji
+enum eApproxFcn {
+	typeGaussLin = 1
+}; 
+/// Nazwy parametrów dla funkcji Gauss+Lin
+enum eParNamesGaussLin {
+	A = 0,
+	B,
+	C,
+	D,
+	E
+};
+/// Nazwy wyników optymalizacji
+enum eOptimInfo {
+	par0 = 0,
+	err,
+	par2,
+	par3,
+	par4,
+	iterations,
+	stopreason,
+	funceval,
+	jacevals,
+	linsolves
+};
 /** 
   \brief struct to pass function domain to it
  * Variable X is defined as const to prevent modifications throught the structure. It is read-only */
