@@ -36,6 +36,9 @@
     <ClInclude Include="..\SDK\C_DumpAll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="LineWeldApprox.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="LM_test.cpp">
@@ -54,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\SDK\C_DumpAll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LineWeldApprox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

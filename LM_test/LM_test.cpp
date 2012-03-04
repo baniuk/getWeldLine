@@ -4,6 +4,7 @@
 #include <windows.h>
 #include <tchar.h>
 #include "Levmar_prototypes.h"
+#include "LineWeldApprox.h"
 #include <C_Matrix_Container.h>
 #include <C_Image_Container.h>
 #include <C_Error.h>

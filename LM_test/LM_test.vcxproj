@@ -150,6 +150,7 @@
     <ClInclude Include="..\SDK\C_Image_Container.h" />
     <ClInclude Include="..\SDK\C_Matrix_Container.h" />
     <ClInclude Include="Levmar_prototypes.h" />
+    <ClInclude Include="LineWeldApprox.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +159,7 @@
     <ClCompile Include="..\SDK\C_Image_Container.cpp" />
     <ClCompile Include="..\SDK\C_Matrix_Container.cpp" />
     <ClCompile Include="Levmar_fcn.cpp" />
+    <ClCompile Include="LineWeldApprox.cpp" />
     <ClCompile Include="LM_test.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
