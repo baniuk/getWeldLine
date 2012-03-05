@@ -9,6 +9,7 @@
 #define _LineWeldApprox_H_
 
 #include "C_Levmar_Warp.h"
+#include "C_getLine.h"
 
 /** 
  * Wykonuje aproxymacjê jednej linii spawu i przechowuje wyniki takiej aproxymacji 
@@ -63,8 +64,6 @@ public:
 	void getApproxParams(C_Matrix_Container *_p, C_Matrix_Container *_ub, C_Matrix_Container *_lb);
 	/// Zwraca wybran¹ informacjê o wyniku optymalizacji
 	double getInfo(eOptimInfo _res);
-
-
 };
 
 
