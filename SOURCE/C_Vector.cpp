@@ -25,7 +25,7 @@ C_Vector::~C_Vector()
 
 }
 
-void C_Vector::getPoints( C_Point &_P0, C_Point &_P1 )
+void C_Vector::getPoints( C_Point &_P0, C_Point &_P1 ) const
 {
 	_P0 = P0;
 	_P1 = P1;
@@ -84,7 +84,7 @@ void C_Vector::setNewP0( const C_Point &_P0 )
 	P1 = P0 + VEC;
 }
 
-double C_Vector::getVectorLen()
+double C_Vector::getVectorLen() const
 {
 	double x,y;
 	VEC.getPoint(x,y);
@@ -105,3 +105,67 @@ void C_Vector::setVectorLen( double len )
 	recalculateVectorP0VEC(P0,tmpVEC);
 
 }
+
+/** 
+ * Wektor wynikowy jest zaczpiony w punkcie P0
+ */
+C_Vector& C_Vector::operator+=( const C_Vector &rhs )
+{
+	C_Point rP0,rP1,rVEC;
+	rhs.getVector(rP0,rP1,rVEC);
+	VEC+=rVEC;
+	recalculateVectorP0VEC(P0,VEC);
+	return *this;
+}
+/** 
+ * Wektor wynikowy jest zaczpiony w punkcie P0
+ */
+C_Vector& C_Vector::operator-=( const C_Vector &rhs )
+{
+	C_Point rP0,rP1,rVEC;
+	rhs.getVector(rP0,rP1,rVEC);
+	VEC-=rVEC;
+	recalculateVectorP0VEC(P0,VEC);
+	return *this;
+}
+/** 
+ * Wektor wynikowy jest zaczpiony w punkcie P0
+ */
+const C_Vector C_Vector::operator+( const C_Vector &rhs ) const
+{
+	C_Vector result = *this;
+	result+=rhs;
+	return result;
+}
+/** 
+ * Wektor wynikowy jest zaczpiony w punkcie P0
+ */
+const C_Vector C_Vector::operator-( const C_Vector &rhs ) const
+{
+	C_Vector result = *this;
+	result-=rhs;
+	return result;
+}
+
+const double C_Vector::operator*( const C_Vector &rhs ) const
+{
+	C_Point dummy1,dummy2,VEC1,VEC2;
+	double x_VEC1,y_VEC1,
+		   x_VEC2,y_VEC2;
+	this->getVector(dummy1,dummy2,VEC1);
+	rhs.getVector(dummy1,dummy2,VEC2);
+	VEC1.getPoint(x_VEC1,y_VEC1);
+	VEC2.getPoint(x_VEC2,y_VEC2);
+
+	return x_VEC1*x_VEC2 + y_VEC1*y_VEC2;
+}
+
+double C_Vector::getAngleDeg( const C_Vector &_V1 ) const
+{
+	double alfa;
+	alfa = (*this*_V1)/(this->getVectorLen()*_V1.getVectorLen());
+	return acos(alfa)*180/M_PI;
+//	a = (obj*V1)/(obj.GetVectorLen*V1.GetVectorLen);
+}
+
+

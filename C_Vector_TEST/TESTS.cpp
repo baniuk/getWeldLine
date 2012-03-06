@@ -1,7 +1,5 @@
 #include "stdafx.h"
 
-
-
 /** \brief Funkcja obs³uguj¹ca porównaina punktów - obiektów C_Point
  * Funkcja porównuje P0==P1
  */ 
@@ -36,16 +34,18 @@ protected:
 	C_Vector vector;
 	double len;
 
+	C_Point _P01;	// punkt pocz¹tkowy
+	C_Point _P11; // punkt koñcowy
+	C_Point _VEC1;	// wsp wektora
+	C_Vector vector1;
+	double len1;
+
 	C_Point C_get_private_setVEC(C_Vector* obj,C_Point &_P0, C_Point &_P1) {
 		return obj->setVEC(_P0,_P1);
 	}
 
 	C_VectorTest() {
-		_P0.setPoint(1,2);
-		_P1.setPoint(11,21);
-		_VEC.setPoint(10,19);
-		vector.recalculateVectorP0P1(_P0,_P1); // ten wektor jest zgodny z _VEC
-		len = sqrt(10.0*10.0+19.0*19.0);
+
 	}
 
 	virtual ~C_VectorTest() {
@@ -56,6 +56,17 @@ protected:
 	// and cleaning up each test, you can define the following methods:
 
 	virtual void SetUp() {
+		_P0.setPoint(1,2);
+		_P1.setPoint(11,21);
+		_VEC.setPoint(10,19);
+		vector.recalculateVectorP0P1(_P0,_P1); // ten wektor jest zgodny z _VEC
+		len = sqrt(10.0*10.0+19.0*19.0);
+
+		_P01.setPoint(-4,1);
+		_P11.setPoint(5,4);
+		_VEC1.setPoint(9,3);
+		vector1.recalculateVectorP0P1(_P01,_P11); // ten wektor jest zgodny z _VEC
+		len1 = sqrt(9.0*9.0+3.0*3.0);
 
 	}
 
@@ -163,4 +174,45 @@ TEST_F(C_VectorTest, setVectorLen) {
 
 	C_Vector expected(P0,P3);
 	C_Vector_CMP(expected,v);
+}
+
+/// testowanie operatora A+=B
+TEST_F(C_VectorTest, operAprB)	{
+	C_Vector expected;
+	expected.recalculateVectorP0VEC(_P0,_VEC+_VEC1);
+	vector+=vector1;
+	C_Vector_CMP(expected,vector);
+}
+
+/// testowanie operatora A-=B
+TEST_F(C_VectorTest, operAmrB)	{
+	C_Vector expected;
+	expected.recalculateVectorP0VEC(_P0,_VEC-_VEC1);
+	vector-=vector1;
+	C_Vector_CMP(expected,vector);
+}
+
+/// testowanie operatora C=A+B
+TEST_F(C_VectorTest, operApB)	{
+	C_Vector expected;
+	C_Vector res;
+	expected.recalculateVectorP0VEC(_P0,_VEC+_VEC1);
+	res = vector+vector1;
+	C_Vector_CMP(expected,res);
+}
+
+/// testowanie operatora C=A-B
+TEST_F(C_VectorTest, operAmB)	{
+	C_Vector expected;
+	C_Vector res;
+	expected.recalculateVectorP0VEC(_P0,_VEC-_VEC1);
+	res = vector-vector1;
+	C_Vector_CMP(expected,res);
+}
+
+/// testowanie operatora *
+TEST_F(C_VectorTest, operskalarny)	{
+	double sk;
+	sk = vector*vector1;
+	EXPECT_EQ(147,sk);
 }

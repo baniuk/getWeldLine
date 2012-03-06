@@ -4,7 +4,9 @@
 /** 
  * Klasa implementuj¹ca punkt w przestreni dwuwymiarowej
  */ 
+#define _USE_MATH_DEFINES
 #include <math.h>
+
 
 class C_Point
 {

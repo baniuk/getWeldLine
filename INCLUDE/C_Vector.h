@@ -14,7 +14,7 @@ public:
 	/// tworzy wektor o pocz¹tku P0 i koñcu P1
 	C_Vector(const C_Point &_P0, const C_Point &_P1);
 	/// zwraca poczatek i koniec wektora
-	void getPoints(C_Point &_P0, C_Point &_P1);
+	void getPoints(C_Point &_P0, C_Point &_P1) const;
 	/// zwraca pocz¹tek, koniec i wspó³rzêdne wektora
 	void getVector(C_Point &_P0, C_Point &_P1, C_Point &_VEC) const;
 	/// ustawia wektor przy pomocy jego pocz¹tku i wspó³rzêdnych
@@ -24,9 +24,21 @@ public:
 	/// Ustala nowy punkt przy³o¿enia
 	void setNewP0(const C_Point &_P0);
 	/// zwraca d³ugoœæ wektora
-	double getVectorLen();
-	// ustawia wektor wg d³ugoœci, nie zmienia punktu pocz¹tkowego
+	double getVectorLen() const;
+	/// ustawia wektor wg d³ugoœci, nie zmienia punktu pocz¹tkowego
 	void setVectorLen(double len);
+	/// zwraca k¹t pomiêdzy wektorami w stopniach
+	double getAngleDeg(const C_Vector &_V1) const;
+	/// operator odejmowania A-=B
+	C_Vector& operator-=(const C_Vector &rhs);
+	/// operator dodawania A+=B
+	C_Vector& operator+=(const C_Vector &rhs);
+	/// operator dodawania C=A+B
+	const C_Vector operator+(const C_Vector &rhs) const;
+	/// operaor odejmowania C = A-B
+	const C_Vector operator-(const C_Vector &rhs) const;
+	/// operator mnozenia skalarnego
+	const double operator*(const C_Vector &rhs) const;
 	~C_Vector();
 private:
 	/// oblicza wspó³rzedne wektora i zapisuje zmienna VEC
