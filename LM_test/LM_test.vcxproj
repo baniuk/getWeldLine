@@ -154,6 +154,9 @@
     <ClInclude Include="C_getLine.h" />
     <ClInclude Include="C_Levmar_Warp.h" />
     <ClInclude Include="C_LineWeldApprox.h" />
+    <ClInclude Include="C_Point.h" />
+    <ClInclude Include="C_Vector.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
@@ -164,7 +167,12 @@
     <ClCompile Include="C_getLine.cpp" />
     <ClCompile Include="C_Levmar_Warp.cpp" />
     <ClCompile Include="C_LineWeldApprox.cpp" />
+    <ClCompile Include="C_Point.cpp" />
+    <ClCompile Include="C_Vector.cpp" />
     <ClCompile Include="LM_test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TrackWeldLine.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
