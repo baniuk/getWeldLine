@@ -62,13 +62,19 @@ y = line3.evalLine(x);
 % dla pionowych tu inaczej dzia³¹
 y = repmat(y,x_data(3),1);
 savebinarymatrix(y(:,1)',[pa,'line3_4.dat']);
-%%
-line1 = Line(0,1);
-line2 = Line(-2,10);
-line3 = Line(NaN,5);
+%% getPointsOnLine
+pa = '..\C_Line_TEST\';
+P0 = [1 1];
+P1 = [10 10];
+N = 20;
+x = linspace(P0(1),P1(1),N);
+y = x;
+savebinarymatrix(P0,[pa,'getPointsOnLine_0.dat']);
+savebinarymatrix(P1,[pa,'getPointsOnLine_1.dat']);
+savebinarymatrix(N,[pa,'getPointsOnLine_2.dat']);
+savebinarymatrix(y,[pa,'getPointsOnLine_3.dat']);
+savebinarymatrix(x,[pa,'getPointsOnLine_4.dat']);
 
-P1 = Point(0,0);
-pp1 = line1.LineCutCircle(P1,10);
 
 
 

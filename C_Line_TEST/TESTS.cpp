@@ -88,7 +88,34 @@ protected:
 	C_Matrix_Container_Factory *dataLinSpace;	// test funkcji LinSpace
 	C_Line *line_LinSPace;
 };
-
+class C_LineTestgetPointsOnLine : public TestWithParam<const char*> {
+public:
+	C_Line line1;	// linia pod k¹tem 45 stopni
+	C_Line line2;	// inna
+	C_Line pionowa;	// linia pionowa
+	virtual ~C_LineTestgetPointsOnLine()
+	{
+	}
+	virtual void SetUp()
+	{
+		line1.setLine(1,0,NORMALNA);
+		line2.setLine(-2,10,NORMALNA);
+		pionowa.setLine(0,5,PIONOWA);
+		const char *nazwa = GetParam();
+		line_LinSPace = new C_Line();
+		// kolejnosc parametrów w kontajnerze a,b,pion,x_data,result
+		dataLinSpace = new C_Matrix_Container_Factory(nazwa,5);
+		dataLinSpace->LoadData();
+	}
+	virtual void TearDown() {
+		SAFE_DELETE(dataLinSpace);
+		SAFE_DELETE(line_LinSPace);
+	}
+protected:
+	// testy LinSpace
+	C_Matrix_Container_Factory *dataLinSpace;	// test funkcji LinSpace
+	C_Line *line_LinSPace;
+};
 #endif //GTEST_HAS_PARAM_TEST
 /// sprawdzanie konstruktora domyœlnego oraz getPoints
 TEST_F(C_LineTest, DefaultConstructor) {
@@ -171,6 +198,49 @@ TEST_P(C_LineTestParamEvalLine, evalLine) {
 	SAFE_DELETE(x);
 	SAFE_DELETE(y);
 }
+/// test getPointsOnLine
+TEST_P(C_LineTestgetPointsOnLine, getPointsOnLine) {
+	// w datalinspce kolejno w ramach ka¿dego testu bed¹ pojawiaæ siê poszczegóne casey
+
+	double *x,*y;
+	C_Point P0(	dataLinSpace->getContainer(0).data[0],
+				dataLinSpace->getContainer(0).data[1]);
+	C_Point P1(	dataLinSpace->getContainer(1).data[0],
+				dataLinSpace->getContainer(1).data[1]);
+	double N = dataLinSpace->getContainer(2).data[0];
+	int i;
+	bool ret;
+	x = new double[N];
+	y = new double[N];
+	ret = line1.getPointsOnLine(P0,P1,x,y,N);
+
+	ASSERT_TRUE(ret);
+	for(i=0;i<N;i++){
+		ASSERT_DOUBLE_EQ(dataLinSpace->getContainer(3).GetPixel(0,i), x[i]) << "Vectors x and differ at index " << i;
+		ASSERT_DOUBLE_EQ(dataLinSpace->getContainer(4).GetPixel(0,i), y[i]) << "Vectors y and differ at index " << i;
+	}
+
+	SAFE_DELETE(x);
+	SAFE_DELETE(y);
+}
+TEST_F(C_LineTest, getPointsOnLine_case1) {
+	// w datalinspce kolejno w ramach ka¿dego testu bed¹ pojawiaæ siê poszczegóne casey
+
+	double *x,*y;
+	C_Point P0(	1,0);
+	C_Point P1(	10,10);
+	double N = 10;
+	int i;
+	bool ret;
+	x = new double[N];
+	y = new double[N];
+	ret = line1.getPointsOnLine(P0,P1,x,y,N);
+
+	ASSERT_FALSE(ret);
+
+	SAFE_DELETE(x);
+	SAFE_DELETE(y);
+}
 /// test getLine2Points
 TEST(_C_Line,getLine2Points_case1)
 {
@@ -234,7 +304,20 @@ TEST_F(C_LineTest,LineCutCircle_case3)
 	SCOPED_TRACE("LineCutCircle_case3");
 	ASSERT_FALSE(ret);
 }
-
+TEST_F(C_LineTest,isPointOnLine_case1)
+{
+	C_Point P0(10,10);
+	bool ret;
+	ret = line1.isPointOnLine(P0);
+	ASSERT_TRUE(ret);
+}
+TEST_F(C_LineTest,isPointOnLine_case2)
+{
+	C_Point P0(11,10);
+	bool ret;
+	ret = line1.isPointOnLine(P0);
+	ASSERT_FALSE(ret);
+}
 INSTANTIATE_TEST_CASE_P(
 	LinSpace_test,
 	C_LineTestParam,
@@ -244,3 +327,8 @@ INSTANTIATE_TEST_CASE_P(
 	evalLin_test,
 	C_LineTestParamEvalLine,
 	::testing::Values("line1.dat","line2.dat","line3.dat"));
+
+INSTANTIATE_TEST_CASE_P(
+	evalLin_test,
+	C_LineTestgetPointsOnLine,
+	::testing::Values("getPointsOnLine.dat"));

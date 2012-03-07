@@ -76,7 +76,7 @@ void C_Line::LinSpace( double x0, double x1, double *x_out, int N ) const
  * \param[in] N iloœæ punktów w tablicy
  * \param[out] out obliczone punkty
  */
-void C_Line::evalLine( const double * const x,int N, double *const out)
+void C_Line::evalLine( const double * const x,int N, double *const out) const
 {
 	int a;
 	if(PIONOWA==jest_pion)
@@ -136,4 +136,48 @@ bool C_Line::LineCutCircle( const C_Point &P0,double R,C_Point (&out)[2] )
 			return false;
 
 	return true;
+}
+/** 
+ * Zwraca wartoœci y=ax+b pomiêdzy punktami le¿¹cymi na linii
+ * \param[in] _P0 punkt pocz¹tkowy
+ * \param[in] _P2 punkt koñcowy
+ * \param[out] _outx wektor x o rozmiarze N
+ * \param[out] _outy wektor y o rozmiarze n
+ * \param[in] N iloœæ punktów pomiêdzy <P0;P1>
+ * \return Jeœli P0 i P1 nie le¿¹ na linii to zwraca false i wartoœci w _out s¹ nieokreœlone
+ */
+bool C_Line::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int N ) const
+{
+	double *x;
+	if(!isPointOnLine(_P0))
+		return false;
+	if(!isPointOnLine(_P1))
+		return false;
+	if(PIONOWA==jest_pion){
+		// jeœli pionowa to dzielimy po y
+		LinSpace(_P0.getY(),_P1.getY(),_outy,N);
+		for(int a=0;a<N;a++)
+			_outx[a] = _P0.getX();
+	}
+	else {
+		LinSpace(_P0.getX(),_P1.getX(),_outx,N);
+		evalLine(_outx,N,_outy);
+	}
+	return true;
+}
+/** 
+ * Sprawdza czy punkt jest na linii
+ * \return false jeœli nie jest na linii
+ */
+bool C_Line::isPointOnLine( const C_Point &_P0 ) const
+{
+	if(PIONOWA==jest_pion) {
+		if(_P0.getX()==par_b)
+			return true;
+	}
+	else {
+		if(_P0.getY() == par_a*_P0.getX()+par_b)
+			return true;
+	}
+	return false;
 }

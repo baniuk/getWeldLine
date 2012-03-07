@@ -36,6 +36,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "C_Matrix_Container_Factory"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "C_Matrix_Container_Factory_TEST", "C_Matrix_Container_Factory_TEST\C_Matrix_Container_Factory_TEST.vcxproj", "{59E47289-C79F-4DFC-B634-02348FBB5EC2}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "C_LineApprox", "C_LineApprox\C_LineApprox.vcxproj", "{68E813AF-AA9E-4FAA-B831-E88714680664}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -190,6 +192,19 @@ Global
 		{59E47289-C79F-4DFC-B634-02348FBB5EC2}.Release|Win32.ActiveCfg = Release|Win32
 		{59E47289-C79F-4DFC-B634-02348FBB5EC2}.Release|Win32.Build.0 = Release|Win32
 		{59E47289-C79F-4DFC-B634-02348FBB5EC2}.Release|x64.ActiveCfg = Release|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Debug|Win32.ActiveCfg = Debug|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Debug|Win32.Build.0 = Debug|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Debug|x64.ActiveCfg = Debug|x64
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Debug|x64.Build.0 = Debug|x64
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Release|Any CPU.ActiveCfg = Release|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Release|Win32.ActiveCfg = Release|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Release|Win32.Build.0 = Release|Win32
+		{68E813AF-AA9E-4FAA-B831-E88714680664}.Release|x64.ActiveCfg = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
