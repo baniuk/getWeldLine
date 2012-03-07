@@ -34,7 +34,12 @@ public:
 	const C_Point operator+(const C_Point &rhs) const;
 	/// operaor odejmowania C = A-B
 	const C_Point operator-(const C_Point &rhs) const;
+	// get x
+	double getX() const { return x0; }
+	// get y
+	double getY() const { return y0; }
 private:
 	double x0, y0;	// wspó³rzêdne punktu
+
 };
 #endif // C_Point_h__

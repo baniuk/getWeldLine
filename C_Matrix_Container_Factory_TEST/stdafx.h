@@ -11,7 +11,6 @@
 #include <tchar.h>
 
 #include "gtest/gtest.h"
-#include "C_Line.h"
 #include "C_Matrix_Container.h"
 #include "C_Error.h"
 #include "C_Matrix_Container_Factory.h"

@@ -300,8 +300,12 @@ BOOL C_Matrix_Container::ReadBinary(char *filename)
 	}
 	else	{
 		#ifdef _DEBUG
-		if(data==NULL)
-			_RPTF0(_CRT_ASSERT, "File not opened correctly!!\n");
+		if(data==NULL)	{
+			 char debugtab[512];
+			 strcpy_s(debugtab,512,"File not opened correctly!! ");
+			 strcat_s(debugtab,512,filename);
+			_RPTF0(_CRT_ASSERT, debugtab);
+		}
 		#endif
 		return FALSE;
 	}

@@ -17,6 +17,8 @@ TEST(_C_Point, Initialization) {
 	initialized.getPoint(x,y);
 	EXPECT_EQ(-1, x);
 	EXPECT_EQ(20, y);
+	EXPECT_EQ(-1, initialized.getX());
+	EXPECT_EQ(20, initialized.getY());
 }
 
 /// test operatora przypisania

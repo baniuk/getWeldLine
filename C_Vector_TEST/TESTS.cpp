@@ -1,16 +1,7 @@
 #include "stdafx.h"
 
-/** \brief Funkcja obs³uguj¹ca porównaina punktów - obiektów C_Point
- * Funkcja porównuje P0==P1
- */ 
-void C_Point_CMP(const C_Point P0, const C_Point P1)
-{
-	double x0,y0,x1,y1;
-	P0.getPoint(x0,y0);
-	P1.getPoint(x1,y1);
-	EXPECT_EQ(x0, x1);
-	EXPECT_EQ(y0, y1);
-}
+#include "GTEST_ADDONS.h"
+
 /** \brief Funkcja obs³uguj¹ca porównaina wektorów - obiektów C_Vector
  * Funkcja porównuje pocz¹tki, koñce oraz wspó³rzêdne zapisane w klasie
  */ 
@@ -24,7 +15,6 @@ void C_Vector_CMP(const C_Vector V0, const C_Vector V1)
 	C_Point_CMP(v0VEC,v1VEC);
 
 }
-
 // The fixture for testing class Foo.
 class C_VectorTest : public ::testing::Test {
 protected:
