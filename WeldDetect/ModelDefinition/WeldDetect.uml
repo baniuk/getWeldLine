@@ -34,7 +34,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-                LastKnownName="Interpolacja n-tej linii, C_getLine"
+                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
                 LastKnownLocation="WeldDetect.uml" />
             </coveredLifelines>
             <finish>
@@ -74,32 +74,22 @@
             <covered>
               <lifelineMoniker
                 Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-                LastKnownName="Interpolacja n-tej linii, C_getLine"
+                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </executionOccurrenceSpecification>
-          <messageOccurrenceSpecification
-            Id="2bb6d424-9c17-41c5-ac60-85f3ba41a3f8"
-            name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker
-                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
-                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification
             Id="a479e0d9-afa2-4d6b-8ea5-ebce4b749bd2"
             name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker
                 Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-                LastKnownName="Interpolacja n-tej linii, C_getLine"
+                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="e8cf5301-b9fe-4bb3-9411-a440a7f925ff"
+            Id="2bb6d424-9c17-41c5-ac60-85f3ba41a3f8"
             name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker
@@ -114,7 +104,17 @@
             <covered>
               <lifelineMoniker
                 Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-                LastKnownName="Interpolacja n-tej linii, C_getLine"
+                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="e8cf5301-b9fe-4bb3-9411-a440a7f925ff"
+            name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker
+                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
+                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -132,7 +132,7 @@
             <covered>
               <lifelineMoniker
                 Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-                LastKnownName="Interpolacja n-tej linii, C_getLine"
+                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -187,16 +187,6 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="75fab872-4cb7-4e1d-95ff-f830c80a566b"
-            name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker
-                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
-                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="47d8ac72-86b1-4eee-9a25-2725d528cb06"
             name="MessageOccurrenceSpecification">
             <covered>
@@ -207,7 +197,7 @@
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="5f8f940a-1abc-457d-96ce-cce2f1a6995c"
+            Id="75fab872-4cb7-4e1d-95ff-f830c80a566b"
             name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker
@@ -223,6 +213,16 @@
               <lifelineMoniker
                 Id="e675b654-b775-4e80-ba28-510d209e7e48"
                 LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="5f8f940a-1abc-457d-96ce-cce2f1a6995c"
+            name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker
+                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
+                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -295,16 +295,6 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="a2baca7c-f091-47f9-bb35-fa3bfa2cf6f5"
-            name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker
-                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
-                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="07eac005-8336-4ee7-af05-40698a0c3d0b"
             name="MessageOccurrenceSpecification">
             <covered>
@@ -315,12 +305,12 @@
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="6e606dee-d452-4d3d-9a37-540a92318fbd"
+            Id="a2baca7c-f091-47f9-bb35-fa3bfa2cf6f5"
             name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker
-                Id="e675b654-b775-4e80-ba28-510d209e7e48"
-                LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
+                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
+                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -331,6 +321,16 @@
               <lifelineMoniker
                 Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
                 LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="6e606dee-d452-4d3d-9a37-540a92318fbd"
+            name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker
+                Id="e675b654-b775-4e80-ba28-510d209e7e48"
+                LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -388,9 +388,9 @@
           </lifeline>
           <lifeline
             Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-            name="Interpolacja n-tej linii, C_getLine"
+            name="Interpolacja n-tej linii, C_LineInterp"
             isActor="false"
-            lifelineDisplayName="Interpolacja n-tej linii, C_getLine">
+            lifelineDisplayName="Interpolacja n-tej linii, C_LineInterp">
             <topLevelOccurrences>
               <executionOccurrenceSpecificationMoniker
                 Id="02562306-1113-4cb6-a8ca-1c66a8ca7b3a"
@@ -449,7 +449,7 @@
           </message>
           <message
             Id="36293910-6d2e-4219-bfbd-4c0fb724d0e6"
-            name="pointer C_getLine"
+            name="C_LineInterp"
             messageKind="Complete"
             messageSort="Reply"
             createSelfMessage="false">

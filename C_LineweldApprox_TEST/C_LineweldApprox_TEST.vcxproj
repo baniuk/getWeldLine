@@ -19,10 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{3D0CCC1B-6ACB-4F23-A574-AEBDA2CE6F3A}</ProjectGuid>
+    <ProjectGuid>{E26015F5-21E5-426C-8E93-9618F5C9C475}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>C_LineApprox_TEST</RootNamespace>
-    <ProjectName>C_LineInterp_TEST</ProjectName>
+    <RootNamespace>C_LineweldApprox_TEST</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -70,7 +69,6 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(GTEST)\include;$(WX_ROOT)\include;$(WX_ROOT)\include\msvc;$(LEVMAR_ROOT);$(LAPACK_ROOT)\include;$(WX_MATHPLOT_ROOT);$(SolutionDir)SDK;$(SolutionDir)INCLUDE;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
     <LibraryPath>$(GTEST)\msvc\gtest-md\debug;$(WX_ROOT)\lib\vc_lib\mswd;$(WX_ROOT)\lib\vc_lib;$(LEVMAR_ROOT);$(LAPACK_ROOT)\lib;$(SolutionDir)SDK;$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSdkDir)lib\x64;</LibraryPath>
-    <SourcePath>$(SolutionDir)SOURCE;$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -146,7 +144,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="C_LineApprox_TEST.cpp" />
+    <ClCompile Include="C_LineweldApprox_TEST.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -156,23 +154,8 @@
     <ClCompile Include="TESTS.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\C_LineApprox\C_LineApprox.vcxproj">
-      <Project>{68e813af-aa9e-4faa-b831-e88714680664}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\C_Line\C_Line.vcxproj">
-      <Project>{65844e28-b694-47f4-ae26-6462026a9c3a}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\C_Matrix_Container_Factory\C_Matrix_Container_Factory.vcxproj">
-      <Project>{d26770bd-d342-45c3-aca4-9042242029e9}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\C_Point\C_Point.vcxproj">
-      <Project>{aa6b3e0c-f43f-4874-850f-9d09251b7ba0}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\Interpol\Interpol.vcxproj">
-      <Project>{79f976cc-709e-43db-89ab-f26541e61d5d}</Project>
-    </ProjectReference>
-    <ProjectReference Include="..\SDK\SDK.vcxproj">
-      <Project>{3b9b11d2-c831-44ca-9eeb-2eba8eedab70}</Project>
+    <ProjectReference Include="..\C_LineweldApprox\C_LineweldApprox.vcxproj">
+      <Project>{66952e97-9052-424a-b3ac-3a3342c9e1d5}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

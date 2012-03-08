@@ -7,9 +7,9 @@
  */ 
 class C_LineApprox_Test1 : public ::testing::Test {
 protected:
-	C_LineApprox *line1;	// linia pod k¹tem 45 stopni
-	C_LineApprox *line2;	// inna
-	C_LineApprox *pionowa;	// linia pionowa
+	C_LineInterp *line1;	// linia pod k¹tem 45 stopni
+	C_LineInterp *line2;	// inna
+	C_LineInterp *pionowa;	// linia pionowa
 	double obrazek1[3];
 	unsigned int siz1[3];
 	double obrazek2[6];
@@ -25,9 +25,9 @@ protected:
 		obrazek1[0] = 0;obrazek1[1] = 10;obrazek1[2] = 30;
 		siz1[0] = 3;siz1[1]=0;siz1[2]=0;
 		siz2[0] = 3;siz2[1]=2;siz2[2]=0;
-		line1 = new C_LineApprox(SPLINE,1,0,NORMALNA,obrazek1,siz1);
-		line2 = new C_LineApprox(SPLINE,-2,10,NORMALNA,obrazek2,siz2);
-		pionowa = new C_LineApprox(SPLINE,0,5,PIONOWA,obrazek1,siz1);
+		line1 = new C_LineInterp(SPLINE,1,0,NORMALNA,obrazek1,siz1);
+		line2 = new C_LineInterp(SPLINE,-2,10,NORMALNA,obrazek2,siz2);
+		pionowa = new C_LineInterp(SPLINE,0,5,PIONOWA,obrazek1,siz1);
 	}
 
 	virtual void TearDown() {
@@ -38,7 +38,7 @@ protected:
 };
 /// sprawdzanie konstruktora domyœlnego
 TEST(_C_LineApprox, DefaultConstructor) {
-	C_LineApprox la;
+	C_LineInterp la;
 	double a,b;
 	KIERUNEK_PROSTEJ kier;
 	kier = la.getLine(a,b);
@@ -83,9 +83,9 @@ TEST_F(C_LineApprox_Test1, getNumOfElements) {
  */ 
 class C_LineApprox_Test2 : public ::testing::Test {
 protected:
-	C_LineApprox *line1;	// linia pozioma
-	C_LineApprox *line2;	// inna
-	C_LineApprox *pionowa;	// linia pionowa
+	C_LineInterp *line1;	// linia pozioma
+	C_LineInterp *line2;	// inna
+	C_LineInterp *pionowa;	// linia pionowa
 	C_Matrix_Container obraz;
 	unsigned int siz[3];
 	C_Point P01;
@@ -108,9 +108,9 @@ protected:
 		
 		P01.setPoint(5,35);
 		P11.setPoint(75,35);
-		line1 = new C_LineApprox(SPLINE,P01,P11,obraz.data,siz);
-		line2 = new C_LineApprox(SPLINE,-2,10,NORMALNA,obraz.data,siz);
-		pionowa = new C_LineApprox(SPLINE,0,5,PIONOWA,obraz.data,siz);
+		line1 = new C_LineInterp(SPLINE,P01,P11,obraz.data,siz);
+		line2 = new C_LineInterp(SPLINE,-2,10,NORMALNA,obraz.data,siz);
+		pionowa = new C_LineInterp(SPLINE,0,5,PIONOWA,obraz.data,siz);
 	}
 
 	virtual void TearDown() {
@@ -122,14 +122,22 @@ protected:
 
 /// test interpolacji getInterpolated_data
 TEST_F(C_LineApprox_Test2, getInterpolated_data) {
+	const double *result;
 	C_DumpAll dump("getInterpolated_data.out");
 	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getInterpolated_data.out" << "\n\n";
 	C_Matrix_Container outx(1,71);
 	C_Matrix_Container outy(1,71);
-	C_Matrix_Container result(1,71);
 	line1->getPointsOnLine(P01,P11,outx.data,outy.data,71);
-	// dodaæ do³¹czanie wyniku do result chyba funkcje do tego bo sam wskaŸnik??
+	result = line1->getInterpolated_data();
+	
 	dump.AddEntry(&outx,"getInterpolated_data_outx");
 	dump.AddEntry(&outy,"getInterpolated_data_outy");	
-	dump.AddEntry(&result,"getInterpolated_data_outy");
+	dump.AddEntry(result,71,"getInterpolated_data_result");
+}
+
+/// test interpolacji getInterpolated_data - u¿ycie getInterpolated_data bez interpolacji
+TEST_F(C_LineApprox_Test2, getInterpolated_data_case2) {
+	const double *result;
+	result = line1->getInterpolated_data();
+	ASSERT_EQ(NULL,result);
 }

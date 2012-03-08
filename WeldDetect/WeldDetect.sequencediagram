@@ -1,19 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SequenceDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="893548a6-4a7e-4825-aa28-fc63f92fbd55" name="WeldDetect" linkedPackageId="cac15abd-5e78-42fd-960d-220e3f13eaff" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="5db1d63d-895f-4f56-8cf8-48223d58232f">
-      <profileInstance Id="9ed67a39-966d-4ebf-9815-356387c856fd" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="d21baa54-172d-4605-88be-a39e05db0da5">
-      <profileInstance Id="017fd37a-8f80-411e-b0a2-01c816ad9e9b" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
   <packagedElements>
     <packageHasNamedElement>
       <interaction Id="3a70b5ac-0d9d-4010-a4a4-deeb6f944de8" name="WeldDetect" collapseFragmentsFlag="false" isActiveClass="false" isAbstract="false" isLeaf="false" isReentrant="false">
@@ -22,7 +8,7 @@
           <behaviorExecutionSpecification Id="6578ae29-9bd6-4105-bbd2-90f0416ef319" name="BehaviorExecutionSpecification">
             <elementDefinition Id="77d622da-1ac8-4384-be66-cbfb56d32dfe" />
             <coveredLifelines>
-              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_getLine" />
+              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_LineInterp" />
             </coveredLifelines>
             <finish>
               <executionOccurrenceSpecificationMoniker Id="2211edb2-b659-4ea3-8717-c35e2a7dbba5" LastKnownName="ExecutionOccurrenceSpecification" />
@@ -43,23 +29,17 @@
               </executionOccurrenceSpecificationReferencesEvent>
             </event>
             <covered>
-              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_getLine" />
+              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_LineInterp" />
             </covered>
           </executionOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="4db6cd40-b595-494a-8e7e-bf524bec9fd1" name="MessageOccurrenceSpecification">
-            <elementDefinition Id="2bb6d424-9c17-41c5-ac60-85f3ba41a3f8" />
-            <covered>
-              <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="83ff428f-518e-4b49-8c52-73f9469ef5ec" name="MessageOccurrenceSpecification">
             <elementDefinition Id="a479e0d9-afa2-4d6b-8ea5-ebce4b749bd2" />
             <covered>
-              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_getLine" />
+              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_LineInterp" />
             </covered>
           </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="a6bb2d4c-8452-455f-8a8d-b4bfe37cd543" name="MessageOccurrenceSpecification">
-            <elementDefinition Id="e8cf5301-b9fe-4bb3-9411-a440a7f925ff" />
+          <messageOccurrenceSpecification Id="4db6cd40-b595-494a-8e7e-bf524bec9fd1" name="MessageOccurrenceSpecification">
+            <elementDefinition Id="2bb6d424-9c17-41c5-ac60-85f3ba41a3f8" />
             <covered>
               <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
             </covered>
@@ -67,7 +47,13 @@
           <messageOccurrenceSpecification Id="9bcc96a2-c62b-4e88-8c8d-3bad1abb864e" name="MessageOccurrenceSpecification">
             <elementDefinition Id="c03f8cbf-127d-4994-801c-5b3cb0548cba" />
             <covered>
-              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_getLine" />
+              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_LineInterp" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="a6bb2d4c-8452-455f-8a8d-b4bfe37cd543" name="MessageOccurrenceSpecification">
+            <elementDefinition Id="e8cf5301-b9fe-4bb3-9411-a440a7f925ff" />
+            <covered>
+              <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
             </covered>
           </messageOccurrenceSpecification>
           <executionOccurrenceSpecification Id="2211edb2-b659-4ea3-8717-c35e2a7dbba5" name="ExecutionOccurrenceSpecification">
@@ -78,7 +64,7 @@
               </executionOccurrenceSpecificationReferencesEvent>
             </event>
             <covered>
-              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_getLine" />
+              <lifelineMoniker Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" LastKnownName="Interpolacja n-tej linii, C_LineInterp" />
             </covered>
           </executionOccurrenceSpecification>
           <behaviorExecutionSpecification Id="be906a91-ce48-407c-bf08-8d12398ead85" name="BehaviorExecutionSpecification">
@@ -108,20 +94,14 @@
               <lifelineMoniker Id="c0a0684d-0953-45dc-acdb-45f75aa6328c" LastKnownName="Aproxymacja profilu, C_LineWeldApprox" />
             </covered>
           </executionOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="054e7d4e-ae3c-46ed-a11a-8e145fb75214" name="MessageOccurrenceSpecification">
-            <elementDefinition Id="75fab872-4cb7-4e1d-95ff-f830c80a566b" />
-            <covered>
-              <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="a54d280b-2f7b-429b-88f5-f5da3fc3eada" name="MessageOccurrenceSpecification">
             <elementDefinition Id="47d8ac72-86b1-4eee-9a25-2725d528cb06" />
             <covered>
               <lifelineMoniker Id="c0a0684d-0953-45dc-acdb-45f75aa6328c" LastKnownName="Aproxymacja profilu, C_LineWeldApprox" />
             </covered>
           </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="193bcd84-7362-48e2-adf3-f9868848f20c" name="MessageOccurrenceSpecification">
-            <elementDefinition Id="5f8f940a-1abc-457d-96ce-cce2f1a6995c" />
+          <messageOccurrenceSpecification Id="054e7d4e-ae3c-46ed-a11a-8e145fb75214" name="MessageOccurrenceSpecification">
+            <elementDefinition Id="75fab872-4cb7-4e1d-95ff-f830c80a566b" />
             <covered>
               <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
             </covered>
@@ -130,6 +110,12 @@
             <elementDefinition Id="8320b195-1f8e-45b8-8a3a-beb5e337f1f1" />
             <covered>
               <lifelineMoniker Id="c0a0684d-0953-45dc-acdb-45f75aa6328c" LastKnownName="Aproxymacja profilu, C_LineWeldApprox" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="193bcd84-7362-48e2-adf3-f9868848f20c" name="MessageOccurrenceSpecification">
+            <elementDefinition Id="5f8f940a-1abc-457d-96ce-cce2f1a6995c" />
+            <covered>
+              <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
             </covered>
           </messageOccurrenceSpecification>
           <executionOccurrenceSpecification Id="3a1050d0-359e-4941-9590-08dd2d325056" name="ExecutionOccurrenceSpecification">
@@ -170,28 +156,28 @@
               <lifelineMoniker Id="c0a0684d-0953-45dc-acdb-45f75aa6328c" LastKnownName="Aproxymacja profilu, C_LineWeldApprox" />
             </covered>
           </executionOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="b798fec1-5b62-4d40-9920-0f5e0a3ccad2" name="MessageOccurrenceSpecification">
-            <elementDefinition Id="a2baca7c-f091-47f9-bb35-fa3bfa2cf6f5" />
-            <covered>
-              <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
-            </covered>
-          </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="471bfca9-5da8-46fb-8576-6bb41a692601" name="MessageOccurrenceSpecification">
             <elementDefinition Id="07eac005-8336-4ee7-af05-40698a0c3d0b" />
             <covered>
               <lifelineMoniker Id="c0a0684d-0953-45dc-acdb-45f75aa6328c" LastKnownName="Aproxymacja profilu, C_LineWeldApprox" />
             </covered>
           </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification Id="39689372-308b-49ff-92ad-d501ad588cb3" name="MessageOccurrenceSpecification">
-            <elementDefinition Id="6e606dee-d452-4d3d-9a37-540a92318fbd" />
+          <messageOccurrenceSpecification Id="b798fec1-5b62-4d40-9920-0f5e0a3ccad2" name="MessageOccurrenceSpecification">
+            <elementDefinition Id="a2baca7c-f091-47f9-bb35-fa3bfa2cf6f5" />
             <covered>
-              <lifelineMoniker Id="c0a0684d-0953-45dc-acdb-45f75aa6328c" LastKnownName="Aproxymacja profilu, C_LineWeldApprox" />
+              <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification Id="cff65670-1865-4af5-b79a-981b1c1dc071" name="MessageOccurrenceSpecification">
             <elementDefinition Id="7304685e-2b8b-48c1-b70f-1798275b57e6" />
             <covered>
               <lifelineMoniker Id="e0e2f50f-f85b-41a9-b491-c6fe04813959" LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification Id="39689372-308b-49ff-92ad-d501ad588cb3" name="MessageOccurrenceSpecification">
+            <elementDefinition Id="6e606dee-d452-4d3d-9a37-540a92318fbd" />
+            <covered>
+              <lifelineMoniker Id="c0a0684d-0953-45dc-acdb-45f75aa6328c" LastKnownName="Aproxymacja profilu, C_LineWeldApprox" />
             </covered>
           </messageOccurrenceSpecification>
           <executionOccurrenceSpecification Id="d2c1b84f-8811-48e4-9a9f-18808323752e" name="ExecutionOccurrenceSpecification">
@@ -218,7 +204,7 @@
               <messageOccurrenceSpecificationMoniker Id="cff65670-1865-4af5-b79a-981b1c1dc071" LastKnownName="MessageOccurrenceSpecification" />
             </topLevelOccurrences>
           </lifeline>
-          <lifeline Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" name="Interpolacja n-tej linii, C_getLine" isActor="false" lifelineDisplayName="Interpolacja n-tej linii, C_getLine">
+          <lifeline Id="057295aa-e0d7-41ac-ac05-723f12bcdbe3" name="Interpolacja n-tej linii, C_LineInterp" isActor="false" lifelineDisplayName="Interpolacja n-tej linii, C_LineInterp">
             <elementDefinition Id="cb1c8875-0257-4cc3-aeda-7c338749756e" />
             <topLevelOccurrences>
               <executionOccurrenceSpecificationMoniker Id="819b4717-a9ad-461d-998b-1eecf0fbef5b" LastKnownName="ExecutionOccurrenceSpecification" />
@@ -245,7 +231,7 @@
               <messageOccurrenceSpecificationMoniker Id="83ff428f-518e-4b49-8c52-73f9469ef5ec" LastKnownName="MessageOccurrenceSpecification" />
             </receiveEvent>
           </message>
-          <message Id="72f6189b-6216-4fd0-8ea4-8083f6de2e9a" name="pointer C_getLine" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
+          <message Id="72f6189b-6216-4fd0-8ea4-8083f6de2e9a" name="C_LineInterp" messageKind="Complete" messageSort="Reply" createSelfMessage="false">
             <elementDefinition Id="36293910-6d2e-4219-bfbd-4c0fb724d0e6" />
             <sendEvent>
               <messageOccurrenceSpecificationMoniker Id="9bcc96a2-c62b-4e88-8c8d-3bad1abb864e" LastKnownName="MessageOccurrenceSpecification" />
@@ -326,5 +312,19 @@
   </packagedElements>
   <package Id="cac15abd-5e78-42fd-960d-220e3f13eaff" name="WeldDetect">
     <elementDefinition Id="c5ee0d59-75c4-4966-ab22-b9743d0fc579" />
+    <profileInstances>
+      <packageHasProfileInstances Id="5db1d63d-895f-4f56-8cf8-48223d58232f">
+        <profileInstance Id="9ed67a39-966d-4ebf-9815-356387c856fd" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="d21baa54-172d-4605-88be-a39e05db0da5">
+        <profileInstance Id="017fd37a-8f80-411e-b0a2-01c816ad9e9b" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </SequenceDesignerModel>

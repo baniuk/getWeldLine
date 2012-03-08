@@ -93,13 +93,23 @@ P1 = Point(1,8);
 li = Line(a,b);
 y = li.getSection(P0,P1,100);
 savebinarymatrix(y(:,2)',[pa,'getPointonLine.dat']);
-%% test interpolacji getInterpolated_data
+%% test interpolacji getInterpolated_data - uruchamiaæ po kompilacji testów
 pa = '..\C_LineApprox_TEST\';
 I = checkerboard;
-lin = I(35,5:75);
-plot(lin)
+lin = I(35+1,5+1:75+1);% - bo w c jest od zera
+% plot(lin)
 savebinarymatrix(I,[pa,'getInterpolated_data.dat']);
-    %% wczytywanie danych do testu poprzedniego
+% wczytywanie danych do testu poprzedniego
+kat = cd;
+cd(pa)
+!"../x64/debug/C_LineApprox_TEST.exe"
+cd(kat)
 pa = '..\C_LineApprox_TEST\';
 ImportDumpFile([pa,'getInterpolated_data.out']);
-
+plot(getInterpolated_data_outx);grid on
+figure
+plot(getInterpolated_data_outy);grid on
+figure
+plot(getInterpolated_data_result);grid on
+hold on
+plot(lin,'-r')

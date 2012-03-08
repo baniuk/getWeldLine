@@ -11,10 +11,6 @@
 #include <tchar.h>
 
 #include "gtest/gtest.h"
-#include "C_LineInterp.h"
-#include "C_Matrix_Container.h"
-#include "C_Error.h"
-#include "C_DumpAll.h"
-#include "C_Matrix_Container_Factory.h"
+#include "C_LineWeldApprox.h"
 
 // TODO: reference additional headers your program requires here

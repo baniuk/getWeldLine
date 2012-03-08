@@ -1,7 +1,9 @@
-#include "C_LineApprox.h"
+#include "C_LineInterp.h"
 
-
-C_LineApprox::C_LineApprox()
+/** 
+ * Podstawowy konstruktor - nie powinien byæ u¿ywany
+ */
+C_LineInterp::C_LineInterp()
 {
 	typ_interpolacji = SPLINE;
 	image = NULL;
@@ -17,7 +19,7 @@ C_LineApprox::C_LineApprox()
  * \param[in] image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
  * \param[in] _size tablica z wymiarami obrazu [rows,cols,z]
  */
-C_LineApprox::C_LineApprox( APPROX_TYPE type,const C_Point &_P0, const C_Point &_P1, const double *const _image, const unsigned int _size[]  ) :
+C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &_P1, const double *const _image, const unsigned int _size[]  ) :
 							C_Line(_P0,_P1),
 							typ_interpolacji(type)
 {
@@ -41,7 +43,7 @@ C_LineApprox::C_LineApprox( APPROX_TYPE type,const C_Point &_P0, const C_Point &
  * \param[in] image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
  * \param[in] _size tablica z wymiarami obrazu [rows,cols,z]
  */
-C_LineApprox::C_LineApprox( APPROX_TYPE type,const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion, const double *const _image, const unsigned int _size[]  ) :
+C_LineInterp::C_LineInterp( APPROX_TYPE type,const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion, const double *const _image, const unsigned int _size[]  ) :
 							C_Line(_a,_b,_czy_pion),
 							typ_interpolacji(type)
 {
@@ -57,7 +59,7 @@ C_LineApprox::C_LineApprox( APPROX_TYPE type,const double &_a, const double &_b,
 	interpolated_data = NULL;
 }
 
-C_LineApprox::~C_LineApprox()
+C_LineInterp::~C_LineInterp()
 {
 	SAFE_DELETE(image);
 	SAFE_DELETE(interpolated_data);
@@ -72,7 +74,7 @@ C_LineApprox::~C_LineApprox()
  * \return Jeœli P0 i P1 nie le¿¹ na linii to zwraca false i wartoœci w _out s¹ nieokreœlone
  * \warning Funkcja modyfikuje tablice image
  */
-bool C_LineApprox::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int N )
+bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int N )
 {
 	bool ret;
 	if(!isPointOnLine(_P0))
@@ -108,7 +110,7 @@ bool C_LineApprox::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
 	return true;
 }
 
-unsigned int C_LineApprox::getNumOfElements() const
+unsigned int C_LineInterp::getNumOfElements() const
 {
 	unsigned int n=1;
 	for(int a=0;a<2;a++)

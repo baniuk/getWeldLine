@@ -81,7 +81,7 @@ void C_DumpAll::AddEntry(C_Image_Container* data, char* name)
 	lastpozindex++;
 }
 
-void C_DumpAll::AddEntry(double* data,unsigned int size, char* name)
+void C_DumpAll::AddEntry(const double* data,unsigned int size, char* name)
 {
 	unsigned int type = DOUBLE;
 	long position,ile;

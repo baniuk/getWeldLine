@@ -16,15 +16,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
-    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\INCLUDE\C_LineInterp.h">
+    <ClInclude Include="..\INCLUDE\C_Levmar_Warp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\INCLUDE\C_LineWeldApprox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\SOURCE\C_LineInterp.cpp">
+    <ClCompile Include="..\SOURCE\C_Levmar_Warp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\SOURCE\C_LineWeldApprox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

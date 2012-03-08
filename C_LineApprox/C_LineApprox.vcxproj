@@ -22,6 +22,7 @@
     <ProjectGuid>{68E813AF-AA9E-4FAA-B831-E88714680664}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>C_LineApprox</RootNamespace>
+    <ProjectName>C_LineInterp</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -127,13 +128,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\SOURCE\C_LineApprox.cpp" />
+    <ClCompile Include="..\SOURCE\C_LineInterp.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\INCLUDE\C_LineApprox.h" />
+    <ClInclude Include="..\INCLUDE\C_LineInterp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
