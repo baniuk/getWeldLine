@@ -10,7 +10,7 @@ C_Line::C_Line() :
 {
 
 }
-/** Tworzy prost¹ n podstawie parametrów. Jeœli cz_pion jest ustawione na PIONOWA to
+/** Tworzy prost¹ na podstawie parametrów. Jeœli cz_pion jest ustawione na PIONOWA to
  * wtedy wartoœæ a jest ignorowana. Nale¿y dbaæ aby wartoœæ tej zmiennej odzwiercied³a³a
  * czy prosta jest naprawdê pionwa czy pozioma.
  * \param[in] _a Wspó³czynnik kierunkowy
@@ -20,6 +20,15 @@ C_Line::C_Line() :
 C_Line::C_Line( const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion )
 {
 	setLine(_a,_b,_czy_pion);
+}
+/** Tworzy prost¹ na podstawie punktów na niej
+ * czy prosta jest naprawdê pionwa czy pozioma.
+ * \param[in] _P0 pierwszy punkt na linii
+ * \param[in] _P1 drugi punkt na linii
+ */
+C_Line::C_Line(const C_Point &_P0,const C_Point &_P1)
+{
+	getLine2Points(_P0,_P1);
 }
 
 C_Line::~C_Line()
@@ -148,7 +157,6 @@ bool C_Line::LineCutCircle( const C_Point &P0,double R,C_Point (&out)[2] )
  */
 bool C_Line::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int N ) const
 {
-	double *x;
 	if(!isPointOnLine(_P0))
 		return false;
 	if(!isPointOnLine(_P1))

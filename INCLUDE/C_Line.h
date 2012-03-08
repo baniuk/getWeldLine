@@ -8,6 +8,10 @@ enum KIERUNEK_PROSTEJ {
 	NORMALNA
 };
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 /** 
  * Klasa implementuj¹ca liniê w przestrzeni 2D. Jeœli prosta jest pionowa to wtedy wartoœæ a jest nieokreœlona a wartoœæ
  * b przyjmuje wartoœæ wspó³rzêdnej x
@@ -18,6 +22,8 @@ public:
 	C_Line();
 	/// buduje prost¹ na podstawie paramstrów
 	C_Line(const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion);
+	/// buduje linie na podstawie dwóch punktów na niej
+	C_Line(const C_Point &_P0,const C_Point &_P1);
 	virtual ~C_Line();
 	/// zwraca wszystkie parametry prostej
 	KIERUNEK_PROSTEJ getLine(double &_a, double &_b) const;

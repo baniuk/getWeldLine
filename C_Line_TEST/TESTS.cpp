@@ -4,17 +4,17 @@
 /** 
  * Œrodowisko testowe 1
  */ 
-class C_LineTest : public ::testing::Test {
+class C_LineApprox_Test1 : public ::testing::Test {
 protected:
 	C_Line line1;	// linia pod k¹tem 45 stopni
 	C_Line line2;	// inna
 	C_Line pionowa;	// linia pionowa
 
-	C_LineTest() {
+	C_LineApprox_Test1() {
 
 	}
 
-	virtual ~C_LineTest() {
+	virtual ~C_LineApprox_Test1() {
 		// You can do clean-up work that doesn't throw exceptions here.
 	}
 
@@ -117,14 +117,37 @@ protected:
 	C_Line *line_LinSPace;
 };
 #endif //GTEST_HAS_PARAM_TEST
-/// sprawdzanie konstruktora domyœlnego oraz getPoints
-TEST_F(C_LineTest, DefaultConstructor) {
+/// sprawdzanie konstruktora domyœlnego oraz getLine
+TEST_F(C_LineApprox_Test1, DefaultConstructor) {
 	double a,b;
 	KIERUNEK_PROSTEJ kier;
 	kier = line1.getLine(a,b);
 	EXPECT_EQ(1,a);
 	EXPECT_EQ(0,b);
 	EXPECT_EQ(NORMALNA,kier);
+}
+/// sprawdzanie konstruktora domyœlnego
+TEST(_C_Line, PointConstructor) {
+	double a,b;
+	KIERUNEK_PROSTEJ kier;
+	C_Point P0(0,0);
+	C_Point P1(10,10);
+	C_Line lin(P0,P1);
+	kier = lin.getLine(a,b);
+	EXPECT_EQ(1,a);
+	EXPECT_EQ(0,b);
+	EXPECT_EQ(NORMALNA,kier);
+}
+/// sprawdzanie konstruktora domyœlnego
+TEST(_C_Line, PointConstructor_case1) {
+	double a,b;
+	KIERUNEK_PROSTEJ kier;
+	C_Point P0(10,0);
+	C_Point P1(10,10);
+	C_Line lin(P0,P1);
+	kier = lin.getLine(a,b);
+	EXPECT_EQ(10,b);
+	EXPECT_EQ(PIONOWA,kier);
 }
 /// testowanie funccji setLine
 TEST(_C_Line,setLineTest) {
@@ -223,14 +246,13 @@ TEST_P(C_LineTestgetPointsOnLine, getPointsOnLine) {
 	SAFE_DELETE(x);
 	SAFE_DELETE(y);
 }
-TEST_F(C_LineTest, getPointsOnLine_case1) {
+TEST_F(C_LineApprox_Test1, getPointsOnLine_case1) {
 	// w datalinspce kolejno w ramach ka¿dego testu bed¹ pojawiaæ siê poszczegóne casey
 
 	double *x,*y;
 	C_Point P0(	1,0);
 	C_Point P1(	10,10);
 	double N = 10;
-	int i;
 	bool ret;
 	x = new double[N];
 	y = new double[N];
@@ -269,7 +291,7 @@ TEST(_C_Line,getLine2Points_case2)
 	EXPECT_EQ(PIONOWA,kier);
 }
 /// test LineCutCircle
-TEST_F(C_LineTest,LineCutCircle_case1)
+TEST_F(C_LineApprox_Test1,LineCutCircle_case1)
 {
 	C_Point P0(0,0);
 	C_Point out[2];
@@ -282,7 +304,7 @@ TEST_F(C_LineTest,LineCutCircle_case1)
 	C_Point_CMP_DOUBLE(exp1,out[0]);
 	C_Point_CMP_DOUBLE(exp2,out[1]);
 }
-TEST_F(C_LineTest,LineCutCircle_case2)
+TEST_F(C_LineApprox_Test1,LineCutCircle_case2)
 {
 	C_Point P0(5,7);
 	C_Point out[2];
@@ -295,7 +317,7 @@ TEST_F(C_LineTest,LineCutCircle_case2)
 	C_Point_CMP_DOUBLE(exp1,out[0]);
 	C_Point_CMP_DOUBLE(exp2,out[1]);
 }
-TEST_F(C_LineTest,LineCutCircle_case3)
+TEST_F(C_LineApprox_Test1,LineCutCircle_case3)
 {
 	C_Point P0(1,0);
 	C_Point out[2];
@@ -304,14 +326,14 @@ TEST_F(C_LineTest,LineCutCircle_case3)
 	SCOPED_TRACE("LineCutCircle_case3");
 	ASSERT_FALSE(ret);
 }
-TEST_F(C_LineTest,isPointOnLine_case1)
+TEST_F(C_LineApprox_Test1,isPointOnLine_case1)
 {
 	C_Point P0(10,10);
 	bool ret;
 	ret = line1.isPointOnLine(P0);
 	ASSERT_TRUE(ret);
 }
-TEST_F(C_LineTest,isPointOnLine_case2)
+TEST_F(C_LineApprox_Test1,isPointOnLine_case2)
 {
 	C_Point P0(11,10);
 	bool ret;

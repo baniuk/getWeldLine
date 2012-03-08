@@ -75,8 +75,31 @@ savebinarymatrix(N,[pa,'getPointsOnLine_2.dat']);
 savebinarymatrix(y,[pa,'getPointsOnLine_3.dat']);
 savebinarymatrix(x,[pa,'getPointsOnLine_4.dat']);
 
-
-
-
-
+P0 = [0 1];
+P1 = [10 10];
+N = 20;
+x = linspace(P0(1),P1(1),N);
+y = x;
+savebinarymatrix(P0,[pa,'getPointsOnLine1_0.dat']);
+savebinarymatrix(P1,[pa,'getPointsOnLine1_1.dat']);
+savebinarymatrix(N,[pa,'getPointsOnLine1_2.dat']);
+savebinarymatrix(y,[pa,'getPointsOnLine1_3.dat']);
+savebinarymatrix(x,[pa,'getPointsOnLine1_4.dat']);
+%% TEST_F(C_LineApprox_Test1, getPointonLine)
+pa = '..\C_LineApprox_TEST\';
+a=-2;b=10;  % sprzezone z C_LineApprox_Test1 !!!
+P0 = Point(0,10);
+P1 = Point(1,8);
+li = Line(a,b);
+y = li.getSection(P0,P1,100);
+savebinarymatrix(y(:,2)',[pa,'getPointonLine.dat']);
+%% test interpolacji getInterpolated_data
+pa = '..\C_LineApprox_TEST\';
+I = checkerboard;
+lin = I(35,5:75);
+plot(lin)
+savebinarymatrix(I,[pa,'getInterpolated_data.dat']);
+    %% wczytywanie danych do testu poprzedniego
+pa = '..\C_LineApprox_TEST\';
+ImportDumpFile([pa,'getInterpolated_data.out']);
 
