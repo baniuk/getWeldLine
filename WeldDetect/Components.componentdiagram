@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="a6d8ad88-48f9-4de6-9357-0fac3253bd0b" name="UMLComponentDiagram1" linkedPackageId="fa08b837-d876-4b99-944c-bdda56193c27" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="7c5db062-deeb-48af-a2bd-90ab63250abd" name="SDK" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b9f78111-c537-4f6a-a911-1d70e9f73ec9" />
+        <suppliersInternal>
+          <dependency Id="ce88683d-cc3d-41d1-9957-2f0aeeb92f99">
+            <componentMoniker Id="6652b418-603e-42a8-bef8-be881de10c9a" LastKnownName="C_LineInterp" />
+            <elementDefinition Id="94d5aa02-a747-49de-80ab-1f1de4185499" />
+          </dependency>
+          <dependency Id="075f509f-994b-4a59-af2b-7319c2d26858">
+            <componentMoniker Id="6df85021-e7ea-4401-9501-3bff726a2ab5" LastKnownName="C_LineweldApprox" />
+            <elementDefinition Id="a326ac2a-31ea-434b-9ecc-bfcefc92560f" />
+          </dependency>
+          <dependency Id="9cb836fc-4846-4c3a-861a-82f460b1b4da">
+            <componentMoniker Id="13f567f9-dd49-4e97-a89d-7765dc9baacb" LastKnownName="C_MatrixContainerFactory" />
+            <elementDefinition Id="d4b9be9a-f027-4286-9c60-8f66b9fdb137" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="03595e64-361e-46b2-83d0-41e6c564d64c" name="C_Point" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="77657853-1300-4706-81d5-c13e68d8abcf" />
+        <suppliersInternal>
+          <dependency Id="5d3b3551-1a46-437c-a8c0-3ad0255ee773">
+            <componentMoniker Id="6652b418-603e-42a8-bef8-be881de10c9a" LastKnownName="C_LineInterp" />
+            <elementDefinition Id="08960f3d-7873-42a0-b366-3dd9b97e9561" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <providedInterface Id="c2b3e322-aa54-4fd4-b6b4-cdc32c2bcf89" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="e9e9af2b-5ec1-4bcc-a9ac-614b7be20173" />
+            <type_NamedElement>
+              <interfaceMoniker Id="d849acd6-9bc0-4a39-9c9a-437fe5c559fc" LastKnownName="Interface1" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="540537d9-0c72-414e-a3b9-71e2c2239c38" name="C_Line" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9569aa16-7e3a-4c06-8f6f-917308b21540" />
+        <suppliersInternal>
+          <dependency Id="2491245c-4d4a-400f-a604-34f964d12869">
+            <componentMoniker Id="03595e64-361e-46b2-83d0-41e6c564d64c" LastKnownName="C_Point" />
+            <elementDefinition Id="af8d4179-bc46-42a8-95a7-f41094bdbdb9" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="6652b418-603e-42a8-bef8-be881de10c9a" name="C_LineInterp" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="aadc82e5-4596-4ff8-8085-6be719b9f9a1" />
+        <suppliersInternal>
+          <dependency Id="4f19cbf8-3d7f-4fb5-8145-fce224bff311">
+            <componentMoniker Id="6df85021-e7ea-4401-9501-3bff726a2ab5" LastKnownName="C_LineweldApprox" />
+            <elementDefinition Id="f8fc6502-3341-48ee-a004-a9ce171516dc" />
+          </dependency>
+          <dependency Id="f6f2f5b8-dd9b-4fbb-8f90-d83b4de5f00b">
+            <componentMoniker Id="32243a77-1d95-4d66-9a2c-6d5dffd3a085" LastKnownName="Interpol" />
+            <elementDefinition Id="23d531aa-3ed0-4795-989f-5ab19685d4bb" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="6df85021-e7ea-4401-9501-3bff726a2ab5" name="C_LineweldApprox" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="5c5b2546-d1f0-48af-8897-a9277507f02d" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="13f567f9-dd49-4e97-a89d-7765dc9baacb" name="C_MatrixContainerFactory" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="deb6b100-87af-4cb3-8e7d-643e58a5beb6" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="c6a8b3e4-a5b9-45a1-a87a-ee52356ab7c3" name="C_Vector" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ea22180b-6815-494c-90a4-92b1a65a570f" />
+        <suppliersInternal>
+          <dependency Id="b9195649-02eb-454c-995f-c945d9d553c0">
+            <componentMoniker Id="03595e64-361e-46b2-83d0-41e6c564d64c" LastKnownName="C_Point" />
+            <elementDefinition Id="0c1c75c4-3ded-4456-af88-015f51dac62c" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="32243a77-1d95-4d66-9a2c-6d5dffd3a085" name="Interpol" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="3c904dee-1afa-4a0a-8fef-2754019a6e0c" />
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="d849acd6-9bc0-4a39-9c9a-437fe5c559fc" name="Interface1" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d354748a-4b46-43bb-9014-6aa6a1f24e54" />
+      </Interface>
+    </modelContainsNamedElements>
+  </packagedElements>
+  <package Id="fa08b837-d876-4b99-944c-bdda56193c27" name="WeldDetect">
+    <elementDefinition Id="c5ee0d59-75c4-4966-ab22-b9743d0fc579" />
+    <profileInstances>
+      <packageHasProfileInstances Id="c91af062-9a4a-4be4-93e7-8eb411058abe">
+        <profileInstance Id="99471dde-5eba-43f0-948d-db54de055395" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="dc975bae-eaf7-487c-8427-7b67b26f12d7">
+        <profileInstance Id="923f30fa-a279-41c4-ae5a-7b57829eeb62" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</componentModel>

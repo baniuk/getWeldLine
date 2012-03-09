@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" xmlns:dm10="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="c5ee0d59-75c4-4966-ab22-b9743d0fc579"
   name="WeldDetect" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -75,22 +75,22 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="25d386c0-9df3-43b8-9e40-5532c4335173"
-            name="MessageOccurrenceSpecification3">
-            <covered>
-              <lifelineMoniker
-                Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="c822c8c1-58ac-4ab3-8264-3a8597f0e049"
             name="MessageOccurrenceSpecification2">
             <covered>
               <lifelineMoniker
                 Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
                 LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="25d386c0-9df3-43b8-9e40-5532c4335173"
+            name="MessageOccurrenceSpecification3">
+            <covered>
+              <lifelineMoniker
+                Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
+                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -163,16 +163,6 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="75fab872-4cb7-4e1d-95ff-f830c80a566b"
-            name="MessageOccurrenceSpecification">
-            <covered>
-              <lifelineMoniker
-                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
-                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="47d8ac72-86b1-4eee-9a25-2725d528cb06"
             name="MessageOccurrenceSpecification">
             <covered>
@@ -183,12 +173,12 @@
             </covered>
           </messageOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="8320b195-1f8e-45b8-8a3a-beb5e337f1f1"
+            Id="75fab872-4cb7-4e1d-95ff-f830c80a566b"
             name="MessageOccurrenceSpecification">
             <covered>
               <lifelineMoniker
-                Id="e675b654-b775-4e80-ba28-510d209e7e48"
-                LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
+                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
+                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -199,6 +189,16 @@
               <lifelineMoniker
                 Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
                 LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="8320b195-1f8e-45b8-8a3a-beb5e337f1f1"
+            name="MessageOccurrenceSpecification">
+            <covered>
+              <lifelineMoniker
+                Id="e675b654-b775-4e80-ba28-510d209e7e48"
+                LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -267,22 +267,22 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="1467b9dd-ed5e-4b38-937f-fac70d0d7538"
-            name="MessageOccurrenceSpecification4">
-            <covered>
-              <lifelineMoniker
-                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
-                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="ceb7055c-db3a-4025-b0c2-199395945c68"
             name="MessageOccurrenceSpecification5">
             <covered>
               <lifelineMoniker
                 Id="e675b654-b775-4e80-ba28-510d209e7e48"
                 LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="1467b9dd-ed5e-4b38-937f-fac70d0d7538"
+            name="MessageOccurrenceSpecification4">
+            <covered>
+              <lifelineMoniker
+                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
+                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -351,22 +351,22 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="fa3faf63-9184-4e52-b639-3982025f7233"
-            name="MessageOccurrenceSpecification6">
-            <covered>
-              <lifelineMoniker
-                Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
-                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="c118c9d7-d293-46b1-ae1d-31e699659c8a"
             name="MessageOccurrenceSpecification7">
             <covered>
               <lifelineMoniker
                 Id="e675b654-b775-4e80-ba28-510d209e7e48"
                 LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="fa3faf63-9184-4e52-b639-3982025f7233"
+            name="MessageOccurrenceSpecification6">
+            <covered>
+              <lifelineMoniker
+                Id="cb1c8875-0257-4cc3-aeda-7c338749756e"
+                LastKnownName="Interpolacja n-tej linii, C_LineInterp"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -435,22 +435,22 @@
             </covered>
           </executionOccurrenceSpecification>
           <messageOccurrenceSpecification
-            Id="38d20c02-43b9-46a5-9d4b-0a1865eb22f7"
-            name="MessageOccurrenceSpecification9">
-            <covered>
-              <lifelineMoniker
-                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
-                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
-                LastKnownLocation="WeldDetect.uml" />
-            </covered>
-          </messageOccurrenceSpecification>
-          <messageOccurrenceSpecification
             Id="151bb2f2-fcdd-4411-bafd-29a7a226cb83"
             name="MessageOccurrenceSpecification8">
             <covered>
               <lifelineMoniker
                 Id="e675b654-b775-4e80-ba28-510d209e7e48"
                 LastKnownName="Aproxymacja profilu, C_LineWeldApprox"
+                LastKnownLocation="WeldDetect.uml" />
+            </covered>
+          </messageOccurrenceSpecification>
+          <messageOccurrenceSpecification
+            Id="38d20c02-43b9-46a5-9d4b-0a1865eb22f7"
+            name="MessageOccurrenceSpecification9">
+            <covered>
+              <lifelineMoniker
+                Id="77d3bf69-4ab5-4545-b9c6-12b85b39fe5c"
+                LastKnownName="Estymacja parmaetrów aproxymacji n-tej linii"
                 LastKnownLocation="WeldDetect.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -801,6 +801,352 @@
       <executionEvent
         Id="cf9550ad-d90f-4335-9f92-ff0d34cddd3b"
         name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="b9f78111-c537-4f6a-a911-1d70e9f73ec9"
+        name="SDK"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="94d5aa02-a747-49de-80ab-1f1de4185499">
+            <componentMoniker
+              Id="aadc82e5-4596-4ff8-8085-6be719b9f9a1"
+              LastKnownName="C_LineInterp"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+          <dependency
+            Id="a326ac2a-31ea-434b-9ecc-bfcefc92560f">
+            <componentMoniker
+              Id="5c5b2546-d1f0-48af-8897-a9277507f02d"
+              LastKnownName="C_LineweldApprox"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+          <dependency
+            Id="d4b9be9a-f027-4286-9c60-8f66b9fdb137">
+            <componentMoniker
+              Id="deb6b100-87af-4cb3-8e7d-643e58a5beb6"
+              LastKnownName="C_MatrixContainerFactory"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="77657853-1300-4706-81d5-c13e68d8abcf"
+        name="C_Point"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="08960f3d-7873-42a0-b366-3dd9b97e9561">
+            <componentMoniker
+              Id="aadc82e5-4596-4ff8-8085-6be719b9f9a1"
+              LastKnownName="C_LineInterp"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="e9e9af2b-5ec1-4bcc-a9ac-614b7be20173"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="d354748a-4b46-43bb-9014-6aa6a1f24e54"
+                LastKnownName="Interface1"
+                LastKnownLocation="WeldDetect.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="9569aa16-7e3a-4c06-8f6f-917308b21540"
+        name="C_Line"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="af8d4179-bc46-42a8-95a7-f41094bdbdb9">
+            <componentMoniker
+              Id="77657853-1300-4706-81d5-c13e68d8abcf"
+              LastKnownName="C_Point"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="aadc82e5-4596-4ff8-8085-6be719b9f9a1"
+        name="C_LineInterp"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="f8fc6502-3341-48ee-a004-a9ce171516dc">
+            <componentMoniker
+              Id="5c5b2546-d1f0-48af-8897-a9277507f02d"
+              LastKnownName="C_LineweldApprox"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+          <dependency
+            Id="23d531aa-3ed0-4795-989f-5ab19685d4bb">
+            <componentMoniker
+              Id="3c904dee-1afa-4a0a-8fef-2754019a6e0c"
+              LastKnownName="Interpol"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="5c5b2546-d1f0-48af-8897-a9277507f02d"
+        name="C_LineweldApprox"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="deb6b100-87af-4cb3-8e7d-643e58a5beb6"
+        name="C_MatrixContainerFactory"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="ea22180b-6815-494c-90a4-92b1a65a570f"
+        name="C_Vector"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <dependency
+            Id="0c1c75c4-3ded-4456-af88-015f51dac62c">
+            <componentMoniker
+              Id="77657853-1300-4706-81d5-c13e68d8abcf"
+              LastKnownName="C_Point"
+              LastKnownLocation="WeldDetect.uml" />
+          </dependency>
+        </suppliersInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="3c904dee-1afa-4a0a-8fef-2754019a6e0c"
+        name="Interpol"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="d354748a-4b46-43bb-9014-6aa6a1f24e54"
+        name="Interface1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="a2559f1d-5479-4d31-b95a-cabebc3372aa"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="6edbd485-532e-43e9-a0ad-8b577784c7bf"
+        name="Class2"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <targetEnds>
+          <association
+            Id="24d34f0d-7b43-4999-a8f0-04f71ddd9037"
+            isDerived="false"
+            sourceEndRoleName="Class2"
+            targetEndRoleName="Class1"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a2559f1d-5479-4d31-b95a-cabebc3372aa"
+              LastKnownName="Class1"
+              LastKnownLocation="WeldDetect.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="1f962888-2fd4-4c79-9de9-b8a2f2e49fd9"
+                  name="Class2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2827041f-f9ed-4507-84e3-3b33f9add4c9"
+                  name="Class1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="d0da256c-cad4-4e10-9746-48906b35b10c"
+            isDerived="false"
+            sourceEndRoleName="Class2"
+            targetEndRoleName="Class3"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="ac644d5a-50aa-4fb3-a531-94907f3d7996"
+              LastKnownName="Class3"
+              LastKnownLocation="WeldDetect.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9527489e-d492-4620-9191-cc958ee9f17d"
+                  name="Class2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="a79e5a00-8ce9-428b-8c92-b55cb69cb0d2"
+                  name="Class3"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="4a425857-7899-4f33-9911-2d5364829b39"
+            isDerived="false"
+            sourceEndRoleName="Class2"
+            targetEndRoleName="Class1"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="a2559f1d-5479-4d31-b95a-cabebc3372aa"
+              LastKnownName="Class1"
+              LastKnownLocation="WeldDetect.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="0ba6527b-6e6f-4eab-aed7-a147224facbf"
+                  name="Class2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="13883103-26ba-4203-8b68-497e119d6907"
+                  name="Class1"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="81008d1a-f4eb-4829-9758-a1966d7beaeb"
+            isDerived="false"
+            sourceEndRoleName="Class2"
+            targetEndRoleName="Class3"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="ac644d5a-50aa-4fb3-a531-94907f3d7996"
+              LastKnownName="Class3"
+              LastKnownLocation="WeldDetect.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="9a6784e1-59fe-42ea-85fd-f092e6a7a59b"
+                  name="Class2"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="c004cb2c-9bbc-4a3d-aa6d-1cb4cd271bc1"
+                  name="Class3"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="ac644d5a-50aa-4fb3-a531-94907f3d7996"
+        name="Class3"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

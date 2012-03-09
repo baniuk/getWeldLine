@@ -1,5 +1,5 @@
 /**
- * \file GTEST_ADDONS.cpp
+ * \file GTEST_ADDONS.h
  *\brief Plik zawiera funkcje do testowania wiêkszych obiektów do u¿ycia wewnatrz testów google
  */
  

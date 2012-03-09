@@ -1,3 +1,9 @@
+/**
+ * \file    C_Matrix_Container_Factory.h
+ * \brief	Obs³uguje automatyczne ³adowania ci¹gów danych z matlaba
+ * \author  PB
+ * \date    2012/03/01
+ */
 #ifndef C_Matrix_Container_Factory_h__
 #define C_Matrix_Container_Factory_h__
 
@@ -8,8 +14,7 @@
 #define MAX_FILE_NAME 1024
 /// maksymalna d³ugoœæ rozszerzenia
 #define MAX_EXT_NAME 10
-/** Klasa tworzy zbiór obiektów klasy C_Matrix_Cntainer i ³aduje do nich 
- * pliki o dowolnej nazwie z koñcówk¹ _xx, gdzie xx jest numerem. Przydatne gdy 
+/** Obs³uguje automatyczne ³adowania ci¹gów danych z matlaba. Klasa tworzy zbiór obiektów klasy C_Matrix_Cntainer i ³aduje do nich pliki o dowolnej nazwie z koñcówk¹ _xx, gdzie xx jest numerem. Przydatne gdy 
  * z matlaba mamy wiele plików z danymi dotycz¹cymi tego samego przypadku
  * i chcemy je ³atwo za³adowaæ.
  */ 

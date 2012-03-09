@@ -18,7 +18,7 @@ C_LineInterp::C_LineInterp()
  * \param[in] type Typ interpolacji
  * \param[in] _P0 punkt poczatkowy
  * \param[in] _P1 punkt koñcowy lini interpolacji
- * \param[in] image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
+ * \param[in] _image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
  * \param[in] _size tablica z wymiarami obrazu [rows,cols,z]
  */
 C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &_P1, const double *const _image, const unsigned int _size[]  ) :
@@ -43,8 +43,8 @@ C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &
  * \param[in] type Typ interpolacji
  * \param[in] _a wspó³czynnik kierunkowy prostej interpolacyjnej
  * \param[in] _b wyraz wolny
- * \param[in] czy_pion czy prosta jest pionowa czy nie
- * \param[in] image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
+ * \param[in] _czy_pion czy prosta jest pionowa czy nie
+ * \param[in] _image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
  * \param[in] _size tablica z wymiarami obrazu [rows,cols,z]
  */
 C_LineInterp::C_LineInterp( APPROX_TYPE type,const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion, const double *const _image, const unsigned int _size[]  ) :
@@ -77,7 +77,7 @@ C_LineInterp::~C_LineInterp()
  * Zwraca wartoœci interpolowane z obrazu pomiêdzy punktami le¿¹cymi na linii. Wartoci interpolowane zapisane s¹ w interpolated_data.
  * wspó³rzêdne dla których by³a inteprolacja równierz
  * \param[in] _P0 punkt pocz¹tkowy
- * \param[in] _P2 punkt koñcowy
+ * \param[in] _P1 punkt koñcowy
  * \param[out] _outx wektor x o rozmiarze N
  * \param[out] _outy wektor y o rozmiarze n
  * \param[in] Np iloœæ punktów pomiêdzy <P0;P1>
@@ -87,7 +87,7 @@ C_LineInterp::~C_LineInterp()
 
 bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int Np )
 {
-	_RPT0(CRT_WARNING_POP,"Obsolete sytnax, use without _outx");
+	_RPT0(_CRT_ERROR,"Obsolete sytnax, use without _outx");
 	bool ret;
 	if(!isPointOnLine(_P0))
 		return false;
@@ -126,8 +126,8 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
  * Zwraca wartoœci interpolowane z obrazu pomiêdzy punktami le¿¹cymi na linii. Wartoci interpolowane zapisane s¹ w interpolated_data.
  * wspó³rzêdne dla których by³a inteprolacja równierz zapisywane s¹ w x i y
  * \param[in] _P0 punkt pocz¹tkowy
- * \param[in] _P2 punkt koñcowy
- * \param[in] N iloœæ punktów pomiêdzy <P0;P1>
+ * \param[in] _P1 punkt koñcowy
+ * \param[in] Np iloœæ punktów pomiêdzy <P0;P1>
  * \return Jeœli P0 i P1 nie le¿¹ na linii to zwraca false i wartoœci w _out s¹ nieokreœlone
  * \warning Funkcja modyfikuje tablice image
  */

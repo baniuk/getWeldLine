@@ -1,60 +1,103 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" dslVersion="1.0.0.0" Id="07cd12c0-9516-4026-b201-66ccf8841f1d" name="WeldDetect" linkedPackageId="4e537231-7c92-4b4f-aec2-0b64cef2df2a" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
-  <profileInstances>
-    <packageHasProfileInstances Id="ee20c9e1-6167-4361-a5a2-f4ee473a620e">
-      <profileInstance Id="4ad49774-41d0-43a3-a7c1-b9f5cb66a1f2" name="StandardProfileL2">
-        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
-      </profileInstance>
-      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
-    </packageHasProfileInstances>
-    <packageHasProfileInstances Id="2f405dac-4dd2-4338-bb00-b6dc4013b3e1">
-      <profileInstance Id="ed90c5ef-7122-46b2-bdb2-5005c6cc580c" name="StandardProfileL3">
-        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
-      </profileInstance>
-      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
-    </packageHasProfileInstances>
-  </profileInstances>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner" xmlns:dm10="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner" dslVersion="1.0.0.0" Id="07cd12c0-9516-4026-b201-66ccf8841f1d" name="WeldDetect" linkedPackageId="4e537231-7c92-4b4f-aec2-0b64cef2df2a" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
-      <class Id="9d3a3b1b-5018-44c2-a33f-4a3dbffdce57" name="C_LineWeldApprox" isAbstract="false" isLeaf="false" isActiveClass="false">
-        <elementDefinition Id="0e289732-a060-4436-b52f-1a3cfb03fb92" />
+      <class Id="7b06e6e9-3f8b-408e-b929-e1426bc21b19" name="Class1" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a2559f1d-5479-4d31-b95a-cabebc3372aa" />
       </class>
     </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
-      <class Id="03558853-0fa7-4033-a2e9-f409d1acf7fa" name="C_getLine" isAbstract="false" isLeaf="false" isActiveClass="false">
-        <elementDefinition Id="cc43b120-253a-4a94-b4b4-7c0b4b2d4faf" />
+      <class Id="5c87702b-2ce2-4390-bafa-dc303755bbbb" name="Class2" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="6edbd485-532e-43e9-a0ad-8b577784c7bf" />
         <targetEnds>
-          <association Id="4c96703d-fc6d-46cc-8746-3f3aee1ea0a3" isDerived="false" sourceEndRoleName="C_getLine" targetEndRoleName="C_LineWeldApprox" isLeaf="false" isAbstract="false">
-            <classMoniker Id="9d3a3b1b-5018-44c2-a33f-4a3dbffdce57" LastKnownName="C_LineWeldApprox" />
+          <association Id="e5724277-52a2-463c-bc6e-17bf7714fb0d" isDerived="false" sourceEndRoleName="Class2" targetEndRoleName="Class1" isLeaf="false" isAbstract="false">
+            <classMoniker Id="7b06e6e9-3f8b-408e-b929-e1426bc21b19" LastKnownName="Class1" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
-                <memberEnd Id="a72694ef-ee97-40bb-9d96-eed547d20f09" name="C_getLine" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
-                  <lowerValueInternal>
-                    <literalString Id="9d9099c4-4920-4be7-b30d-ce018c9a4ef9" name="Lower" value="0">
-                      <elementDefinition Id="651c8b75-3ab8-4ecb-ada3-41e39c541244" />
-                    </literalString>
-                  </lowerValueInternal>
-                  <upperValueInternal>
-                    <literalString Id="6b2def23-daf2-47d2-9416-f1c927a64d5c" name="Upper" value="0">
-                      <elementDefinition Id="9a4edc6c-2c51-4cb5-881d-7b2aadf8c2e9" />
-                    </literalString>
-                  </upperValueInternal>
-                  <elementDefinition Id="d6c881f7-1f3b-4645-9502-d797f1d8dd8c" />
+                <memberEnd Id="ea224a2a-9718-4ac1-bfc8-da43167e8b74" name="Class2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="1f962888-2fd4-4c79-9de9-b8a2f2e49fd9" />
                 </memberEnd>
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
-                <memberEnd Id="d2b55f6e-6ee0-4111-804c-961ed0fdc17b" name="C_LineWeldApprox" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="ba7f9489-f2c6-4768-9fe2-82d70c78c176" />
+                <memberEnd Id="c37fb347-f5fd-4999-ac34-8333d14ce6ce" name="Class1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="2827041f-f9ed-4507-84e3-3b33f9add4c9" />
                 </memberEnd>
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
-            <elementDefinition Id="8767caee-8a97-4cfa-a0dc-399eadf4e83f" />
+            <elementDefinition Id="24d34f0d-7b43-4999-a8f0-04f71ddd9037" />
+          </association>
+          <association Id="2f087ff6-c8a6-45cb-ae8f-6c5d42751226" isDerived="false" sourceEndRoleName="Class2" targetEndRoleName="Class3" isLeaf="false" isAbstract="false">
+            <classMoniker Id="dfd54da5-a88b-42fe-abe2-cee63576dbc7" LastKnownName="Class3" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="8da46ac0-1874-4965-b5b5-dd021b41ced7" name="Class2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9527489e-d492-4620-9191-cc958ee9f17d" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="7541b117-5ef2-4dc6-98d2-1b17f4d1d0b1" name="Class3" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="a79e5a00-8ce9-428b-8c92-b55cb69cb0d2" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="d0da256c-cad4-4e10-9746-48906b35b10c" />
+          </association>
+          <association Id="18fd29e7-c171-4545-862e-bc5af273ae3b" isDerived="false" sourceEndRoleName="Class2" targetEndRoleName="Class1" isLeaf="false" isAbstract="false">
+            <classMoniker Id="7b06e6e9-3f8b-408e-b929-e1426bc21b19" LastKnownName="Class1" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="cf3914f9-1e9b-4a46-9657-a366e45c7195" name="Class2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="0ba6527b-6e6f-4eab-aed7-a147224facbf" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0a8225a5-4dd4-493b-9f9e-e58c8e7b91a0" name="Class1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="13883103-26ba-4203-8b68-497e119d6907" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="4a425857-7899-4f33-9911-2d5364829b39" />
+          </association>
+          <association Id="a65d7474-b550-4230-bb4f-35e8d2b514da" isDerived="false" sourceEndRoleName="Class2" targetEndRoleName="Class3" isLeaf="false" isAbstract="false">
+            <classMoniker Id="dfd54da5-a88b-42fe-abe2-cee63576dbc7" LastKnownName="Class3" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="4e2c99fe-4df3-4078-84d5-4cf87673eae0" name="Class2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="9a6784e1-59fe-42ea-85fd-f092e6a7a59b" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="28b57a89-851c-46c7-af24-42c21803072b" name="Class3" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="c004cb2c-9bbc-4a3d-aa6d-1cb4cd271bc1" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="81008d1a-f4eb-4829-9758-a1966d7beaeb" />
           </association>
         </targetEnds>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="dfd54da5-a88b-42fe-abe2-cee63576dbc7" name="Class3" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="ac644d5a-50aa-4fb3-a531-94907f3d7996" />
       </class>
     </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="4e537231-7c92-4b4f-aec2-0b64cef2df2a" name="WeldDetect">
     <elementDefinition Id="c5ee0d59-75c4-4966-ab22-b9743d0fc579" />
+    <profileInstances>
+      <packageHasProfileInstances Id="ee20c9e1-6167-4361-a5a2-f4ee473a620e">
+        <profileInstance Id="4ad49774-41d0-43a3-a7c1-b9f5cb66a1f2" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="2f405dac-4dd2-4338-bb00-b6dc4013b3e1">
+        <profileInstance Id="ed90c5ef-7122-46b2-bdb2-5005c6cc580c" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
   </package>
 </logicalClassDesignerModel>

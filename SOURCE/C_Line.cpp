@@ -15,7 +15,7 @@ C_Line::C_Line() :
  * czy prosta jest naprawdê pionwa czy pozioma.
  * \param[in] _a Wspó³czynnik kierunkowy
  * \param[in] _b Wyraz wolny
- * \param[in] czy_pion Informacja czy prost¹ traktujemy jako pionow¹ (tylko wspó³czynnik b jest brany pod uwagê czy normaln¹
+ * \param[in] _czy_pion Informacja czy prost¹ traktujemy jako pionow¹ (tylko wspó³czynnik b jest brany pod uwagê czy normaln¹
  */
 C_Line::C_Line( const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion )
 {
@@ -38,8 +38,8 @@ C_Line::~C_Line()
 
 /** 
  * Zwraca wszystkie parametry opisuj¹ce prost¹
- * \param[out] a Wspó³czynnik kierunkowy
- * \param[ouy] b wyraz wolny
+ * \param[out] _a Wspó³czynnik kierunkowy
+ * \param[out] _b wyraz wolny
  * \return jest_pion zwraca TRUE jesli prosta jest pionowa
  */
 KIERUNEK_PROSTEJ C_Line::getLine( double &_a, double &_b ) const
@@ -54,7 +54,7 @@ KIERUNEK_PROSTEJ C_Line::getLine( double &_a, double &_b ) const
  * czy prosta jest naprawdê pionwa czy pozioma.
  * \param[in] _a Wspó³czynnik kierunkowy
  * \param[in] _b Wyraz wolny
- * \param[in] czy_pion Informacja czy prost¹ traktujemy jako pionow¹ (tylko wspó³czynnik b jest brany pod uwagê czy normaln¹
+ * \param[in] _czy_pion Informacja czy prost¹ traktujemy jako pionow¹ (tylko wspó³czynnik b jest brany pod uwagê czy normaln¹
  */
 void C_Line::setLine( const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion )
 {
@@ -71,7 +71,7 @@ void C_Line::setLine( const double &_a, const double &_b, const KIERUNEK_PROSTEJ
  */
 void C_Line::LinSpace( double x0, double x1, double *x_out, int N ) const
 {
-	unsigned int a;
+	int a;
 
 	for(a=0;a<=N-2;a++)
 		x_out[a] = x0 + a*(x1-x0)/(N-1);
@@ -149,7 +149,7 @@ bool C_Line::LineCutCircle( const C_Point &P0,double R,C_Point (&out)[2] )
 /** 
  * Zwraca wartoœci y=ax+b pomiêdzy punktami le¿¹cymi na linii
  * \param[in] _P0 punkt pocz¹tkowy
- * \param[in] _P2 punkt koñcowy
+ * \param[in] _P1 punkt koñcowy
  * \param[out] _outx wektor x o rozmiarze N
  * \param[out] _outy wektor y o rozmiarze n
  * \param[in] N iloœæ punktów pomiêdzy <P0;P1>

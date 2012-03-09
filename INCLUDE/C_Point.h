@@ -1,13 +1,19 @@
+/**
+ * \file    C_Point.h
+ * \brief	Definiuje punkt w przestrzeni
+ * \author  PB
+ * \date    2012/03/01
+ */
 #ifndef C_Point_h__
 #define C_Point_h__
+
+
+#define _USE_MATH_DEFINES
+#include <math.h>
 
 /** 
  * Klasa implementuj¹ca punkt w przestreni dwuwymiarowej
  */ 
-#define _USE_MATH_DEFINES
-#include <math.h>
-
-
 class C_Point
 {
 public:

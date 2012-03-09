@@ -10,9 +10,9 @@
 /** 
  * Standardowy konstruktor obiektu dokonuj¹cego aproxymacji linii spawu i przechowujacego wynik. Klasa przechowuje wyniki minimalizacji oraz uzyskane parametry.
  * Pozosta³e dane jak w, y, x nie s¹ przechowywane celem zaoszczêdzenia miejsca.
- * \param[in] ApproxFcn		Rodzaj krzywej do aproxymacji - zgodne z eApproxFcn
- * \param[in] _y		table of data to be fit
- * \param[in] _x		values of domain of y. Approximation function is evaluated for these data and fitted to y
+ * \param[in] _typeApprox Rodzaj krzywej do aproxymacji - zgodne z eApproxFcn
+ * \param[in] _y table of data to be fit
+ * \param[in] _x values of domain of y. Approximation function is evaluated for these data and fitted to y
  */
 C_LineWeldApprox::C_LineWeldApprox(eApproxFcn _typeApprox,C_Matrix_Container *_y, C_Matrix_Container *_x)
 	:
@@ -44,7 +44,7 @@ C_LineWeldApprox::~C_LineWeldApprox()
 /** 
  * Approximates one line of image. Approximation functions are evaluated for vector xtradata::x->x and then its output values are compared to 
  * vector y. Vector y and xtradata::x->x are the same size. Require to call method C_LineWeldApprox::setApproxPAram before
- * @param[in] iter	maximum number of iterations			
+ * @param[in] _iter	maximum number of iterations			
  * \return Number of iterations or -1 if failed
 */
 int C_LineWeldApprox::getLineApprox(int _iter)
@@ -91,14 +91,13 @@ int C_LineWeldApprox::getLineApproxGaussLinWeighted(int iter)
 /** 
  * Ustawia parametry aproxymacji. Zaden z parametrów nie jest modyfikowany. _p, _ub _lb _opts s¹ kopiowane do klasy. Jeœli
  * parametry s¹ NULL to u¿yte s¹ parametry domyœlne ustawiane w konstruktorze
- * @param[in] w		weights to weight y data (NULL if no wieghts)
- * @param[inout] p	table of parameters
- * @param[in] lb	lower bounds - size of m
- * @param[in] ub	upper bounds - size of m
- * @param[in] opts  minim. options [\tau, \epsilon1, \epsilon2, \epsilon3]. Respectively the scale factor for initial \mu,
- *					stopping thresholds for ||J^T e||_inf, ||Dp||_2 and ||e||_2. Set to NULL for defaults to be used
+ * @param[in] _w		weights to weight y data (NULL if no wieghts)
+ * @param[in,out] _p	table of parameters
+ * @param[in] _lb lower bounds - size of m
+ * @param[in] _ub upper bounds - size of m
+ * @param[in] _opts minim. options \latexonly [\tau, \epsilon_1, \epsilon_2, \epsilon_3]. Respectively the scale factor for initial \mu,stopping thresholds for ||J^T e||_inf, ||Dp||_2 and ||e||_2. \endlatexonly
+ * Set to NULL for defaults to be used
 */
-
 void C_LineWeldApprox::setApproxParmas( C_Matrix_Container *_p, C_Matrix_Container *_w, C_Matrix_Container *_ub, C_Matrix_Container *_lb, double *_opts )
 {
 	int a;
@@ -173,7 +172,7 @@ void C_LineWeldApprox::getApproxParams( C_Matrix_Container *_p, C_Matrix_Contain
 }
 /** 
  * Zwraca wartoœæ wybranej pozycji z tablicy info zawieraj¹cej wyniki optymalizacji
- * \param[in] res	nazwa parametru zgodna z wektor z eOptimInfo
+ * \param[in] _res	nazwa parametru zgodna z wektor z eOptimInfo
  * \return wartosc parametru o nazwie _res
 */
 double C_LineWeldApprox::getInfo( eOptimInfo _res )

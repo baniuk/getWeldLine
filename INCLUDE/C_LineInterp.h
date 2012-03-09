@@ -1,3 +1,9 @@
+/**
+ * \file    C_LineInterp.h
+ * \brief	Interpoluje profil liniowy obrazy zdjêty z linii prostej.	
+ * \author  PB
+ * \date    2012/03/01
+ */
 #ifndef C_LineInterp_h__
 #define C_LineInterp_h__
 

@@ -17,6 +17,13 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v10.0\ArchitectureTools\Microsoft.VisualStudio.TeamArchitect.ModelingProject.targets" />
   <ItemGroup>
+    <Content Include="Components.componentdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Components.componentdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Components.componentdiagram</DependentUpon>
+    </Content>
     <Content Include="WeldDetect.classdiagram">
       <SubType>Content</SubType>
     </Content>

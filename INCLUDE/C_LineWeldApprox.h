@@ -1,7 +1,6 @@
 /**
  * \file    C_LineWeldApprox.h
- * \brief	Aproxymacja spawów liniowych	
- * \details Aproksymuje spawy liniowe
+ * \brief	Aproxymuje profil liniowy obrazu	
  * \author  PB
  * \date    2012/03/01
  */

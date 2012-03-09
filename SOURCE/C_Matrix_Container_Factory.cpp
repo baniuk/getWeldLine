@@ -3,7 +3,7 @@
 /** 
  * G³ówny konstruktor - przyjmuje iloœæ plików do wczytania oraz ich nazwê bazow¹. Po konstrukcji nale¿y wywo³aæ loaddata
  * \param[in] _baza nazwa bazowa
- * \param[in] ile liczba plików
+ * \param[in] _ile liczba plików
  * \warning Pliki s¹ numerowane od 0
  */
 C_Matrix_Container_Factory::C_Matrix_Container_Factory(const char* const _baza, int _ile)
@@ -25,8 +25,8 @@ C_Matrix_Container_Factory::~C_Matrix_Container_Factory()
 
 /** 
  * Dodaje do nazwy bazowej numer kolejny.
- * \param[in] numer do dodania
- * \param[out] tu ³aduje gotowy ci¹g
+ * \param[in] n numer do dodania
+ * \param[out] out tu ³aduje gotowy ci¹g
  */
 void C_Matrix_Container_Factory::CreateName( int n, char* out )
 {

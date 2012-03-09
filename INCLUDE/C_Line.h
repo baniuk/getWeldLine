@@ -1,3 +1,9 @@
+/**
+ * \file    C_Line.h
+ * \brief	Definiuje linie w przestrzeni 2D	
+ * \author  PB
+ * \date    2012/03/01
+ */
 #ifndef C_Line_h__
 #define C_Line_h__
 

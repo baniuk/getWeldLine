@@ -49,9 +49,9 @@ C_Point &C_Vector::setVEC()
 }
 /** 
  * Zwraca wszystkie dane wektora.
- * \params[out] _P0 pocz¹tek wektora
- * \params[out] _P1 koniec wektora
- * \params[out] _VEC wspó³rzêdne wektora
+ * \param[out] _P0 pocz¹tek wektora
+ * \param[out] _P1 koniec wektora
+ * \param[out] _VEC wspó³rzêdne wektora
  */
 void C_Vector::getVector( C_Point &_P0, C_Point &_P1, C_Point &_VEC ) const
 {
