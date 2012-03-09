@@ -1,7 +1,10 @@
 #ifndef __C_Matrix_Container__
 #define __C_Matrix_Container__
 
+#ifndef SAFE_DELETE
 #define SAFE_DELETE(p)       { if(p) { delete (p);     (p)=NULL; } }
+#endif
+
 #include <windows.h>
 #include <stdio.h>
 #include <math.h>
@@ -9,7 +12,12 @@
 #include <wx/defs.h>
 #include <wx/debug.h>
 
-// Ver 1.3.2 by PB
+// Ver 1.3.3 by PB
+
+/// definiuje zmien¹ c_matrix i od razu ³aduje do niej plik fiel
+#define C_MATRIX_LOAD(var,file) \
+	C_Matrix_Container (var);\
+	(var).ReadBinary((file));
 
 class C_Matrix_Container
 {

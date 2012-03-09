@@ -124,7 +124,7 @@ protected:
 TEST_F(C_LineApprox_Test2, getInterpolated_data) {
 	const double *result;
 	C_DumpAll dump("getInterpolated_data.out");
-	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getInterpolated_data.out" << "\n\n";
+	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getLineApproxGaussLin_test_1_expected.out" << "\n\n";
 	C_Matrix_Container outx(1,71);
 	C_Matrix_Container outy(1,71);
 	line1->getPointsOnLine(P01,P11,outx.data,outy.data,71);
@@ -138,6 +138,33 @@ TEST_F(C_LineApprox_Test2, getInterpolated_data) {
 /// test interpolacji getInterpolated_data - u¿ycie getInterpolated_data bez interpolacji
 TEST_F(C_LineApprox_Test2, getInterpolated_data_case2) {
 	const double *result;
+	const double *x;
+	const double *y;
+
 	result = line1->getInterpolated_data();
+	x = line1->getInterpolated_X();
+	y = line1->getInterpolated_Y();
 	ASSERT_EQ(NULL,result);
+	ASSERT_EQ(NULL,x);
+	ASSERT_EQ(NULL,y);
+}
+
+/// test interpolacji getInterpolated_x oraz getInterpolated_y
+TEST_F(C_LineApprox_Test2, getInterpolated_xy) {
+	const double *x;
+	const double *y;
+
+	C_Matrix_Container outx(1,71);
+	C_Matrix_Container outy(1,71);
+	line1->getPointsOnLine(P01,P11,outx.data,outy.data,71);
+	x = line1->getInterpolated_X();
+	y = line1->getInterpolated_Y();
+	// x i y powinny byæ kopi¹ outx i out y
+	for(int a=0;a<71;a++)
+	{
+		ASSERT_DOUBLE_EQ(outx.GetPixel(0,a), x[a]) << "Vectors x and differ at index " << a;
+		ASSERT_DOUBLE_EQ(outy.GetPixel(0,a), y[a]) << "Vectors y and differ at index " << a;
+	}
+
+
 }

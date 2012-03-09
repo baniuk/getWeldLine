@@ -12,5 +12,6 @@
 
 #include "gtest/gtest.h"
 #include "C_LineWeldApprox.h"
+#include "C_DumpAll.h"
 
 // TODO: reference additional headers your program requires here

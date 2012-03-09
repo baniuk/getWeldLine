@@ -34,6 +34,8 @@ C_LineWeldApprox::C_LineWeldApprox(eApproxFcn _typeApprox,C_Matrix_Container *_y
 	}
 
 }
+	// dodaæ konstruktor pobieraj¹cy obiekt C_LineInterp
+
 C_LineWeldApprox::~C_LineWeldApprox()
 {
 

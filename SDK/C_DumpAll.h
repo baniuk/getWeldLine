@@ -12,11 +12,6 @@
 #define C_IMAGE 3
 #define FLOAT 4
 
-// definiuje zmien¹ c_matrix i od razu ³aduje do niej plik fiel
-#define C_DUMP_LOAD(var,file) \
-	C_Matrix_Container (var);\
-	(var).ReadBinary((file));
-
 class C_DumpAll
 {
 public:

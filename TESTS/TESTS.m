@@ -1,4 +1,6 @@
 %% kasowanie wszystkich plików out
+% nalezy uruchmic plik test.m, póŸnej testy w vcc i jeszcze raz m, bo
+% niektóre testy s¹ sprawdzane w matlabie
 %% przygotowanie TestCase_1 GaussLin_test_1
 pa = '..\x64\debug\';
 TestCase_1.name = 'GaussLin_test_1';
