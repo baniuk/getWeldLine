@@ -24,12 +24,16 @@ protected:
 TEST_F(C_CircBuff_Test1, CircBuff_case1) {
 	test1->BuffInit(3);// 3 elementów
 	ASSERT_FALSE(test1->Czy_pelny());	// pusty
+	ASSERT_EQ(0,test1->getNumElem());
 	test1->AddObject();
 	ASSERT_FALSE(test1->Czy_pelny());	// pusty
+	ASSERT_EQ(1,test1->getNumElem());
 	test1->AddObject();
 	ASSERT_FALSE(test1->Czy_pelny());	// pusty
+	ASSERT_EQ(2,test1->getNumElem());
 	test1->AddObject();
 	ASSERT_TRUE(test1->Czy_pelny());	// pe³ny
+	ASSERT_EQ(3,test1->getNumElem());
 }
 /// test czy bufora 1
 TEST_F(C_CircBuff_Test1, CircBuff_case2) {
@@ -61,6 +65,8 @@ TEST_F(C_CircBuff_Test1, CircBuff_case3) {
 	ASSERT_EQ(2,*(test1->GetObject(1)));
 	ASSERT_EQ(3,*(test1->GetObject(2)));
 	ASSERT_EQ(4,*(test1->GetObject(3)));
+	// jeœli pe³ny to zwraca pojemnoœæ
+	ASSERT_EQ(3,test1->getNumElem());
 
 }
 /// test czy bufora 4
@@ -188,6 +194,14 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case2) {
 /// test evalNextParams - koniec obrazka 
 TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
 	C_LinearWeld obj(rtg);
+
+	obj.hLogFile = CreateFile("C_LinearWeld_case3.txt", GENERIC_WRITE, 
+		FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, 
+		FILE_ATTRIBUTE_NORMAL, NULL);
+	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
+	_CrtSetReportFile(_CRT_WARN, obj.hLogFile);
+	_RPT0(_CRT_WARN,"------ Entering C_LinearWeld_case3 ------\n");
+
 	int x_poz = 7831;
 	obj.SetProcedureParameters(10,x_poz); // start of x=10
 	C_Point P0test;

@@ -1,0 +1,14 @@
+------ Entering C_LinearWeld_case3 ------
+	Entering C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::~C_LinearWeld

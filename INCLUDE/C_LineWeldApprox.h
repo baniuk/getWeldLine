@@ -28,11 +28,11 @@ public:
 	/// Standard Constructor - po jego u¿yciu obowi¹zkowo ManualConstructor
 	C_LineWeldApprox();
 	/// konstruktor podstawowy
-	C_LineWeldApprox(eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len);
+	C_LineWeldApprox(eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len);
 	/// Destructor
 	~C_LineWeldApprox();
 	/// konstruktor manualny - musi byæ u¿yty po konstruktorze bezparametrowym
-	void ManualConstructor(eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len);
+	void ManualConstructor(eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len);
 private:
 	/// wskaŸnik do danych y \warning Poprzez ten wskaŸnik nie mo¿na modyfikowaæ nic
 	double const *y;

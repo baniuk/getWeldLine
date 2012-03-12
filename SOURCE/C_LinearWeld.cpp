@@ -1,5 +1,7 @@
 #include "C_LinearWeld.h"
 
+
+
 C_LinearWeld::C_LinearWeld( const C_Matrix_Container *_rtg ) : C_WeldlineDetect(_rtg)
 {
 
@@ -7,7 +9,7 @@ C_LinearWeld::C_LinearWeld( const C_Matrix_Container *_rtg ) : C_WeldlineDetect(
 
 C_LinearWeld::~C_LinearWeld()
 {
-
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::~C_LinearWeld\n");
 }
 /** 
  * Ustawia œrodowisko, tworzy potrzebne tablice. 
@@ -17,6 +19,7 @@ C_LinearWeld::~C_LinearWeld()
  */
 void C_LinearWeld::SetProcedureParameters(unsigned int _k,unsigned int _sp)
 {
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::SetProcedureParameters\n");
 	k = _k;
 	P0.setPoint(_sp,0); // dó³ obrazka
 	P1.setPoint(_sp,rtg->_rows-1);	// góra obrazka
@@ -24,7 +27,7 @@ void C_LinearWeld::SetProcedureParameters(unsigned int _k,unsigned int _sp)
 	if(k>0)
 	{
 		approx_results.BuffInit(k);
-		err.BuffInit(k);
+		ERR.BuffInit(k);
 		interp_lines.BuffInit(k);
 	}
 	
@@ -41,31 +44,38 @@ void C_LinearWeld::Start()
  */
 void C_LinearWeld::fillBuffor()
 {
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::fillBuffor\n");
 	// interpolacja k kolejnych linii zacynaj¹c od startowej - poruszam siê po kolumnach
-	C_LineInterp *obj;	// obiekt tymczasowy do ³atwiejszego adresowania
+/*	C_LineInterp *obj;	// obiekt tymczasowy do ³atwiejszego adresowania
 	C_LineWeldApprox *app;
 	while(!interp_lines.Czy_pelny())	// dopuki bufor nie jest pe³ny
 	{
 		obj = interp_lines.AddObject();	// dodaje now¹ liniê
 		// ustawiam parametry interpolacji - P0 lezy na dole obrazu, P1 na górze, linia pionowa
 		obj->ManualConstructor(SPLINE,P0,P1,rtg->data,rtgsize);
-		// wykonuje interpolacjê - biorê tyle punktów ile jest rzêdów w obrazie + punkty koñcowe
+		// wykonuje interpolacjê - biorê tyle punktów ile jest rzêdów w obrazie + punkty koñcowe. Wyniki s¹ zapamiêtywane w klasie i dostêpne poprzez getInterpolated
 		obj->getPointsOnLine(P0,P1,rtg->_rows+1);
 		// aproksymacja - dodaje obiekt aprox
 		app = approx_results.AddObject();
 		// konstruktor manualne
-		app->ManualConstructor(SPLINE,obj->getInterpolated_X(),obj->getInterpolated_data(),rtg->_rows+1);
+		app->ManualConstructor(typeGaussLin,obj->getInterpolated_X(),obj->getInterpolated_data(),rtg->_rows+1);
 		// aproxymacja - parametry domyœlne
 		app->setApproxParmas(NULL,NULL,NULL,NULL,NULL);
 		// aproxymacja
 		app->getLineApprox(100);
-		// zbieram przydatne parametry
-//		app->getInfo()
-			//
-	//		kasowanie jesli blad za duzy - nie zapamietujemy takiego
+		// sprawdzam powodzenie interpolacji
+		if(7==app->getInfo(stopreason)){
+			approx_results.DelObject();	// inny b³¹d
+			interp_lines.DelObject();
+		}else // zbieram przydatne parametry
+			if(app->getInfo(err)>MAX_ERROR_LEVEL){
+				approx_results.DelObject();	// jeœli b³¹d jest za du¿y to kasuje tak¹ liniê
+				interp_lines.DelObject();
+			}
 		// generuje nastêpne punkty
 		evalNextParams();
-	}
+		
+	}*/
 }
 /** 
  * Generuje zestaw parametrów startowych do obliczenia kolejenj aproxymacji. Obraz jest
@@ -77,6 +87,7 @@ void C_LinearWeld::fillBuffor()
  */
 bool C_LinearWeld::evalNextParams()
 {
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextParams\n");
 	// generowanie nowych wspó³rzêdnych dla linii inteprolacyjnej - do paproxymacji profilu
 	if(P0.getX()==rtg->_cols-1)	// jeœli jesteœmy na ostatniej kolumnie to nie mo¿na wygenerowac kolejnej
 		return false;

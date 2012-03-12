@@ -15,7 +15,7 @@
  * \param[in] _x values of domain of y. Approximation function is evaluated for these data and fitted to y
  * \param[in] rozmiar danych x i y
  */
-C_LineWeldApprox::C_LineWeldApprox(eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len)
+C_LineWeldApprox::C_LineWeldApprox(eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len)
 {
 	ManualConstructor( _typeApprox,_y, _x, _len );
 }
@@ -35,7 +35,7 @@ C_LineWeldApprox::C_LineWeldApprox()
  * \param[in] _x values of domain of y. Approximation function is evaluated for these data and fitted to y
  * \param[in] rozmiar danych x i y
  */
-void C_LineWeldApprox::ManualConstructor( eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len )
+void C_LineWeldApprox::ManualConstructor( eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len )
 {
 	typeApprox = _typeApprox;
 	x = _x;
@@ -121,7 +121,7 @@ int C_LineWeldApprox::getLineApproxGaussLinWeighted(int iter)
  * Ustawia parametry aproxymacji. Zaden z parametrów nie jest modyfikowany. _p, _ub _lb _opts s¹ kopiowane do klasy. Jeœli
  * parametry s¹ NULL to u¿yte s¹ parametry domyœlne ustawiane w konstruktorze
  * @param[in] _w		weights to weight y data (NULL if no wieghts)
- * @param[in,out] _p	table of parameters
+ * @param[in] _p	table of parameters
  * @param[in] _lb lower bounds - size of m
  * @param[in] _ub upper bounds - size of m
  * @param[in] _opts minim. options \latexonly [\tau, \epsilon_1, \epsilon_2, \epsilon_3]. Respectively the scale factor for initial \mu,stopping thresholds for ||J^T e||_inf, ||Dp||_2 and ||e||_2. \endlatexonly

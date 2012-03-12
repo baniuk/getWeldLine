@@ -37,7 +37,7 @@ protected:
 	/// przechowuje k ostatnich wyników interpolacji linii - dane do aproxymacji i generowania wag
 	C_CircBuff<C_LineInterp> interp_lines;
 	/// przechowuje k ostatnich b³êdów dopasowania
-	C_CircBuff<double> err;
+	C_CircBuff<double> ERR;
 	/// iloœæ poprzendich wyników brana pod uwagê
 	unsigned int k;
 	/// rozmiar obrazka wejœciowego potrzebny do funkcji interpoluj¹cej

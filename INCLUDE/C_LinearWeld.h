@@ -9,6 +9,11 @@
 
 #include "C_WeldlineDetect.h"
 
+/// maksymalny b³¹d aproxymacji który jest akceptowany. Powy¿ej tego b³êdu dane s¹ odrzucane
+#define MAX_ERROR_LEVEL 200
+
+
+
 class C_LinearWeld : public C_WeldlineDetect
 {
 	friend class C_LinearWeld_Test1;
@@ -17,6 +22,7 @@ public:
 	~C_LinearWeld();
 	void SetProcedureParameters(unsigned int _k,unsigned int _sp);
 	void Start();
+	HANDLE hLogFile;
 protected:
 	bool evalNextParams();
 	void fillBuffor();
