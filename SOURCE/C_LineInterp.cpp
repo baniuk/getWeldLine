@@ -3,7 +3,7 @@
 /** 
  * Podstawowy konstruktor - nie powinien byæ u¿ywany
  */
-C_LineInterp::C_LineInterp()
+C_LineInterp::C_LineInterp() : C_Line()
 {
 	typ_interpolacji = SPLINE;
 	image = NULL;
@@ -14,26 +14,16 @@ C_LineInterp::C_LineInterp()
 	y = NULL;
 }
 /** 
- * Tworzy oniekt Intepolacji, do³¹czony do okreœlonego obrazka (trzeba konwertowaæ z C_Matrix_Container
+ * Tworzy obiekt Intepolacji, do³¹czony do okreœlonego obrazka (trzeba konwertowaæ z C_Matrix_Container
  * \param[in] type Typ interpolacji
  * \param[in] _P0 punkt poczatkowy
  * \param[in] _P1 punkt koñcowy lini interpolacji
  * \param[in] _image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
  * \param[in] _size tablica z wymiarami obrazu [rows,cols,z]
  */
-C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &_P1, const double *const _image, const unsigned int _size[]  ) :
-							C_Line(_P0,_P1),
-							typ_interpolacji(type)
+C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &_P1, const double *const _image, const unsigned int _size[]  )
 {
-	// kopiowanie tablicy z rozmiarami danych
-	memcpy_s(im_size,sizeof(im_size),_size,3*sizeof(unsigned int));
-	// wype³anianie ilosci ementów
-	N = getNumOfElements();
-	// tworzenie bufora z danymi
-	image = new float[N];
-	// kopiowanie danych z zewnatrz do bufora
-	for (unsigned int a=1;a<N;a++)
-		image[a] = (float)_image[a];
+	ManualConstructor( type,_P0,_P1,_image,_size);
 	interpolated_data = NULL;
 	x = NULL;
 	y = NULL;
@@ -87,7 +77,7 @@ C_LineInterp::~C_LineInterp()
 
 bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int Np )
 {
-	_RPT0(_CRT_ERROR,"Obsolete sytnax, use without _outx");
+	_RPT0(_CRT_WARN,"Obsolete sytnax, use without _outx");
 	bool ret;
 	if(!isPointOnLine(_P0))
 		return false;
@@ -193,5 +183,28 @@ void C_LineInterp::SafeAllocateTab()
 void C_LineInterp::DataCopy( double *src,double *dest )
 {
 	memcpy_s(dest,N*sizeof(double),src,N*sizeof(double));
+}
+/** 
+ * Ustawia linieinterpolacji przy pomocy dwóch punktów. Funkcja ta inicjaklizuje tak¿e ca³y obiekt. Powinna byæ u¿ywana w przypadku u¿ycia domyœlnego konstruktora.
+ * \param[in] type Typ interpolacji
+ * \param[in] _P0 punkt poczatkowy
+ * \param[in] _P1 punkt koñcowy lini interpolacji
+ * \param[in] _image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
+ * \param[in] _size tablica z wymiarami obrazu [rows,cols,z]
+ */ 
+void C_LineInterp::ManualConstructor( APPROX_TYPE type,const C_Point &P0, const C_Point &P1, const double *const _image, const unsigned int _size[] )
+{
+	typ_interpolacji = type;
+	getLine2Points(P0,P1);	// inicjalizacja obieku Line
+	// kopiowanie tablicy z rozmiarami danych
+	memcpy_s(im_size,sizeof(im_size),_size,3*sizeof(unsigned int));
+	// wype³anianie ilosci ementów
+	N = getNumOfElements();
+	// tworzenie bufora z danymi
+	image = new float[N];
+	// kopiowanie danych z zewnatrz do bufora
+	for (unsigned int a=1;a<N;a++)
+		image[a] = (float)_image[a];
+
 }
 

@@ -82,11 +82,98 @@ TEST(C_LineweldApprox_Test1,getLineApproxGaussLin)
 		info,
 		X);
 	getLineApproxGaussLin_test_1.AddEntry(&p,"expected");
-	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getInterpolated_data.out" << "\n\n";
+	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getLineApproxGaussLin_test_1_expected.out" << "\n\n";
 	EXPECT_NEAR(761.1147,p.data[0],1e-4);
 	EXPECT_NEAR(1.079115936954478e+003,p.data[1],1e-4);
 	EXPECT_NEAR(1.152311635531913e+002,p.data[2],1e-3);
 	EXPECT_NEAR(-1.063228816386850e-002,p.data[3],1e-2);
 	EXPECT_NEAR(8.148828860093591e+002,p.data[4],1e-3);
+
+}
+/// test konstruktora
+TEST(C_LineweldApprox_Test1,construct)
+{
+	const double *p;
+	const double *ub;
+	const double *lb;
+	C_MATRIX_LOAD(profil,"getLineApproxGaussLin_test_1.dat"); // profil do aproxymacji
+	C_MATRIX_LOAD(x,"getLineApproxGaussLin_test_1_x.dat");
+	C_LineWeldApprox obj;
+	obj.ManualConstructor(typeGaussLin,profil.data,x.data,x._cols);
+	p = obj.getApproxParams_p();
+	ub = obj.getApproxParams_ub();
+	lb = obj.getApproxParams_lb();
+	ASSERT_EQ(1060,p[A]);
+	ASSERT_EQ(x._cols/2,p[B]);
+	ASSERT_EQ(160,p[C]);
+	ASSERT_EQ(0,p[D]);
+	ASSERT_EQ(0,p[E]);
+}
+
+/// test setParam
+TEST(C_LineweldApprox_Test1,setParam)
+{
+	const double *p;
+	const double *ub;
+	const double *lb;
+	C_MATRIX_LOAD(profil,"getLineApproxGaussLin_test_1.dat"); // profil do aproxymacji
+	C_MATRIX_LOAD(x,"getLineApproxGaussLin_test_1_x.dat");
+	double pset[5] = {1,2,3,4,5};
+	double ubset[5] = {6,7,8,9,10};
+	double lbset[5] = {9,8,7,6,5};
+	C_Matrix_Container w(1,x._cols);
+	w.Ones();
+
+	C_LineWeldApprox obj;
+	obj.ManualConstructor(typeGaussLin,profil.data,x.data,x._cols);
+	obj.setApproxParmas(pset,w.data,ubset,lbset,NULL);
+
+	p = obj.getApproxParams_p();
+	ub = obj.getApproxParams_ub();
+	lb = obj.getApproxParams_lb();
+
+	ASSERT_EQ(1,p[A]);
+	ASSERT_EQ(2,p[B]);
+	ASSERT_EQ(3,p[C]);
+	ASSERT_EQ(4,p[D]);
+	ASSERT_EQ(5,p[E]);
+
+	ASSERT_EQ(6,ub[A]);
+	ASSERT_EQ(7,ub[B]);
+	ASSERT_EQ(8,ub[C]);
+	ASSERT_EQ(9,ub[D]);
+	ASSERT_EQ(10,ub[E]);
+
+	ASSERT_EQ(9,lb[A]);
+	ASSERT_EQ(8,lb[B]);
+	ASSERT_EQ(7,lb[C]);
+	ASSERT_EQ(6,lb[D]);
+	ASSERT_EQ(5,lb[E]);
+}
+
+/// test wysokopoziomowej funkcji aproksymuj¹cej
+TEST(C_LineweldApprox_Test1,getApprox)
+{
+	const double *p;
+	const double *ub;
+	const double *lb;
+	C_MATRIX_LOAD(profil,"getLineApproxGaussLin_test_1.dat"); // profil do aproxymacji
+	C_MATRIX_LOAD(x,"getLineApproxGaussLin_test_1_x.dat"); // dane wejsciowe
+	C_LineWeldApprox obj;
+	obj.ManualConstructor(typeGaussLin,profil.data,x.data,x._cols);
+	obj.getLineApprox(100);
+	// p[arametry
+	p = obj.getApproxParams_p();
+	ub = obj.getApproxParams_ub();
+	lb = obj.getApproxParams_lb();
+
+	std::cout << "err: "<< sqrt(obj.getInfo(err))<<"\n";
+
+	EXPECT_NEAR(761.1147,p[A],1e-4);
+	EXPECT_NEAR(1.079115936954478e+003,p[B],1e-4);
+	EXPECT_NEAR(1.152311635531913e+002,p[C],1e-3);
+	EXPECT_NEAR(-1.063228816386850e-002,p[D],1e-2);
+	EXPECT_NEAR(8.148828860093591e+002,p[E],1e-3);
+	
 
 }

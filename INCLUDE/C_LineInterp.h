@@ -27,7 +27,7 @@ enum APPROX_TYPE {
  * elementowej okreœlaj¹cej iloœæ elementów w ka¿dym wymiarze.
  * Interpolowane dane oraz ich wspó³rzêdne s¹ przechowywane wewnêtrz klasy i dostêpne za pomoc¹ C_LineApprox::getInterpolated_data.
  * Schmemat dzia³ania:\n
- * \li Inicjalizacja obiektu = dane interpolowane interpolated_data ustawione na null oraz image te¿
+ * \li Inicjalizacja obiektu = dane interpolowane interpolated_data ustawione na null oraz image te¿ - jeœli u¿yty jest domyœlny konstruktor to trzeba inicjalizowaæ funkcj¹ setLine2Points
  * \li Interpolacja getPointsOnLine wype³nione s¹ tablice oraz zwracane wspó³rzêdne x,y punktów dla których wykonana by³a interpolacja
  * \li Pobranie wyników za pomoc¹ funkcji read-only getInterpolated_data oraz getInterpolatedXY
  */
@@ -40,6 +40,8 @@ public:
 	C_LineInterp(APPROX_TYPE type,const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion, const double *const _image, const unsigned int _size[] );
 	/// konstruktor wykorzystuj¹cy punkty przez które prosta przechodzi
 	C_LineInterp(APPROX_TYPE type,const C_Point &_P0, const C_Point &_P1, const double *const _image, const unsigned int _size[] );
+	/// definiuje linie interpolacji na podstawie 2 punktów
+	virtual void ManualConstructor(APPROX_TYPE type,const C_Point &P0, const C_Point &P1, const double *const _image, const unsigned int _size[] );
 	/// Wykonuje interpolacjê: Zwraca punkty na linii aproxymowanej pomiêdzy P0 i P1 oraz zapisuje je w obiekcie
 	virtual bool getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int N  );
 	/// Wykonuje interpolacjê Zapisuje obliczone punkty w obiekcie

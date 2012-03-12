@@ -106,13 +106,22 @@ cd(pa)
 cd(kat)
 pa = '..\C_LineApprox_TEST\';
 ImportDumpFile([pa,'getInterpolated_data.out']);
+ImportDumpFile([pa,'getInterpolated_data_case1.out']);
 plot(getInterpolated_data_outx);grid on
 figure
 plot(getInterpolated_data_outy);grid on
 figure
 plot(getInterpolated_data_result);grid on
 hold on
-plot(lin,'-r')
+plot(getInterpolated_data_result_case1)
+plot(lin,'or')
+
+lin1 = I(10+1:50+1,5+1);% - bo w c jest od zera
+ImportDumpFile([pa,'getInterpolated_data_case3.out']);
+figure
+plot(getInterpolated_data_result_case3);grid on
+hold on
+plot(lin1,'or')
 %% TEST(C_LineweldApprox_Test1, GaussLin_Case_1)
 pa = '..\C_LineweldApprox_TEST\';
 a = 10;
@@ -194,3 +203,10 @@ e = gausslinear(x,expected(1),expected(2),expected(3),expected(4),expected(5));
 plot(x,data_in)
 hold on
 plot(x,e,'r','linewidth',2);
+%% class C_LinearWeld_Test1
+clear all
+pa = '..\C_WeldlineDetect_TEST\';
+
+rtg = double(imread('300_09.tif'));
+rtg1 = RemoveFrame(rtg); 
+savebinarymatrix(rtg1,[pa,'testimag1.dat']);

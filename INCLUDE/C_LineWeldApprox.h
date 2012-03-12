@@ -24,26 +24,30 @@
   */
 class C_LineWeldApprox
 {
-	/// Standard Constructor
-	C_LineWeldApprox(eApproxFcn _typeApprox,C_Matrix_Container *_y, C_Matrix_Container *_x);
+public:
+	/// Standard Constructor - po jego u¿yciu obowi¹zkowo ManualConstructor
+	C_LineWeldApprox();
+	/// konstruktor podstawowy
+	C_LineWeldApprox(eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len);
 	/// Destructor
 	~C_LineWeldApprox();
-	/// High level approximation function - weight data before aproximation
+	/// konstruktor manualny - musi byæ u¿yty po konstruktorze bezparametrowym
+	void ManualConstructor(eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len);
 private:
 	/// wskaŸnik do danych y \warning Poprzez ten wskaŸnik nie mo¿na modyfikowaæ nic
-	C_Matrix_Container const *y;
+	double const *y;
 	/// wskaŸnik do x
-	C_Matrix_Container const *x;
+	double const *x;
 	/// kopia y ¿eby wag¹ nie modyfikowaæ
-	C_Matrix_Container copy_y;
+	double *copy_y;
 	/// przechowuje wspó³czynniki dla funkcji GaussLin
-	C_Matrix_Container p;
+	double *p;
 	/// Przechowuje typ aproxymacji skojarzony z obiektem, zgodnie z ApproxFcn
 	eApproxFcn typeApprox;
 	/// Przechowuje lb
-	C_Matrix_Container lb;
+	double *lb;
 	/// Przechowje ub
-	C_Matrix_Container ub;
+	double *ub;
 	/// Rodzaj krzywej aproxymuj¹cej
 	eApproxFcn currentApproxFcn;
 	/// parametry optymalizacji
@@ -54,13 +58,17 @@ private:
 	int getLineApproxGaussLinWeighted(int iter);
 	/// ustawia parametry domyœlne dla wybranego typu aproxymacji
 	void setDefaultParams();
+	/// rozmiar wektorów x i y
+	unsigned int len;
 public:
 	/// Aproxymuje jedn¹ liniê wybran¹ funkcj¹ zgodnie z eApproxFcn
 	int getLineApprox(int _iter);
 	/// ustawia parametry optymalizacji i dane
-	void setApproxParmas(C_Matrix_Container *_p, C_Matrix_Container *_w, C_Matrix_Container *_ub, C_Matrix_Container *_lb, double *_opts=NULL);
+	void setApproxParmas(double *_p, double *_w, double *_ub, double *_lb, double *_opts=NULL);
 	/// Zwraca wybrane parametry, bez sprawdzania czy optymalizacja by³a wykoana
-	void getApproxParams(C_Matrix_Container *_p, C_Matrix_Container *_ub, C_Matrix_Container *_lb);
+	const double* getApproxParams_p();
+	const double* getApproxParams_ub();
+	const double* getApproxParams_lb();
 	/// Zwraca wybran¹ informacjê o wyniku optymalizacji
 	double getInfo(eOptimInfo _res);
 };

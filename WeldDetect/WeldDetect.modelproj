@@ -38,6 +38,13 @@
       <SubType>Content</SubType>
       <DependentUpon>WeldDetect.sequencediagram</DependentUpon>
     </Content>
+    <Content Include="WeldlineDetect.componentdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="WeldlineDetect.componentdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>WeldlineDetect.componentdiagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\WeldDetect.uml">
       <SubType>Content</SubType>

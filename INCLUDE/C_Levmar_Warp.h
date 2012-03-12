@@ -20,7 +20,8 @@
 
 /// Typy aproxymacji
 enum eApproxFcn {
-	typeGaussLin = 1
+	typeGaussLin = 1,
+	none
 }; 
 /// Nazwy parametrów dla funkcji Gauss+Lin
 enum eParNamesGaussLin {

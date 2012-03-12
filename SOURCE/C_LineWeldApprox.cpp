@@ -13,32 +13,58 @@
  * \param[in] _typeApprox Rodzaj krzywej do aproxymacji - zgodne z eApproxFcn
  * \param[in] _y table of data to be fit
  * \param[in] _x values of domain of y. Approximation function is evaluated for these data and fitted to y
+ * \param[in] rozmiar danych x i y
  */
-C_LineWeldApprox::C_LineWeldApprox(eApproxFcn _typeApprox,C_Matrix_Container *_y, C_Matrix_Container *_x)
-	:
-	typeApprox(_typeApprox),
-	x(_x),
-	y(_y)
+C_LineWeldApprox::C_LineWeldApprox(eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len)
 {
-	y->CloneObject(&copy_y);
+	ManualConstructor( _typeApprox,_y, _x, _len );
+}
+
+C_LineWeldApprox::C_LineWeldApprox()
+{
+	typeApprox = none;
+	len = 0;
+	p = copy_y = ub = lb = NULL;
+
+}
+/** 
+ * Standardowy konstruktor obiektu dokonuj¹cego aproxymacji linii spawu i przechowujacego wynik. Klasa przechowuje wyniki minimalizacji oraz uzyskane parametry.
+ * Pozosta³e dane jak w, y, x nie s¹ przechowywane celem zaoszczêdzenia miejsca.
+ * \param[in] _typeApprox Rodzaj krzywej do aproxymacji - zgodne z eApproxFcn
+ * \param[in] _y table of data to be fit
+ * \param[in] _x values of domain of y. Approximation function is evaluated for these data and fitted to y
+ * \param[in] rozmiar danych x i y
+ */
+void C_LineWeldApprox::ManualConstructor( eApproxFcn _typeApprox,double *_y, double *_x,unsigned int _len )
+{
+	typeApprox = _typeApprox;
+	x = _x;
+	y = _y;
+	len = _len;
+	copy_y = new double[len];
+	memcpy_s(copy_y,len*sizeof(double),_y,len*sizeof(double));
 	switch(typeApprox)
 	{
-		case typeGaussLin:
-			p.AllocateData(1,5);
-			ub.AllocateData(1,5);
-			lb.AllocateData(1,5);
-			setDefaultParams(); 
-			break;
-		default:
-			_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
+	case typeGaussLin:
+		p = new double[5];
+		ub = new double[5];
+		lb = new double[5];
+		setDefaultParams(); 
+		break;
+	default:
+		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
 	}
 
 }
+
 	// dodaæ konstruktor pobieraj¹cy obiekt C_LineInterp
 
 C_LineWeldApprox::~C_LineWeldApprox()
 {
-
+	SAFE_DELETE(copy_y);
+	SAFE_DELETE(lb);
+	SAFE_DELETE(ub);
+	SAFE_DELETE(p);
 }
 
 /** 
@@ -54,6 +80,9 @@ int C_LineWeldApprox::getLineApprox(int _iter)
 	{
 	case typeGaussLin:
 		ret = getLineApproxGaussLinWeighted(_iter);
+		break;
+	default:
+		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
 	}
 	return ret;
 }
@@ -68,14 +97,14 @@ int C_LineWeldApprox::getLineApproxGaussLinWeighted(int iter)
 {
 	int ret;
 	xtradata X;
-	X.x = x->data;
+	X.x = x;
 	ret = dlevmar_bc_der(GaussLin,
 						jGaussLin,
-						p.data,
-						y->data,
-						p._cols, y->_cols,
-						lb.data,
-						ub.data,
+						p,
+						copy_y,
+						5, len,
+						lb,
+						ub,
 						NULL,
 						iter, 
 						NULL, //opts,
@@ -98,20 +127,27 @@ int C_LineWeldApprox::getLineApproxGaussLinWeighted(int iter)
  * @param[in] _opts minim. options \latexonly [\tau, \epsilon_1, \epsilon_2, \epsilon_3]. Respectively the scale factor for initial \mu,stopping thresholds for ||J^T e||_inf, ||Dp||_2 and ||e||_2. \endlatexonly
  * Set to NULL for defaults to be used
 */
-void C_LineWeldApprox::setApproxParmas( C_Matrix_Container *_p, C_Matrix_Container *_w, C_Matrix_Container *_ub, C_Matrix_Container *_lb, double *_opts )
+void C_LineWeldApprox::setApproxParmas( double *_p, double *_w, double *_ub, double *_lb, double *_opts )
 {
 	int a;
-	if(NULL!=_w)
-		copy_y.DotMulti(_w);
-	if(NULL!=_p)
-		_p->CloneObject(&p);
-	if(NULL!=_ub)
-		_ub->CloneObject(&ub);
-	if(NULL!=_lb)
-		_lb->CloneObject(&lb);
-	if(NULL!=_opts)
-		for (a=0;a<LM_OPTS_SZ;a++)
-			opts[a] = _opts[a];
+	switch(typeApprox)
+	{
+	case typeGaussLin:
+		if(NULL!=_w)
+			for(unsigned a=0;a<len;a++) copy_y[a]*=_w[a];
+		if(NULL!=_p)
+			memcpy_s(p,5*sizeof(double),_p,5*sizeof(double));
+		if(NULL!=_ub)
+			memcpy_s(ub,5*sizeof(double),_ub,5*sizeof(double));
+		if(NULL!=_lb)
+			memcpy_s(lb,5*sizeof(double),_lb,5*sizeof(double));
+		if(NULL!=_opts)
+			for (a=0;a<LM_OPTS_SZ;a++)
+				opts[a] = _opts[a];
+		break;
+	default:
+		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
+	}
 
 }
 /** 
@@ -123,52 +159,44 @@ void C_LineWeldApprox::setDefaultParams()
 	switch(typeApprox)
 	{
 	case typeGaussLin:
-		p.data[A] = 1060;
-		p.data[B] = x->_cols/2;
-		p.data[C] = 160;
-		p.data[D] = p.data[E] = 0;
+		p[A] = 1060;
+		p[B] = len/2;
+		p[C] = 160;
+		p[D] = p[E] = 0;
 
-		ub.data[A] = 65535;
-		ub.data[B] = p.data[B] + x->_cols/4;
-		ub.data[C] = 600;
-		ub.data[D] = 1;
-		ub.data[E] = 20000;
+		ub[A] = 65535;
+		ub[B] = p[B] + len/4;
+		ub[C] = 600;
+		ub[D] = 1;
+		ub[E] = 20000;
 
-		ub.data[A] = 0;
-		ub.data[B] = p.data[B] - x->_cols/4;
-		ub.data[C] = 50;
-		ub.data[D] = -1;
-		ub.data[E] = -20000;
+		lb[A] = 0;
+		lb[B] = p[B] - len/4;
+		lb[C] = 50;
+		lb[D] = -1;
+		lb[E] = -20000;
+		break;
+	default:
+		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
 	}
 }
 /** 
  * Zwraca wybrane parmaetry. Jeœli optymalizacja nie by³a wykonana lub funkcja setApproxParams nie by³¹ u¿yta to zwraca domyœlne.
- * Funkcja kasuje i inicjalizuje wartoœci parametrów wejœciowych 
  * \param[out] _p	wektor z parametrami, jeœli jest NULL to nie zwraca
  * \param[out] _ub	wektor z górna granic¹ parametrów, jeœli jest NULL to nie zwraca
  * \param[out] _lb	wektor z dolna granic¹ parametrów, jeœli jest NULL to nie zwraca
 */
-void C_LineWeldApprox::getApproxParams( C_Matrix_Container *_p, C_Matrix_Container *_ub, C_Matrix_Container *_lb )
+const double* C_LineWeldApprox::getApproxParams_p()
 {
-	switch(typeApprox)
-	{
-	case typeGaussLin:
-		if(NULL!=_p)
-		{
-			_p->AllocateData(1,5);
-			p.CloneObject(_p);
-		}
-		if(NULL!=_ub)
-		{
-			_ub->AllocateData(1,5);
-			ub.CloneObject(_ub);
-		}
-		if(NULL!=_lb)
-		{
-			_lb->AllocateData(1,5);
-			lb.CloneObject(_lb);
-		}
-	}
+	return p;
+}
+const double* C_LineWeldApprox::getApproxParams_ub()
+{
+	return ub;
+}
+const double* C_LineWeldApprox::getApproxParams_lb()
+{
+	return lb;
 }
 /** 
  * Zwraca wartoœæ wybranej pozycji z tablicy info zawieraj¹cej wyniki optymalizacji
@@ -177,5 +205,10 @@ void C_LineWeldApprox::getApproxParams( C_Matrix_Container *_p, C_Matrix_Contain
 */
 double C_LineWeldApprox::getInfo( eOptimInfo _res )
 {
-	return info[_res];
+	if(err==_res)
+		return sqrt(info[_res]);
+	else
+		return info[_res];
 }
+
+

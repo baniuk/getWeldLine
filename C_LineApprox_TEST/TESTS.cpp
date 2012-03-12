@@ -86,6 +86,7 @@ protected:
 	C_LineInterp *line1;	// linia pozioma
 	C_LineInterp *line2;	// inna
 	C_LineInterp *pionowa;	// linia pionowa
+	C_LineInterp *line3;
 	C_Matrix_Container obraz;
 	unsigned int siz[3];
 	C_Point P01;
@@ -111,12 +112,14 @@ protected:
 		line1 = new C_LineInterp(SPLINE,P01,P11,obraz.data,siz);
 		line2 = new C_LineInterp(SPLINE,-2,10,NORMALNA,obraz.data,siz);
 		pionowa = new C_LineInterp(SPLINE,0,5,PIONOWA,obraz.data,siz);
+		line3 = new C_LineInterp;	// konstruktor domyœlny a póŸniej setline
 	}
 
 	virtual void TearDown() {
 		SAFE_DELETE(line1);
 		SAFE_DELETE(line2);
 		SAFE_DELETE(pionowa);
+		SAFE_DELETE(line3);
 	}
 };
 
@@ -124,7 +127,7 @@ protected:
 TEST_F(C_LineApprox_Test2, getInterpolated_data) {
 	const double *result;
 	C_DumpAll dump("getInterpolated_data.out");
-	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getLineApproxGaussLin_test_1_expected.out" << "\n\n";
+	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getInterpolated_data_result.out" << "\n\n";
 	C_Matrix_Container outx(1,71);
 	C_Matrix_Container outy(1,71);
 	line1->getPointsOnLine(P01,P11,outx.data,outy.data,71);
@@ -133,6 +136,40 @@ TEST_F(C_LineApprox_Test2, getInterpolated_data) {
 	dump.AddEntry(&outx,"getInterpolated_data_outx");
 	dump.AddEntry(&outy,"getInterpolated_data_outy");	
 	dump.AddEntry(result,71,"getInterpolated_data_result");
+}
+
+/// test interpolacji getInterpolated_data - inna inicjalizacja
+TEST_F(C_LineApprox_Test2, getInterpolated_data_case1) {
+	const double *result;
+	C_DumpAll dump("getInterpolated_data_case1.out");
+	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getInterpolated_data_result_case1.out" << "\n\n";
+	C_Matrix_Container outx(1,71);
+	C_Matrix_Container outy(1,71);
+	line3->ManualConstructor(SPLINE,P01,P11,obraz.data,siz);
+	line3->getPointsOnLine(P01,P11,outx.data,outy.data,71);
+	result = line3->getInterpolated_data();
+
+	dump.AddEntry(&outx,"getInterpolated_data_outx_case1");
+	dump.AddEntry(&outy,"getInterpolated_data_outy_case1");	
+	dump.AddEntry(result,71,"getInterpolated_data_result_case1");
+}
+
+/// test interpolacji getInterpolated_data - pionowa
+TEST_F(C_LineApprox_Test2, getInterpolated_data_case3) {
+	const double *result;
+	C_DumpAll dump("getInterpolated_data_case3.out");
+	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getInterpolated_data_result_case3.out" << "\n\n";
+	C_Matrix_Container outx(1,41);
+	C_Matrix_Container outy(1,41);
+	C_Point P0(5,10);
+	C_Point P1(5,50);
+	line3->ManualConstructor(SPLINE,P0,P1,obraz.data,siz);
+	bool ret = line3->getPointsOnLine(P0,P1,outx.data,outy.data,41);
+	result = line3->getInterpolated_data();
+	ASSERT_TRUE(ret);
+	dump.AddEntry(&outx,"getInterpolated_data_outx_case3");
+	dump.AddEntry(&outy,"getInterpolated_data_outy_case3");	
+	dump.AddEntry(result,41,"getInterpolated_data_result_case3");
 }
 
 /// test interpolacji getInterpolated_data - u¿ycie getInterpolated_data bez interpolacji
