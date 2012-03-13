@@ -31,7 +31,7 @@ protected:
 	/// generuje zestaw paramstrów do detekcji kolejnej linii - punkty P0 i P1 oraz parametry aproxymacji oraz wagi
 	virtual bool evalNextParams()=0;
 	/// wype³nia bufory approxymuj¹c k poczatkowych linii
-	virtual void fillBuffor()=0;
+	virtual bool fillBuffor()=0;
 	/// przechowuje k poprzednich wyników aproxymacji
 	C_CircBuff<C_LineWeldApprox> approx_results;
 	/// przechowuje k ostatnich wyników interpolacji linii - dane do aproxymacji i generowania wag

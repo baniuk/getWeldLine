@@ -1,0 +1,44 @@
+The current local time is: Tue Mar 13 21:08:09 2012
+
+------ Entering Test C_LinearWeld_case1 ------
+	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test C_LinearWeld_case2 ------
+	Entering C_LinearWeld::SetProcedureParameters		k = 10		k=0.000, P0[10.0;0.0] P1[10.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::evalNextParams		Input: P0[10.0;0.0] P1[10.0;1824.0]		Output: P0[11.0;0.0] P1[11.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[11.0;0.0] P1[11.0;1824.0]		Output: P0[12.0;0.0] P1[12.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[12.0;0.0] P1[12.0;1824.0]		Output: P0[13.0;0.0] P1[13.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[13.0;0.0] P1[13.0;1824.0]		Output: P0[14.0;0.0] P1[14.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[14.0;0.0] P1[14.0;1824.0]		Output: P0[15.0;0.0] P1[15.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[15.0;0.0] P1[15.0;1824.0]		Output: P0[16.0;0.0] P1[16.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[16.0;0.0] P1[16.0;1824.0]		Output: P0[17.0;0.0] P1[17.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[17.0;0.0] P1[17.0;1824.0]		Output: P0[18.0;0.0] P1[18.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[18.0;0.0] P1[18.0;1824.0]		Output: P0[19.0;0.0] P1[19.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[19.0;0.0] P1[19.0;1824.0]		Output: P0[20.0;0.0] P1[20.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test C_LinearWeld_case3 ------
+	Entering C_LinearWeld::SetProcedureParameters		k = 10		k=0.000, P0[7831.0;0.0] P1[7831.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::evalNextParams		Input: P0[7831.0;0.0] P1[7831.0;1824.0]		Output: P0[7832.0;0.0] P1[7832.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7832.0;0.0] P1[7832.0;1824.0]		Output: P0[7833.0;0.0] P1[7833.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7833.0;0.0] P1[7833.0;1824.0]		Output: P0[7834.0;0.0] P1[7834.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7834.0;0.0] P1[7834.0;1824.0]		Output: P0[7835.0;0.0] P1[7835.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7835.0;0.0] P1[7835.0;1824.0]		Output: P0[7836.0;0.0] P1[7836.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7836.0;0.0] P1[7836.0;1824.0]		Output: P0[7837.0;0.0] P1[7837.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7837.0;0.0] P1[7837.0;1824.0]		Output: P0[7838.0;0.0] P1[7838.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7838.0;0.0] P1[7838.0;1824.0]		Output: P0[7839.0;0.0] P1[7839.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7839.0;0.0] P1[7839.0;1824.0]		Output: P0[7840.0;0.0] P1[7840.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams		Input: P0[7840.0;0.0] P1[7840.0;1824.0]		Output: P0[7841.0;0.0] P1[7841.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Entering C_LinearWeld::evalNextParams	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test C_LinearWeld_FillBuffor ------
+	Entering C_LinearWeld::SetProcedureParameters		k = 10		k=0.000, P0[10.0;0.0] P1[10.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::fillBuffor		Input: P0[10.0;0.0] P1[10.0;1824.0]		RES: A=813.97 B=1044.08 C=136.35 D=-0.02 E=1057.78 err=3.513e+003	Entering C_LinearWeld::evalNextParams		Input: P0[10.0;0.0] P1[10.0;1824.0]		Output: P0[11.0;0.0] P1[11.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[11.0;0.0] P1[11.0;1824.0]		RES: A=817.75 B=1044.18 C=136.88 D=-0.02 E=1054.97 err=3.446e+003	Entering C_LinearWeld::evalNextParams		Input: P0[11.0;0.0] P1[11.0;1824.0]		Output: P0[12.0;0.0] P1[12.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[12.0;0.0] P1[12.0;1824.0]		RES: A=813.56 B=1042.83 C=135.50 D=-0.02 E=1052.58 err=3.243e+003	Entering C_LinearWeld::evalNextParams		Input: P0[12.0;0.0] P1[12.0;1824.0]		Output: P0[13.0;0.0] P1[13.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[13.0;0.0] P1[13.0;1824.0]		RES: A=819.82 B=1044.02 C=137.12 D=-0.02 E=1050.02 err=3.046e+003	Entering C_LinearWeld::evalNextParams		Input: P0[13.0;0.0] P1[13.0;1824.0]		Output: P0[14.0;0.0] P1[14.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[14.0;0.0] P1[14.0;1824.0]		RES: A=821.92 B=1044.08 C=137.92 D=-0.02 E=1048.13 err=2.984e+003	Entering C_LinearWeld::evalNextParams		Input: P0[14.0;0.0] P1[14.0;1824.0]		Output: P0[15.0;0.0] P1[15.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[15.0;0.0] P1[15.0;1824.0]		RES: A=812.56 B=1042.90 C=137.58 D=-0.02 E=1045.36 err=2.941e+003	Entering C_LinearWeld::evalNextParams		Input: P0[15.0;0.0] P1[15.0;1824.0]		Output: P0[16.0;0.0] P1[16.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[16.0;0.0] P1[16.0;1824.0]		RES: A=828.45 B=1043.68 C=139.55 D=-0.03 E=1045.85 err=2.971e+003	Entering C_LinearWeld::evalNextParams		Input: P0[16.0;0.0] P1[16.0;1824.0]		Output: P0[17.0;0.0] P1[17.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[17.0;0.0] P1[17.0;1824.0]		RES: A=820.63 B=1042.95 C=139.96 D=-0.02 E=1041.54 err=2.943e+003	Entering C_LinearWeld::evalNextParams		Input: P0[17.0;0.0] P1[17.0;1824.0]		Output: P0[18.0;0.0] P1[18.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[18.0;0.0] P1[18.0;1824.0]		RES: A=820.10 B=1043.86 C=138.89 D=-0.02 E=1038.64 err=2.902e+003	Entering C_LinearWeld::evalNextParams		Input: P0[18.0;0.0] P1[18.0;1824.0]		Output: P0[19.0;0.0] P1[19.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+		Input: P0[19.0;0.0] P1[19.0;1824.0]		RES: A=821.60 B=1044.62 C=139.66 D=-0.02 E=1037.80 err=2.894e+003	Entering C_LinearWeld::evalNextParams		Input: P0[19.0;0.0] P1[19.0;1824.0]		Output: P0[20.0;0.0] P1[20.0;1824.0]	Leaving C_LinearWeld::evalNextParams
+	Leaving C_LinearWeld::fillBuffor
+	Entering C_LinearWeld::~C_LinearWeld

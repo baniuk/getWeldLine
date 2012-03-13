@@ -43,9 +43,9 @@ public:
 	/// definiuje linie interpolacji na podstawie 2 punktów
 	virtual void ManualConstructor(APPROX_TYPE type,const C_Point &P0, const C_Point &P1, const double *const _image, const unsigned int _size[] );
 	/// Wykonuje interpolacjê: Zwraca punkty na linii aproxymowanej pomiêdzy P0 i P1 oraz zapisuje je w obiekcie
-	virtual bool getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int N  );
+	virtual bool getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, unsigned int _Np  );
 	/// Wykonuje interpolacjê Zapisuje obliczone punkty w obiekcie
-	virtual bool getPointsOnLine( const C_Point &_P0, const C_Point &_P1, int N  );
+	virtual bool getPointsOnLine( const C_Point &_P0, const C_Point &_P1, unsigned int _Np  );
 	/// zwaraca iloœæ elementów na podstawie tablicy im_size
 	unsigned int getNumOfElements() const; 
 	/// zwraca tablicê z interpolowanymi danymi
@@ -54,6 +54,8 @@ public:
 	const double * getInterpolated_X() const { return x; }
 	/// zwraca tablice ze wspó³rzêdnymi y
 	const double * getInterpolated_Y() const { return y; }
+	/// zwraca rozmiar danych w tablicach x, y, interpolated_data
+	unsigned int getSizeofApproxData() const { return Np; }
 	virtual ~C_LineInterp();
 protected:
 //	void Interpolate
@@ -65,15 +67,17 @@ private:
 	APPROX_TYPE typ_interpolacji;
 	/// wskaŸnik przechowuj¹cy obraz, jest modyfikowany przez getPointsOnLine
 	float *image;
-	/// tablica przechowuj¹ca wynik interpolacji
+	/// tablica przechowuj¹ca wynik interpolacji dla punktów [x y]
 	double *interpolated_data;
 	/// wymiary danych w image [rows cols z]
-	int im_size[3];
+	unsigned int im_size[3];
 	/// ilosc elementów obrazu
 	unsigned int N;
-	/// tablica z wsp x
+	/// iloœæ elementów w interpolowanym wektorze interpolated_dataoraz x i y
+	unsigned int Np;
+	/// tablica z wsp x - zawiera wspó³rzêdne x punktów dla których wykonano interpolacje
 	double *x;
-	/// tablica z wsp y
+	/// tablica z wsp y - zawiera wspó³rzêdne y punktów dla których wykonano interpolacje
 	double *y;
 };
 

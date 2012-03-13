@@ -27,11 +27,11 @@ public:
 	/// zwraca odres obiektu na pozycji n
 	T *GetObject(unsigned int _n);  
 	/// zwraca true jeœli bufor pe³ny
-	bool Czy_pelny() const { return czy_pelny; }
+	bool Czy_pelny() const;
 	/// kasuje ostatnio dodany obiekt
 	void DelObject();
 	/// zwraca iloœæ elementów w buforze
-	unsigned int getNumElem();
+	int getNumElem();
 private:
 	/// tablica zawieraj¹ca obiekty w buforze ko³owym
 	T **buff;
@@ -39,10 +39,10 @@ private:
 	unsigned int last;
 	/// rozmiar bufora 
 	unsigned int S;
-	/// czy bufor pe³ny
-	bool czy_pelny;
 	/// ostatnio dodany index przy uwzglênieniu cyrkularnoœci
 	int ostatni;
+	/// ilosc zapisów
+	unsigned int ile;
 	
 };
 /** 
@@ -50,9 +50,11 @@ private:
  * \return Iloœæ elementów. Jesli bufor pe³ny to zwraca jego pojemnoœæ, jeœli nie pe³ny to iloœæ zapisanych elementów.
  */
 template<class T>
-unsigned int C_CircBuff<T>::getNumElem()
+int C_CircBuff<T>::getNumElem()
 {
-	if(NULL==buff || ostatni<0)
+	if(NULL==buff )
+		return -1;
+	if( ostatni<0)
 		return 0;
 	if(Czy_pelny())
 		return S;
@@ -67,6 +69,7 @@ void C_CircBuff<T>::DelObject()
 	_ASSERT(ostatni>=0);	// nie ma nic dodane ale jest zainicjalizowane
 	SAFE_DELETE(buff[ostatni]);	
 	last = ostatni;
+	ile--;
 }
 
 /** 
@@ -107,9 +110,16 @@ T * C_CircBuff<T>::AddObject()
 	SAFE_DELETE(buff[last]);	// kasownaie tego co tam jest na nowej pozycji
 	buff[last] = new T;
 	ostatni = (int)last;
-	if(last==S-1)
-		czy_pelny = true;
+	ile++;
 	return GetObject(last++);
+}
+template<class T>
+bool C_CircBuff<T>::Czy_pelny() const
+{ 
+	if(ile>=S)
+		return true;	// wiêcej zapisów niz miejsca
+	else
+		return false; 
 }
 
 template<class T>
@@ -125,8 +135,8 @@ C_CircBuff<T>::C_CircBuff()
 {
 	buff = NULL;
 	last = 0;	// do ustawienia
-	czy_pelny = false;
 	S = 0;
+	ile = 0;
 	ostatni = -1;
 }
 

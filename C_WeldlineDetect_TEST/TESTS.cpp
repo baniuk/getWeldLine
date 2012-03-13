@@ -111,11 +111,14 @@ TEST_F(C_CircBuff_Test1, CircBuff_case6) {
 	test1->BuffInit(3);	// 3 elementy [1 2 3 4]->4 idzie za 1, zamiana 6 na 30 nie powinna burzyæ struktury
 	*(test1->AddObject()) = 1;
 	*(test1->AddObject()) = 2;
+	ASSERT_FALSE(test1->Czy_pelny());	// pusty
 	*(test1->AddObject()) = 3;
+	ASSERT_TRUE(test1->Czy_pelny());	// pe³ny
 	*(test1->AddObject()) = 4;
 	*(test1->AddObject()) = 5;
 	*(test1->AddObject()) = 6;
 	test1->DelObject();
+	ASSERT_TRUE(test1->Czy_pelny());	// pusty
 	*(test1->AddObject()) = 30;
 
 	ASSERT_TRUE(test1->Czy_pelny());	// pe³ny
@@ -125,24 +128,74 @@ TEST_F(C_CircBuff_Test1, CircBuff_case6) {
 	ASSERT_EQ(4,*(test1->GetObject(3)));
 
 }
+// w pêtli tworzenie
+TEST(_C_CircularBuffer,CircBuff_case7)
+{
+	C_CircBuff<C_LineWeldApprox> approx_results;
+	approx_results.BuffInit(3);
+	int l=0;
+	C_LineWeldApprox *ptr;
+	while(!approx_results.Czy_pelny())
+	{
+		ptr = approx_results.AddObject();
+		l++;
+	}
+	ASSERT_EQ(3,l);
+}
+/// tworzenie w pêtli i kasowanie jednego
+TEST(_C_CircularBuffer,CircBuff_case8)
+{
+	C_CircBuff<C_LineWeldApprox> approx_results;
+	approx_results.BuffInit(3);
+	int l=0;
+	C_LineWeldApprox *ptr;
+	while(!approx_results.Czy_pelny())
+	{
+		ptr = approx_results.AddObject();
+		if(l==1)
+			approx_results.DelObject();
+		l++;
+	}
+	ASSERT_EQ(4,l); // wykona sie o raz wiêcej bo jeden skasowany
+}
 /** 
- * Œrodowisko testowe 1 dla C_LinearWeld
+ * Œrodowisko testowe 1 dla C_LinearWeld. Œrodowisko w³¹cza logowanie
  */ 
 class C_LinearWeld_Test1 : public ::testing::Test {
 protected:
 	C_Matrix_Container *rtg;
+	// na dane wyjœciowe interpolowany profil
+	C_Matrix_Container *interpdata;
+	// na dane wyjœciowe x
+	C_Matrix_Container *interpdata_x;
+	// na dane wyjœciowe parametry aproxymacji
+	C_Matrix_Container *approxdata;
+	/// dostêp do metod prywatnych
 	const C_Matrix_Container* getRTG(C_LinearWeld *obj)
 	{
 		return obj->rtg;
 	}
+	/// dostêp do metod prywatnych
 	bool access_evalNextParams(C_LinearWeld *obj)
 	{
 		return obj->evalNextParams();
 	}
+	/// dostêp do metod prywatnych
+	void access_fillBuffor(C_LinearWeld *obj)
+	{
+		obj->fillBuffor();
+	}
+	/// dostêp do metod prywatnych
 	void access_P0P1(C_LinearWeld *obj, C_Point &_P0, C_Point &_P1)
 	{
 		_P0 = obj->P0;
 		_P1 = obj->P1;
+	}
+	/// dostêp do danych prywatnych
+	void access_interpaprox(C_LinearWeld *obj, C_CircBuff<C_LineWeldApprox> **approx,C_CircBuff<C_LineInterp> **interp)
+	{
+		*(approx) = &obj->approx_results;
+		*(interp) = &obj->interp_lines;
 	}
 	C_LinearWeld_Test1()
 	{
@@ -152,6 +205,7 @@ protected:
 
 	virtual ~C_LinearWeld_Test1() {
 		SAFE_DELETE(rtg);
+
 	}
 
 	virtual void SetUp() {
@@ -164,6 +218,7 @@ protected:
 };
 /// test konstruktora
 TEST_F(C_LinearWeld_Test1, C_LinearWeld_case1) {
+	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_case1 ------\n");
 	C_LinearWeld obj(rtg);
 	const C_Matrix_Container *tmp = getRTG(&obj);
 	std::cout << "\n\t" << "size: [" << tmp->_rows << "," << tmp->_cols <<"]"<<  "\n\n";
@@ -172,6 +227,7 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case1) {
 }
 /// test evalNextParams - przesówanie od poczatku o kilka punktów 
 TEST_F(C_LinearWeld_Test1, C_LinearWeld_case2) {
+	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_case2 ------\n");
 	C_LinearWeld obj(rtg);
 	int x_poz = 10;
 	obj.SetProcedureParameters(10,x_poz); // start of x=10
@@ -193,14 +249,8 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case2) {
 }
 /// test evalNextParams - koniec obrazka 
 TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
+	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_case3 ------\n");
 	C_LinearWeld obj(rtg);
-
-	obj.hLogFile = CreateFile("C_LinearWeld_case3.txt", GENERIC_WRITE, 
-		FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, 
-		FILE_ATTRIBUTE_NORMAL, NULL);
-	_CrtSetReportMode(_CRT_WARN, _CRTDBG_MODE_FILE);
-	_CrtSetReportFile(_CRT_WARN, obj.hLogFile);
-	_RPT0(_CRT_WARN,"------ Entering C_LinearWeld_case3 ------\n");
 
 	int x_poz = 7831;
 	obj.SetProcedureParameters(10,x_poz); // start of x=10
@@ -222,3 +272,28 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
 	ok = access_evalNextParams(&obj);	//przesówam punkt
 	ASSERT_FALSE(ok);
 }
+/// test fillBuffor
+TEST_F(C_LinearWeld_Test1, C_LinearWeld_FillBuffor) {
+	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_FillBuffor ------\n");
+	C_LinearWeld obj(rtg);
+	C_CircBuff<C_LineWeldApprox> *approx;
+	C_CircBuff<C_LineInterp> *interp;
+	C_LineInterp *tmp;
+	int ile_linii = 10;
+	int x_poz = 10;	// 10 linia
+	obj.SetProcedureParameters(ile_linii,x_poz); // start of x=10, ile_linii lini w buforze
+	access_fillBuffor(&obj);
+	access_interpaprox(&obj,&approx,&interp);
+	// sprawdzam czy bufor pe³en - powinien byc ze wzgledu na sposób dzia³ania fillbuffor
+	ASSERT_TRUE(approx->Czy_pelny());
+	ASSERT_TRUE(interp->Czy_pelny());
+	// czy ma tyle elementów co trzeba
+	ASSERT_EQ(ile_linii,approx->getNumElem());
+	ASSERT_EQ(ile_linii,interp->getNumElem());
+	// czy pionowe
+	tmp = interp->GetObject(0);
+	ASSERT_EQ(PIONOWA,tmp->getjest_pion());
+	// zrzucanie wyników
+
+}
+

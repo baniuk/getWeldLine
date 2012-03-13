@@ -8,6 +8,7 @@
 #define C_Line_h__
 
 #include "C_Point.h"
+#include <crtdbg.h>
 /// definiuje typ danych okreœlaj¹cy kierunek prostej
 enum KIERUNEK_PROSTEJ {
 	PIONOWA,

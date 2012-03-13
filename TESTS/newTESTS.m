@@ -107,21 +107,30 @@ cd(kat)
 pa = '..\C_LineApprox_TEST\';
 ImportDumpFile([pa,'getInterpolated_data.out']);
 ImportDumpFile([pa,'getInterpolated_data_case1.out']);
-plot(getInterpolated_data_outx);grid on
+plot(getInterpolated_data_outx);grid on;title('getInterpolated_data_outx')
 figure
-plot(getInterpolated_data_outy);grid on
+plot(getInterpolated_data_outy);grid on;title('getInterpolated_data_outy')
 figure
 plot(getInterpolated_data_result);grid on
 hold on
 plot(getInterpolated_data_result_case1)
 plot(lin,'or')
+figure
+plot(getInterpolated_data_outx_case1);grid on;title('getInterpolated_data_outx_case1')
+figure
+plot(getInterpolated_data_outy_case1);grid on;title('getInterpolated_data_outy_case1')
+
 
 lin1 = I(10+1:50+1,5+1);% - bo w c jest od zera
 ImportDumpFile([pa,'getInterpolated_data_case3.out']);
 figure
-plot(getInterpolated_data_result_case3);grid on
+plot(getInterpolated_data_result_case3);grid on;title('getInterpolated_data_result_case3')
 hold on
 plot(lin1,'or')
+figure
+plot(getInterpolated_data_outx_case3);grid on;title('getInterpolated_data_outx_case3')
+figure
+plot(getInterpolated_data_outy_case3);grid on;title('getInterpolated_data_outy_case3')
 %% TEST(C_LineweldApprox_Test1, GaussLin_Case_1)
 pa = '..\C_LineweldApprox_TEST\';
 a = 10;

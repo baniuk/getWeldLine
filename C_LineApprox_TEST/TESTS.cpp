@@ -202,6 +202,5 @@ TEST_F(C_LineApprox_Test2, getInterpolated_xy) {
 		ASSERT_DOUBLE_EQ(outx.GetPixel(0,a), x[a]) << "Vectors x and differ at index " << a;
 		ASSERT_DOUBLE_EQ(outy.GetPixel(0,a), y[a]) << "Vectors y and differ at index " << a;
 	}
-
-
 }
+

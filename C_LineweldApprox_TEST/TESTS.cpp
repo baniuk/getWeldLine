@@ -161,6 +161,7 @@ TEST(C_LineweldApprox_Test1,getApprox)
 	C_MATRIX_LOAD(x,"getLineApproxGaussLin_test_1_x.dat"); // dane wejsciowe
 	C_LineWeldApprox obj;
 	obj.ManualConstructor(typeGaussLin,profil.data,x.data,x._cols);
+	obj.setApproxParmas(NULL,NULL,NULL,NULL,NULL);
 	obj.getLineApprox(100);
 	// p[arametry
 	p = obj.getApproxParams_p();

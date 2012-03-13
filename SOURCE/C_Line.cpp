@@ -157,6 +157,8 @@ bool C_Line::LineCutCircle( const C_Point &P0,double R,C_Point (&out)[2] )
  */
 bool C_Line::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int N ) const
 {
+	_ASSERT(_outx!=NULL);
+	_ASSERT(_outy!=NULL);
 	if(!isPointOnLine(_P0))
 		return false;
 	if(!isPointOnLine(_P1))

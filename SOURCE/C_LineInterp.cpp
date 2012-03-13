@@ -9,6 +9,7 @@ C_LineInterp::C_LineInterp() : C_Line()
 	image = NULL;
 	im_size[0] = im_size[1] = im_size[2] = 0;
 	N = getNumOfElements();
+	Np = 0;
 	interpolated_data = NULL;
 	x = NULL;
 	y = NULL;
@@ -27,6 +28,7 @@ C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &
 	interpolated_data = NULL;
 	x = NULL;
 	y = NULL;
+	Np = 0;
 }
 /** 
  * Tworzy oniekt Intepolacji, do³¹czony do okreœlonego obrazka (trzeba konwertowaæ z C_Matrix_Container
@@ -39,16 +41,17 @@ C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &
  */
 C_LineInterp::C_LineInterp( APPROX_TYPE type,const double &_a, const double &_b, const KIERUNEK_PROSTEJ &_czy_pion, const double *const _image, const unsigned int _size[]  ) :
 							C_Line(_a,_b,_czy_pion),
-							typ_interpolacji(type)
+							typ_interpolacji(type),
+							Np(0)
 {
 	// kopiowanie tablicy z rozmiarami danych
 	memcpy_s(im_size,sizeof(im_size),_size,3*sizeof(unsigned int));
-	// wype³anianie ilosci ementów
+	// wype³anianie ilosci ementów danych wejsciowych (obrazu)
 	N = getNumOfElements();
 	// tworzenie bufora z danymi
 	image = new float[N];
 	// kopiowanie danych z zewnatrz do bufora
-	for (unsigned int a=1;a<N;a++)
+	for (unsigned int a=0;a<N;a++)
 		image[a] = (float)_image[a];
 	interpolated_data = NULL;
 	x = NULL;
@@ -75,7 +78,7 @@ C_LineInterp::~C_LineInterp()
  * \warning Funkcja modyfikuje tablice image
  */
 
-bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, int Np )
+bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, double *const _outx, double *const _outy, unsigned int _Np )
 {
 	_RPT0(_CRT_WARN,"Obsolete sytnax, use without _outx");
 	bool ret;
@@ -87,14 +90,15 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
 	if(Error)
 		_RPT0(_CRT_ERROR,"Error in C_LineApprox::getPointsOnLine->SamplesToCoefficients");
 	// wypeninie lini P0 P1 punktami równo roz³o¿onymi
+	Np = _Np;
+	SafeAllocateTab();
 	ret = C_Line::getPointsOnLine(_P0,_P1,_outx,_outy,Np);	// tu musi byæ wowo³ana funkcja z klasy podrzêdnej
 	if(ret==false)
 		return false;	// punkty nie na linii
-	SafeAllocateTab();
 	switch(typ_interpolacji)
 	{
 	case SPLINE:
-		for(int a=0;a<Np;a++) { // po wszystkich punktach
+		for(unsigned int a=0;a<Np;a++) { // po wszystkich punktach
 			interpolated_data[a] = (double)InterpolatedValue(image,
 															im_size[1],
 															im_size[0],
@@ -108,6 +112,7 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
 	default:
 		_RPT0(_CRT_ERROR,"Error in C_LineApprox::getPointsOnLine->SamplesToCoefficients - wrong type");
 	}
+	// kopiowanie na wyjœcie
 	DataCopy(_outx,x);
 	DataCopy(_outy,y);
 	return true;
@@ -121,7 +126,7 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
  * \return Jeœli P0 i P1 nie le¿¹ na linii to zwraca false i wartoœci w _out s¹ nieokreœlone
  * \warning Funkcja modyfikuje tablice image
  */
-bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, int Np )
+bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, unsigned int _Np )
 {
 	bool ret;
 	if(!isPointOnLine(_P0))
@@ -132,14 +137,16 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, int 
 	if(Error)
 		_RPT0(_CRT_ERROR,"Error in C_LineApprox::getPointsOnLine->SamplesToCoefficients");
 	// wypeninie lini P0 P1 punktami równo roz³o¿onymi
+	Np = _Np;
+	SafeAllocateTab();
 	ret = C_Line::getPointsOnLine(_P0,_P1,x,y,Np);	// tu musi byæ wowo³ana funkcja z klasy podrzêdnej
 	if(ret==false)
 		return false;	// punkty nie na linii
-	SafeAllocateTab();
+	
 	switch(typ_interpolacji)
 	{
 	case SPLINE:
-		for(int a=0;a<Np;a++) { // po wszystkich punktach
+		for(unsigned int a=0;a<Np;a++) { // po wszystkich punktach
 			interpolated_data[a] = (double)InterpolatedValue(image,
 				im_size[1],
 				im_size[0],
@@ -155,11 +162,15 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, int 
 	}
 	return true;
 }
-
+/** 
+ * Oblicza rozmiar obrazu wejœciowego. Rozmiar ten jest dany za pomoc¹ tablicy [rows cols z]. Funkcja zwraca iloœæ elementów w tej tablicy.
+ * Takie podejœcie jest potzrebne poniewa¿ funkcja inteproluj¹ca wymaga rozmiarów x i y obrazu (przyjmuje dane w forma,cie linowym zgodnym z C_Matrix_Container::data
+ * \return Iloœæ elementów w obrazu wejœciowego
+ */
 unsigned int C_LineInterp::getNumOfElements() const
 {
 	unsigned int n=1;
-	for(int a=0;a<2;a++)
+	for(int a=0;a<3;a++)
 		if(0!=im_size[a])
 			n*=im_size[a];
 	return n;
@@ -171,18 +182,18 @@ void C_LineInterp::SafeAllocateTab()
 {
 	if(interpolated_data!=NULL)
 		SAFE_DELETE(interpolated_data);
-	interpolated_data = new double[N];
+	interpolated_data = new double[Np];
 	if(NULL!=x)
 		SAFE_DELETE(x);
-	x = new double[N];
+	x = new double[Np];
 	if(NULL!=y)
 		SAFE_DELETE(y);
-	y = new double[N];
+	y = new double[Np];
 }
 
 void C_LineInterp::DataCopy( double *src,double *dest )
 {
-	memcpy_s(dest,N*sizeof(double),src,N*sizeof(double));
+	memcpy_s(dest,Np*sizeof(double),src,Np*sizeof(double));
 }
 /** 
  * Ustawia linieinterpolacji przy pomocy dwóch punktów. Funkcja ta inicjaklizuje tak¿e ca³y obiekt. Powinna byæ u¿ywana w przypadku u¿ycia domyœlnego konstruktora.
@@ -198,12 +209,12 @@ void C_LineInterp::ManualConstructor( APPROX_TYPE type,const C_Point &P0, const 
 	getLine2Points(P0,P1);	// inicjalizacja obieku Line
 	// kopiowanie tablicy z rozmiarami danych
 	memcpy_s(im_size,sizeof(im_size),_size,3*sizeof(unsigned int));
-	// wype³anianie ilosci ementów
+	// wype³anianie ilosci ementów obrzy wejœciowego
 	N = getNumOfElements();
 	// tworzenie bufora z danymi
 	image = new float[N];
 	// kopiowanie danych z zewnatrz do bufora
-	for (unsigned int a=1;a<N;a++)
+	for (unsigned int a=0;a<N;a++)
 		image[a] = (float)_image[a];
 
 }
