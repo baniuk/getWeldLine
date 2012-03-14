@@ -1,6 +1,51 @@
 #include "stdafx.h"
 #include "GTEST_ADDONS.h"
 
+#if GTEST_HAS_PARAM_TEST
+using ::testing::TestWithParam;
+using ::testing::Values;
+/** 
+ * Przygotowanie testu parametrycznego - wypelnianie bufora. 
+ * Parametrem s¹ró¿ne pozycje punktu startowego
+ */
+class C_LinearWeld_FillBuffor : public TestWithParam<int> {
+public:
+	C_LinearWeld_FillBuffor()
+	{
+		rtg = new C_Matrix_Container();
+		rtg->ReadBinary("testimag1.dat");
+	}
+	virtual ~C_LinearWeld_FillBuffor()
+	{
+		SAFE_DELETE(rtg);
+	}
+	virtual void SetUp()
+	{
+		// setup C_LinearWeld
+		obj = new C_LinearWeld(rtg);
+		x_start = GetParam();
+	}
+	virtual void TearDown() {
+		SAFE_DELETE(obj);
+	}
+protected:
+	C_Matrix_Container *rtg;
+	C_LinearWeld *obj;// g³ówny obiekt testowy
+	void access_fillBuffor(C_LinearWeld *obj)
+	{
+		obj->fillBuffor();
+	}
+	void access_interpaprox(C_LinearWeld *obj, C_CircBuff<C_LineWeldApprox> **approx,C_CircBuff<C_LineInterp> **interp)
+	{
+		*(approx) = &obj->approx_results;
+		*(interp) = &obj->interp_lines;
+	}
+	C_CircBuff<C_LineWeldApprox> *approx;
+	C_CircBuff<C_LineInterp> *interp;
+	int x_start;
+};
+
+#endif //GTEST_HAS_PARAM_TEST
 /** 
  * Œrodowisko testowe 1 dla C_CircBuff
  */ 
@@ -176,9 +221,9 @@ protected:
 		return obj->rtg;
 	}
 	/// dostêp do metod prywatnych
-	bool access_evalNextParams(C_LinearWeld *obj)
+	bool evalNextStartPoint(C_LinearWeld *obj)
 	{
-		return obj->evalNextParams();
+		return obj->evalNextStartPoint();
 	}
 	/// dostêp do metod prywatnych
 	void access_fillBuffor(C_LinearWeld *obj)
@@ -196,6 +241,11 @@ protected:
 	{
 		*(approx) = &obj->approx_results;
 		*(interp) = &obj->interp_lines;
+	}
+	/// dostêp do funkcji prywatnej
+	bool access_evalNextParams(C_LinearWeld *obj)
+	{
+		return obj->evalNextParams();
 	}
 	C_LinearWeld_Test1()
 	{
@@ -225,7 +275,7 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case1) {
 	ASSERT_EQ(1825,tmp->_rows);
 	ASSERT_EQ(7842,tmp->_cols);
 }
-/// test evalNextParams - przesówanie od poczatku o kilka punktów 
+/// test evalNextStartPoint - przesówanie od poczatku o kilka punktów 
 TEST_F(C_LinearWeld_Test1, C_LinearWeld_case2) {
 	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_case2 ------\n");
 	C_LinearWeld obj(rtg);
@@ -242,12 +292,12 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case2) {
 		ASSERT_EQ(0,P0test.getY());		
 		ASSERT_EQ(x_poz,P1test.getX());
 		ASSERT_EQ(tmp->_rows-1,P1test.getY());
-		ok = access_evalNextParams(&obj);	//przesówam punkt
+		ok = evalNextStartPoint(&obj);	//przesówam punkt
 		ASSERT_TRUE(ok);
 		x_poz++;		
 	}
 }
-/// test evalNextParams - koniec obrazka 
+/// test evalNextStartPoint - koniec obrazka 
 TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
 	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_case3 ------\n");
 	C_LinearWeld obj(rtg);
@@ -265,25 +315,33 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
 		ASSERT_EQ(0,P0test.getY());		
 		ASSERT_EQ(x_poz,P1test.getX());
 		ASSERT_EQ(tmp->_rows-1,P1test.getY());
-		ok = access_evalNextParams(&obj);	//przesówam punkt
+		ok = evalNextStartPoint(&obj);	//przesówam punkt
 		ASSERT_TRUE(ok);
 		x_poz++;		
 	}
-	ok = access_evalNextParams(&obj);	//przesówam punkt
+	ok = evalNextStartPoint(&obj);	//przesówam punkt
 	ASSERT_FALSE(ok);
 }
-/// test fillBuffor
-TEST_F(C_LinearWeld_Test1, C_LinearWeld_FillBuffor) {
-	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_FillBuffor ------\n");
-	C_LinearWeld obj(rtg);
-	C_CircBuff<C_LineWeldApprox> *approx;
-	C_CircBuff<C_LineInterp> *interp;
+
+
+/// test fillBuffor - wype³aniam bufor i sprawdzam aproksymacje dla ró¿nych punktów startowych
+TEST_P(C_LinearWeld_FillBuffor, case1) {
+	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_FillBuffor_case1 ------ ");
+	_RPT1(_CRT_WARN,"PAR: %d\n",x_start);
+	char buff[6];_itoa(x_start,buff,10);std::string liczba(buff);
+	std::string nazwa("C_LinearWeld_FillBuffor");
+	nazwa+=liczba;
+	nazwa+=".out";
+		std::cout<< "\n\t Wyniki do testu w matlabie " << nazwa <<"\n\n";
+	C_DumpAll dump(nazwa.c_str());
+
 	C_LineInterp *tmp;
-	int ile_linii = 10;
-	int x_poz = 10;	// 10 linia
-	obj.SetProcedureParameters(ile_linii,x_poz); // start of x=10, ile_linii lini w buforze
-	access_fillBuffor(&obj);
-	access_interpaprox(&obj,&approx,&interp);
+	int ile_linii = 25;
+	obj->SetProcedureParameters(ile_linii,x_start); // start of x=10, ile_linii lini w buforze
+	// start
+	access_fillBuffor(obj);
+	// pobieral adresy struktur z danymi
+	access_interpaprox(obj,&approx,&interp);
 	// sprawdzam czy bufor pe³en - powinien byc ze wzgledu na sposób dzia³ania fillbuffor
 	ASSERT_TRUE(approx->Czy_pelny());
 	ASSERT_TRUE(interp->Czy_pelny());
@@ -293,7 +351,33 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_FillBuffor) {
 	// czy pionowe
 	tmp = interp->GetObject(0);
 	ASSERT_EQ(PIONOWA,tmp->getjest_pion());
-	// zrzucanie wyników
-
+	// zrzucanie wyników - w rzêdach kolejne wyniki
+	// zrucam wyniki p pod postaci¹ wsp³ó³czynników
+	// dane x i y interpolacji
+	// wartoœci interpolownego profilu profil
+	C_Matrix_Container x(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
+	C_Matrix_Container y(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
+	C_Matrix_Container profil(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
+	C_Matrix_Container p(approx->getNumElem(),5);
+	// kopiowanie danych do matlaba
+	for (int a=0,k=0;a<interp->getNumElem();a++)	// po ca³ym buforze
+	{
+		for (k=0;k<interp->GetObject(a)->getSizeofApproxData();k++)
+		{
+			x.SetPixel(a,k,interp->GetObject(a)->getInterpolated_X()[k]);
+			y.SetPixel(a,k,interp->GetObject(a)->getInterpolated_Y()[k]);
+			profil.SetPixel(a,k,interp->GetObject(a)->getInterpolated_data()[k]);
+		}
+		for(k=0;k<5;k++)
+			p.SetPixel(a,k,approx->GetObject(a)->getApproxParams_p()[k]);
+	}
+	dump.AddEntry(&x,"x");
+	dump.AddEntry(&y,"y");
+	dump.AddEntry(&profil,"profil");
+	dump.AddEntry(&p,"p");
 }
 
+INSTANTIATE_TEST_CASE_P(
+	FillBuffor_Test,
+	C_LinearWeld_FillBuffor,
+	::testing::Values(10,1612,3253,4294)); // te same wartosci sa w matlabie

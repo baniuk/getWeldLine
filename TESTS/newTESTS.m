@@ -219,3 +219,31 @@ pa = '..\C_WeldlineDetect_TEST\';
 rtg = double(imread('300_09.tif'));
 rtg1 = RemoveFrame(rtg); 
 savebinarymatrix(rtg1,[pa,'testimag1.dat']);
+%% C_LinearWeld_Test1, C_LinearWeld_FillBuffor
+clear all
+rtg = double(imread('300_09.tif'));
+rtg1 = RemoveFrame(rtg); 
+imshow(rtg1,[]); hold on
+pa = '..\C_WeldlineDetect_TEST\';
+PAR = [10, 1612,3253, 4294];   % parametr z testu parametrycznego - tu pozycja startowa
+plot(PAR,repmat(size(rtg1,1)/2,1,length(PAR)),'o','markerfacecolor','r')
+for pp=1:length(PAR)
+    ImportDumpFile([pa,'C_LinearWeld_FillBuffor',num2str(PAR(pp)),'.out']);
+%     figure
+%     plot(x');title('C_LinearWeld_FillBuffor_x');grid on
+%     figure
+%     plot(y');title('C_LinearWeld_FillBuffor_y');grid on
+%     figure
+%     plot(profil');title('C_LinearWeld_FillBuffor_profil');grid on
+    figure
+    title(['grupowy zal od y bo linie pionowe start: ',num2str(PAR(pp))])
+    for a=1:size(p,1)
+        subplot(4,7,a)
+        e = gausslinear(y(a,:),p(a,1),p(a,2),p(a,3),p(a,4),p(a,5));
+        plot(y,profil(a,:),'-b');
+        hold on
+        plot(y,e,'r','linewidth',2);
+        grid on
+        title(num2str(x(a,1)))
+    end
+end

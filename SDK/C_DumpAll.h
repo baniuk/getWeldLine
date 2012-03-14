@@ -15,7 +15,7 @@
 class C_DumpAll
 {
 public:
-	C_DumpAll(char* filename);
+	C_DumpAll(const char* filename);
 	void AddEntry(const double* data, unsigned int size, char* name);
 	void AddEntry(float* data, unsigned int size, char* name);
 	void AddEntry(C_Matrix_Container* data, char* name);

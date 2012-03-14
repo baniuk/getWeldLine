@@ -1,6 +1,6 @@
 #include "C_DumpAll.h"
 
-C_DumpAll::C_DumpAll(char* filename)
+C_DumpAll::C_DumpAll(const char* filename)
 {
 #ifdef _DEBUG
 	unsigned int a;

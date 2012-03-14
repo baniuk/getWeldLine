@@ -64,8 +64,11 @@ bool C_LinearWeld::fillBuffor()
 		// konstruktor manualne
 		if(obj->getjest_pion()==PIONOWA) // sprawdzam bo jak jest pionowa to aproxymacja jest w funkcji y a jeœli nie to x
 			app->ManualConstructor(typeGaussLin,obj->getInterpolated_data(),obj->getInterpolated_Y(),obj->getSizeofApproxData());
-		else
-			app->ManualConstructor(typeGaussLin,obj->getInterpolated_data(),obj->getInterpolated_X(),obj->getSizeofApproxData()); // to nie powinno byc nigdy wykonene w tej wersji
+		else{
+			_RPTF0(_CRT_ASSERT,"C_LinearWeld::fillBuffor()->linia nie jest pionowa");
+			app->ManualConstructor(typeGaussLin,obj->getInterpolated_data(),obj->getInterpolated_X(),obj->getSizeofApproxData()); // to nie 
+			// powinno byc nigdy wykonene w tej wersji
+		}
 		// aproxymacja - parametry domyœlne
 		app->setApproxParmas(NULL,NULL,NULL,NULL,NULL);
 		// aproxymacja
@@ -87,7 +90,7 @@ bool C_LinearWeld::fillBuffor()
 				interp_lines.DelObject();
 			}
 		// generuje nastêpne punkty
-		ret_evalnextparam = evalNextParams();
+		ret_evalnextparam = evalNextStartPoint();
 	}
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::fillBuffor\n");
 	return ret_evalnextparam;
@@ -100,9 +103,9 @@ bool C_LinearWeld::fillBuffor()
  * \warning Funkcja modyfikuje pola P0 i P1
  * 
  */
-bool C_LinearWeld::evalNextParams()
+bool C_LinearWeld::evalNextStartPoint()
 {
-	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextParams");
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextStartPoint");
 	// generowanie nowych wspó³rzêdnych dla linii inteprolacyjnej - do paproxymacji profilu
 	if(P0.getX()==rtg->_cols-1)	// jeœli jesteœmy na ostatniej kolumnie to nie mo¿na wygenerowac kolejnej
 		return BLAD;
@@ -111,6 +114,18 @@ bool C_LinearWeld::evalNextParams()
 	P0+=delta;
 	P1+=delta;
 	_RPT4(_CRT_WARN,"\t\tOutput: P0[%.1lf;%.1lf] P1[%.1lf;%.1lf]",P0.getX(),P0.getY(),P1.getX(),P1.getY());
+	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::evalNextStartPoint\n");
+	return OK;
+}
+/** 
+ * Generuje parametry aproksymacji: wspó³czynniki startowe p, ub, lb oraz wagi. Na podstawie struktur buforowych approx_results i interp_lines.
+ * \return OK jesli w porzadku
+ */
+bool C_LinearWeld::evalNextParams()
+{
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextParams");
+
+
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::evalNextParams\n");
 	return OK;
 }

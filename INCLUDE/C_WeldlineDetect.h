@@ -8,7 +8,6 @@
 #ifndef C_WeldlineDetect_h__
 #define C_WeldlineDetect_h__
 
-
 #include "C_Matrix_Container.h"
 #include "C_CircBuff.h"
 #include "C_LineWeldApprox.h"
@@ -17,6 +16,7 @@
 class C_WeldlineDetect
 {
 	friend class C_LinearWeld_Test1;
+	friend class C_LinearWeld_FillBuffor;
 public:
 	/// pobiera obrazek rtg
 	C_WeldlineDetect(const C_Matrix_Container *_rtg);
@@ -28,7 +28,9 @@ public:
 protected:
 	/// przechowuje wskaŸnik do obrazka
 	const C_Matrix_Container *rtg;
-	/// generuje zestaw paramstrów do detekcji kolejnej linii - punkty P0 i P1 oraz parametry aproxymacji oraz wagi
+	/// generuje zestaw paramstrów do detekcji kolejnej linii - punkty P0 i P1 
+	virtual bool evalNextStartPoint()=0;
+	/// generuje zestaw kolejnych parametrów aproxymacji oraz wagi
 	virtual bool evalNextParams()=0;
 	/// wype³nia bufory approxymuj¹c k poczatkowych linii
 	virtual bool fillBuffor()=0;
@@ -42,6 +44,5 @@ protected:
 	unsigned int k;
 	/// rozmiar obrazka wejœciowego potrzebny do funkcji interpoluj¹cej
 	unsigned int rtgsize[3];
-
 };
 #endif // C_WeldlineDetect_h__

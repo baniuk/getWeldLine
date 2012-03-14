@@ -16,5 +16,7 @@
 #include "C_CircBuff.h"
 #include "C_Point.h"
 #include "C_LinearWeld.h"
+#include <string>
+#include <iostream>
 
 // TODO: reference additional headers your program requires here
