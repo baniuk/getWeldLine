@@ -11,4 +11,5 @@
 * do ich includów. W projektach testów ustawione s¹ tak¿e postbuilds.
 * Linkowane s¹ tylko funkcji na poziomie danego includa, tzn ze na przyk³¹d jesli cmatrix uzywa czegoœ z wx lib to w bibliotece wynikowej cmatrix nie bêdzie tych dunkcji i w projekcie finalnym trzeba je do³¹czyæ
 
+
  */
