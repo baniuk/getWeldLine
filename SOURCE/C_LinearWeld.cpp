@@ -4,11 +4,12 @@
 
 C_LinearWeld::C_LinearWeld( const C_Matrix_Container *_rtg ) : C_WeldlineDetect(_rtg)
 {
-
+	
 }
 
 C_LinearWeld::~C_LinearWeld()
 {
+	SAFE_DELETE(_w);
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::~C_LinearWeld\n");
 }
 /** 
@@ -118,13 +119,84 @@ bool C_LinearWeld::evalNextStartPoint()
 	return OK;
 }
 /** 
- * Generuje parametry aproksymacji: wspó³czynniki startowe p, ub, lb oraz wagi. Na podstawie struktur buforowych approx_results i interp_lines.
+ * Generuje parametry aproksymacji: wspó³czynniki startowe p, ub, lb oraz wagi. Na podstawie struktur buforowych approx_results i interp_lines.Obliczone parametry zwraca na zewn¹trz. W kolejnej moga one zostaæ przekazane do klasy C_LineWeldApprox, która robi sobie ich lokaln¹ kopiê.Funkcja inicalizuje tablcê wag, ale jednorazowo. Za³o¿enie jest ze do obiektu nie mo¿na pod³¹czyæ innego obrazka wiêc iloœæ elementów interpolowanych nie zmieni siê.
  * \return OK jesli w porzadku
  */
 bool C_LinearWeld::evalNextParams()
 {
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextParams");
+	if(approx_results.getNumElem()<=0)
+		_RPT0(_CRT_ASSERT,"C_LinearWeld::evalNextParams->pusty bufor");
+	int num_el = approx_results.getNumElem();
+	int num_points = interp_lines.GetObject(0)->getSizeofApproxData();
+	C_Matrix_Container a(1,num_el);
+	C_Matrix_Container b(1,num_el);
+	C_Matrix_Container c(1,num_el);
+	C_Matrix_Container d(1,num_el);
+	C_Matrix_Container e(1,num_el);
+	const double *p_par;	// parametry z bufora lub wektor wag
+	// meidana z p - poszczególne elementy tego wektora z ca³ego bufora s¹ zbierane do jednego wektora
+	_RPT1(_CRT_WARN,"\t\tSizebuff: %d",num_el);
+	_RPT1(_CRT_WARN,"\t\tNumInterpElem: %d",num_points);
+	// inicjalizacja wektora wag (globalny) inicjalizowany tylko raz
+	if(NULL==_w)
+		_w = new double[num_points];
+	for (int la=0;la<num_el;la++)
+	{
+		p_par = approx_results.GetObject(la)->getApproxParams_p();
+		a.SetPixel(0,la,p_par[A]);
+		b.SetPixel(0,la,p_par[B]);
+		c.SetPixel(0,la,p_par[C]);
+		d.SetPixel(0,la,p_par[D]);
+		e.SetPixel(0,la,p_par[E]);
+	}
+	_p[A] = a.Median();
+	_p[B] = b.Median();
+	_p[C] = c.Median();
+	_p[D] = d.Median();
+	_p[E] = e.Median();
 
+	for (int la=0;la<num_el;la++)
+	{
+		p_par = approx_results.GetObject(la)->getApproxParams_ub();
+		a.SetPixel(0,la,p_par[A]);
+		b.SetPixel(0,la,p_par[B]);
+		c.SetPixel(0,la,p_par[C]);
+		d.SetPixel(0,la,p_par[D]);
+		e.SetPixel(0,la,p_par[E]);
+	}
+	_ub[A] = a.Median();
+	_ub[B] = b.Median();
+	_ub[C] = c.Median();
+	_ub[D] = d.Median();
+	_ub[E] = e.Median();
+
+	for (int la=0;la<num_el;la++)
+	{
+		p_par = approx_results.GetObject(la)->getApproxParams_lb();
+		a.SetPixel(0,la,p_par[A]);
+		b.SetPixel(0,la,p_par[B]);
+		c.SetPixel(0,la,p_par[C]);
+		d.SetPixel(0,la,p_par[D]);
+		e.SetPixel(0,la,p_par[E]);
+	}
+	_lb[A] = a.Median();
+	_lb[B] = b.Median();
+	_lb[C] = c.Median();
+	_lb[D] = d.Median();
+	_lb[E] = e.Median();
+	// wagi
+	// wype³nienie zerami
+	for(int ld=0;ld<num_points;++ld)	// dzielenie oprzez ilosc kazdej warotsci
+		_w[ld] = 0.0;
+	for(int la=0;la<num_el;la++)	// po liniach w buforze
+	{
+		p_par = interp_lines.GetObject(la)->getInterpolated_data(); // biore obiekt z la linii w buforze
+		for(int ld=0;ld<num_points;ld++)
+			_w[ld]+=p_par[ld];	// dodaje do bufora wag
+	}
+	for(int ld=0;ld<num_points;ld++)	// dzielenie oprzez ilosc kazdej warotsci
+		_w[ld]/=num_el;
 
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::evalNextParams\n");
 	return OK;

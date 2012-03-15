@@ -40,6 +40,16 @@ protected:
 		*(approx) = &obj->approx_results;
 		*(interp) = &obj->interp_lines;
 	}
+	void access_pwublb(C_LinearWeld *obj, double **p,double **ub,double **lb,double **w)
+	{
+		*(p) = obj->_p;
+		*(ub) = obj->_ub;
+		*(lb) = obj->_lb;
+		*(w) = obj->_w;
+	} 
+	bool access_evalNextParams(C_LinearWeld *obj){
+		return obj->evalNextParams();
+	}
 	C_CircBuff<C_LineWeldApprox> *approx;
 	C_CircBuff<C_LineInterp> *interp;
 	int x_start;
@@ -324,7 +334,8 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
 }
 
 
-/// test fillBuffor - wype³aniam bufor i sprawdzam aproksymacje dla ró¿nych punktów startowych
+
+/// test fillBuffor - wype³aniam bufor i sprawdzam aproksymacje dla ró¿nych punktów startowych oraz evalNextParam
 TEST_P(C_LinearWeld_FillBuffor, case1) {
 	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_FillBuffor_case1 ------ ");
 	_RPT1(_CRT_WARN,"PAR: %d\n",x_start);
@@ -351,6 +362,22 @@ TEST_P(C_LinearWeld_FillBuffor, case1) {
 	// czy pionowe
 	tmp = interp->GetObject(0);
 	ASSERT_EQ(PIONOWA,tmp->getjest_pion());
+
+	// test funkcji evalnextparams
+	double *pp_med,*pud_med,*plb_med,*pw;	// wskaŸniki do  dostêpu przez eccess_pwubld
+	C_Matrix_Container p_med(1,5); // mediana  z ca³ego bufora
+	C_Matrix_Container ub_med(1,5); 
+	C_Matrix_Container lb_med(1,5); 
+	C_Matrix_Container w(1,interp->GetObject(0)->getSizeofApproxData()); // srednia z aproxymacjiz ca³ego bufora
+	access_evalNextParams(obj);
+	access_pwublb(obj,&pp_med,&pud_med,&plb_med,&pw); // dostêp do wskaŸników paramerów prywatnych
+	p_med.CopyfromTab(pp_med,5); // kopiowanie ze wskaŸników do obiektów C_Matrix_Container
+	ub_med.CopyfromTab(pud_med,5);
+	lb_med.CopyfromTab(plb_med,5);
+	w.CopyfromTab(pw,interp->GetObject(0)->getSizeofApproxData());
+	
+	// wyniki zwracane na zewn¹trz
+	// 
 	// zrzucanie wyników - w rzêdach kolejne wyniki
 	// zrucam wyniki p pod postaci¹ wsp³ó³czynników
 	// dane x i y interpolacji
@@ -359,6 +386,8 @@ TEST_P(C_LinearWeld_FillBuffor, case1) {
 	C_Matrix_Container y(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
 	C_Matrix_Container profil(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
 	C_Matrix_Container p(approx->getNumElem(),5);
+	C_Matrix_Container ub(approx->getNumElem(),5);
+	C_Matrix_Container lb(approx->getNumElem(),5);
 	// kopiowanie danych do matlaba
 	for (int a=0,k=0;a<interp->getNumElem();a++)	// po ca³ym buforze
 	{
@@ -368,13 +397,23 @@ TEST_P(C_LinearWeld_FillBuffor, case1) {
 			y.SetPixel(a,k,interp->GetObject(a)->getInterpolated_Y()[k]);
 			profil.SetPixel(a,k,interp->GetObject(a)->getInterpolated_data()[k]);
 		}
-		for(k=0;k<5;k++)
+		for(k=0;k<5;k++){
 			p.SetPixel(a,k,approx->GetObject(a)->getApproxParams_p()[k]);
+			ub.SetPixel(a,k,approx->GetObject(a)->getApproxParams_ub()[k]);
+			lb.SetPixel(a,k,approx->GetObject(a)->getApproxParams_lb()[k]);
+		}
 	}
-	dump.AddEntry(&x,"x");
-	dump.AddEntry(&y,"y");
-	dump.AddEntry(&profil,"profil");
-	dump.AddEntry(&p,"p");
+	dump.AddEntry(&x,"x");// wsp x dla których aproxymacja, w rzêdach kolejne linie (z bufora)
+	dump.AddEntry(&y,"y");// wsp y dla których aproxymacja
+	dump.AddEntry(&profil,"profil"); // aproxymowany profil
+	dump.AddEntry(&p,"p"); // parametry krzywej aproxymuj¹cej
+	dump.AddEntry(&ub,"ub"); // parametry krzywej aproxymuj¹cej
+	dump.AddEntry(&lb,"lb"); // parametry krzywej aproxymuj¹cej
+
+	dump.AddEntry(&p_med,"p_med"); // parmaetry oblicone z ca³ego bufora (mediana)
+	dump.AddEntry(&ub_med,"ub_med");
+	dump.AddEntry(&lb_med,"lb_med");
+	dump.AddEntry(&w,"w"); // srednia wartoœæ z ca³ego bufora dla profilu
 }
 
 INSTANTIATE_TEST_CASE_P(

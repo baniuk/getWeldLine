@@ -27,6 +27,7 @@ class C_LinearWeld : public C_WeldlineDetect
 public:
 	C_LinearWeld(const C_Matrix_Container *_rtg);
 	~C_LinearWeld();
+	/// Funkcja inicjalizacyjna œrodowiska.
 	void SetProcedureParameters(unsigned int _k,unsigned int _sp);
 	void Start();
 protected:
@@ -34,11 +35,16 @@ protected:
 	bool evalNextStartPoint();
 	/// wype³nia bufor pocz¹tkowymi aproksymacjami
 	bool fillBuffor();
-	/// generuje zestaw parametrów do aproksymacji
+	/// generuje zestaw parametrów do aproksymacji izwraca je
 	bool evalNextParams();
+private:
 	/// pozycja startowa - dla spawów linowych jedynie kolumna - te punkty zmieniaj¹ siê podczas dzia³ania algorytmu
 	C_Point P0;
 	C_Point P1;	/**< Pomiêdzy P0 i P1 rozci¹ga siê linia zdejmowania profilu */
+	double _p[5]; /**< Parametry bierz¹ce aproxymacji - tak¿e zmieniaj¹ siê podczas dzia³ania algorytmu */
+	double _ub[5];/**< Granice górne bierz¹ce aproxymacji - tak¿e zmieniaj¹ siê podczas dzia³ania algorytmu */
+	double _lb[5];/**< Granice dolne bierz¹ce aproxymacji - tak¿e zmieniaj¹ siê podczas dzia³ania algorytmu */
+	
 };
 
 #endif // C_LinearWeld_h__

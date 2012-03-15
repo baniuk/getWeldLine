@@ -599,3 +599,15 @@ int C_Matrix_Container::partition( double a[], int l, int r)
    t = a[l]; a[l] = a[j]; a[j] = t;
    return j;
 }
+
+void C_Matrix_Container::CopyfromTab( const double *src,unsigned int size_src )
+{
+#ifdef _DEBUG
+	if(data==NULL)
+		_RPTF0(_CRT_ASSERT, "Matrix not initialized!!\n");
+#endif
+	if(size_src>GetNumofElements())
+		_RPTF0(_CRT_ASSERT, "CopyfromTab::Wrong size!!\n");
+	for(unsigned int a=0;a<size_src;++a)
+		data[a] = src[a];
+}

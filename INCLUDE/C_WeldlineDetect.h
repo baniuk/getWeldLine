@@ -44,5 +44,6 @@ protected:
 	unsigned int k;
 	/// rozmiar obrazka wejœciowego potrzebny do funkcji interpoluj¹cej
 	unsigned int rtgsize[3];
+	double *_w; /**< Tablica wag. Jest inicjalizowana jednorazowo w funkcji evalNextParams*/
 };
 #endif // C_WeldlineDetect_h__

@@ -57,6 +57,7 @@ public:
 	void RemoveMatrixCol(C_Matrix_Container* index);
 	unsigned long iselement(double element);
 	void quickSort( double a[], int l, int r);
+	void CopyfromTab(const double *src,unsigned int size_src);
 	virtual ~C_Matrix_Container(void);
 private:
 	int partition( double a[], int l, int r);

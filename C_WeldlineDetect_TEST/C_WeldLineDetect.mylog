@@ -1,4 +1,4 @@
-The current local time is: Wed Mar 14 15:35:51 2012
+The current local time is: Thu Mar 15 16:40:59 2012
 
 ------ Entering Test C_LinearWeld_case1 ------
 	Entering C_LinearWeld::~C_LinearWeld
@@ -56,6 +56,7 @@ The current local time is: Wed Mar 14 15:35:51 2012
 		Input: P0[33.0;0.0] P1[33.0;1824.0]		RES: A=822.14 B=1042.60 C=136.00 D=-0.02 E=1036.67 err=2.887e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[33.0;0.0] P1[33.0;1824.0]		Output: P0[34.0;0.0] P1[34.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 		Input: P0[34.0;0.0] P1[34.0;1824.0]		RES: A=819.47 B=1044.33 C=135.62 D=-0.02 E=1034.67 err=2.795e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[34.0;0.0] P1[34.0;1824.0]		Output: P0[35.0;0.0] P1[35.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 	Leaving C_LinearWeld::fillBuffor
+	Entering C_LinearWeld::evalNextParams		Sizebuff: 25		NumInterpElem: 1826	Leaving C_LinearWeld::evalNextParams
 	Entering C_LinearWeld::~C_LinearWeld
 ------ Entering Test C_LinearWeld_FillBuffor_case1 ------ PAR: 1612
 	Entering C_LinearWeld::SetProcedureParameters		k = 25		k=0.000, P0[1612.0;0.0] P1[1612.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
@@ -85,6 +86,7 @@ The current local time is: Wed Mar 14 15:35:51 2012
 		Input: P0[1635.0;0.0] P1[1635.0;1824.0]		RES: A=511.74 B=1058.37 C=83.77 D=0.16 E=781.97 err=2.206e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[1635.0;0.0] P1[1635.0;1824.0]		Output: P0[1636.0;0.0] P1[1636.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 		Input: P0[1636.0;0.0] P1[1636.0;1824.0]		RES: A=499.43 B=1061.14 C=86.23 D=0.17 E=783.12 err=2.233e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[1636.0;0.0] P1[1636.0;1824.0]		Output: P0[1637.0;0.0] P1[1637.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 	Leaving C_LinearWeld::fillBuffor
+	Entering C_LinearWeld::evalNextParams		Sizebuff: 25		NumInterpElem: 1826	Leaving C_LinearWeld::evalNextParams
 	Entering C_LinearWeld::~C_LinearWeld
 ------ Entering Test C_LinearWeld_FillBuffor_case1 ------ PAR: 3253
 	Entering C_LinearWeld::SetProcedureParameters		k = 25		k=0.000, P0[3253.0;0.0] P1[3253.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
@@ -114,6 +116,7 @@ The current local time is: Wed Mar 14 15:35:51 2012
 		Input: P0[3276.0;0.0] P1[3276.0;1824.0]		RES: A=617.98 B=681.68 C=600.00 D=0.01 E=645.84 err=8.778e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[3276.0;0.0] P1[3276.0;1824.0]		Output: P0[3277.0;0.0] P1[3277.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 		Input: P0[3277.0;0.0] P1[3277.0;1824.0]		RES: A=608.94 B=673.25 C=600.00 D=0.01 E=651.84 err=8.728e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[3277.0;0.0] P1[3277.0;1824.0]		Output: P0[3278.0;0.0] P1[3278.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 	Leaving C_LinearWeld::fillBuffor
+	Entering C_LinearWeld::evalNextParams		Sizebuff: 25		NumInterpElem: 1826	Leaving C_LinearWeld::evalNextParams
 	Entering C_LinearWeld::~C_LinearWeld
 ------ Entering Test C_LinearWeld_FillBuffor_case1 ------ PAR: 4294
 	Entering C_LinearWeld::SetProcedureParameters		k = 25		k=0.000, P0[4294.0;0.0] P1[4294.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
@@ -212,4 +215,5 @@ The current local time is: Wed Mar 14 15:35:51 2012
 		Input: P0[4386.0;0.0] P1[4386.0;1824.0]		RES: A=868.41 B=533.79 C=600.00 D=0.21 E=439.75 err=7.582e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[4386.0;0.0] P1[4386.0;1824.0]		Output: P0[4387.0;0.0] P1[4387.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 		Input: P0[4387.0;0.0] P1[4387.0;1824.0]		RES: A=843.23 B=544.23 C=600.00 D=0.19 E=460.92 err=7.657e+003	Entering C_LinearWeld::evalNextStartPoint		Input: P0[4387.0;0.0] P1[4387.0;1824.0]		Output: P0[4388.0;0.0] P1[4388.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
 	Leaving C_LinearWeld::fillBuffor
+	Entering C_LinearWeld::evalNextParams		Sizebuff: 25		NumInterpElem: 1826	Leaving C_LinearWeld::evalNextParams
 	Entering C_LinearWeld::~C_LinearWeld
