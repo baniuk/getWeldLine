@@ -19,7 +19,9 @@
 #define OK true
 #endif
 
-
+/** 
+ * Klasa implementujaca funkcje do wykrywania spawów liniowych. W ramach obiektu tworzonego z tej klasy realizowana jest pe³na procedura wykrywania. Sposób u¿ycia w testach parametrycznych C_LinearWeld_FillBuffor case1 i inne.
+ */
 class C_LinearWeld : public C_WeldlineDetect
 {
 	friend class C_LinearWeld_Test1;

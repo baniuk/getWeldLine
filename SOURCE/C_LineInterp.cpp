@@ -73,7 +73,7 @@ C_LineInterp::~C_LineInterp()
  * \param[in] _P1 punkt koñcowy
  * \param[out] _outx wektor x o rozmiarze N
  * \param[out] _outy wektor y o rozmiarze n
- * \param[in] Np iloœæ punktów pomiêdzy <P0;P1>
+ * \param[in] _Np iloœæ punktów pomiêdzy <P0;P1>
  * \return Jeœli P0 i P1 nie le¿¹ na linii to zwraca false i wartoœci w _out s¹ nieokreœlone
  * \warning Funkcja modyfikuje tablice image
  */
@@ -122,7 +122,7 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
  * wspó³rzêdne dla których by³a inteprolacja równierz zapisywane s¹ w x i y
  * \param[in] _P0 punkt pocz¹tkowy
  * \param[in] _P1 punkt koñcowy
- * \param[in] Np iloœæ punktów pomiêdzy <P0;P1>
+ * \param[in] _Np iloœæ punktów pomiêdzy <P0;P1>
  * \return Jeœli P0 i P1 nie le¿¹ na linii to zwraca false i wartoœci w _out s¹ nieokreœlone
  * \warning Funkcja modyfikuje tablice image
  */
@@ -198,8 +198,8 @@ void C_LineInterp::DataCopy( double *src,double *dest )
 /** 
  * Ustawia linieinterpolacji przy pomocy dwóch punktów. Funkcja ta inicjaklizuje tak¿e ca³y obiekt. Powinna byæ u¿ywana w przypadku u¿ycia domyœlnego konstruktora.
  * \param[in] type Typ interpolacji
- * \param[in] _P0 punkt poczatkowy
- * \param[in] _P1 punkt koñcowy lini interpolacji
+ * \param[in] P0 punkt poczatkowy
+ * \param[in] P1 punkt koñcowy lini interpolacji
  * \param[in] _image wskaŸnik do obrazu na którym bêdzie intepolaowana linia
  * \param[in] _size tablica z wymiarami obrazu [rows,cols,z]
  */ 

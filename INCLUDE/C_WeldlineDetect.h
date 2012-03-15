@@ -13,6 +13,9 @@
 #include "C_LineWeldApprox.h"
 #include "C_LineInterp.h"
 
+/** 
+ * Klasa abstrakcyjna implementuj¹ca metody u¿ywane do wykrywania linii spawu. Z tej klasy dziedziczone bêd¹ klasy do spawów liniowych i zakrzywionych.
+ */
 class C_WeldlineDetect
 {
 	friend class C_LinearWeld_Test1;

@@ -74,7 +74,7 @@ void C_CircBuff<T>::DelObject()
 
 /** 
  * Ta funkcja musi byæ wywo³ana jako pierwsza
- * \param S Rozmiar bufora
+ * \param _S Rozmiar bufora
  */
 template<class T>
 void C_CircBuff<T>::BuffInit( unsigned int _S )

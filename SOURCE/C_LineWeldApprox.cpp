@@ -13,7 +13,7 @@
  * \param[in] _typeApprox Rodzaj krzywej do aproxymacji - zgodne z eApproxFcn
  * \param[in] _y table of data to be fit
  * \param[in] _x values of domain of y. Approximation function is evaluated for these data and fitted to y
- * \param[in] rozmiar danych x i y
+ * \param[in] _len danych x i y
  */
 C_LineWeldApprox::C_LineWeldApprox(eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len)
 {
@@ -33,7 +33,7 @@ C_LineWeldApprox::C_LineWeldApprox()
  * \param[in] _typeApprox Rodzaj krzywej do aproxymacji - zgodne z eApproxFcn
  * \param[in] _y table of data to be fit
  * \param[in] _x values of domain of y. Approximation function is evaluated for these data and fitted to y
- * \param[in] rozmiar danych x i y
+ * \param[in] _len danych x i y
  */
 void C_LineWeldApprox::ManualConstructor( eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len )
 {
@@ -182,18 +182,24 @@ void C_LineWeldApprox::setDefaultParams()
 }
 /** 
  * Zwraca wybrane parmaetry. Jeœli optymalizacja nie by³a wykonana lub funkcja setApproxParams nie by³¹ u¿yta to zwraca domyœlne.
- * \param[out] _p	wektor z parametrami, jeœli jest NULL to nie zwraca
- * \param[out] _ub	wektor z górna granic¹ parametrów, jeœli jest NULL to nie zwraca
- * \param[out] _lb	wektor z dolna granic¹ parametrów, jeœli jest NULL to nie zwraca
+ * \return WskaŸnik do tablicy z parametrami p trzymanymi w obiekcie
 */
 const double* C_LineWeldApprox::getApproxParams_p()
 {
 	return p;
 }
+/** 
+ * Zwraca wybrane parmaetry. Jeœli optymalizacja nie by³a wykonana lub funkcja setApproxParams nie by³¹ u¿yta to zwraca domyœlne.
+ * \return WskaŸnik do tablicy z parametrami ub trzymanymi w obiekcie
+*/
 const double* C_LineWeldApprox::getApproxParams_ub()
 {
 	return ub;
 }
+/** 
+ * Zwraca wybrane parmaetry. Jeœli optymalizacja nie by³a wykonana lub funkcja setApproxParams nie by³¹ u¿yta to zwraca domyœlne.
+ * \return WskaŸnik do tablicy z parametrami lb trzymanymi w obiekcie
+*/
 const double* C_LineWeldApprox::getApproxParams_lb()
 {
 	return lb;
