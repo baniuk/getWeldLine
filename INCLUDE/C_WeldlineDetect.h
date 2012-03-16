@@ -12,7 +12,7 @@
 #include "C_CircBuff.h"
 #include "C_LineWeldApprox.h"
 #include "C_LineInterp.h"
-
+#include "C_WeldPos.h"
 /** 
  * Klasa abstrakcyjna implementuj¹ca metody u¿ywane do wykrywania linii spawu. Z tej klasy dziedziczone bêd¹ klasy do spawów liniowych i zakrzywionych.
  */
@@ -25,9 +25,9 @@ public:
 	C_WeldlineDetect(const C_Matrix_Container *_rtg);
 	virtual ~C_WeldlineDetect();
 	/// ustawia parametry procedury i tworzy potrzebne struktury
-	virtual void SetProcedureParameters(unsigned int _k,unsigned int _sp)=0;
+	virtual void SetProcedureParameters(unsigned int _k, C_Point _StartPoint)=0;
 	/// Znajduje profil spawu
-	virtual void Start()=0;
+	virtual bool Start()=0;
 protected:
 	/// przechowuje wskaŸnik do obrazka
 	const C_Matrix_Container *rtg;

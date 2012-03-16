@@ -16,14 +16,14 @@ C_LinearWeld::~C_LinearWeld()
  * Ustawia œrodowisko, tworzy potrzebne tablice. 
  * Funkcja musi byæ wywo³ana po konstruktorze aby ustawiæ potrzebne parametry.
  * \param[in] _k iloœæ linii branych do wygeneroania nastêpnej - wielkosæ bufora
- * \param[in] _sp punkt startowy - kolumna obrazka
+ * \param[in] _StartPoint punkt startowy - kolumna obrazka w tym przypadku (sk³¹dowa x)
  */
-void C_LinearWeld::SetProcedureParameters(unsigned int _k,unsigned int _sp)
+void C_LinearWeld::SetProcedureParameters(unsigned int _k, C_Point _StartPoint)
 {
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::SetProcedureParameters");
 	k = _k;
-	P0.setPoint(_sp,0); // dó³ obrazka
-	P1.setPoint(_sp,rtg->_rows-1);	// góra obrazka
+	P0.setPoint(_StartPoint.getX(),0); // dó³ obrazka
+	P1.setPoint(_StartPoint.getX(),rtg->_rows-1);	// góra obrazka
 	// tworzenie buforów na przechowanie danych
 	if(k>0)
 	{
@@ -35,10 +35,33 @@ void C_LinearWeld::SetProcedureParameters(unsigned int _k,unsigned int _sp)
 	_RPT5(_CRT_WARN,"\t\tk=%.3lf, P0[%.1lf;%.1lf] P1[%.1lf;%.1lf]",k,P0.getX(),P0.getY(),P1.getX(),P1.getY());
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::SetProcedureParameters\n");
 }
-
-void C_LinearWeld::Start()
+/** 
+ * Uruchamia w³aœciwy proces wykrywnia spawu.
+ * \return OK jeœli uda³o siê zakoñczyæ, BLAD jeœli wystapi³ b³¹d
+ */
+bool C_LinearWeld::Start()
 {
+	/// \todo Rozpoczête
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::Start");
+	bool ret;
+	// wype³nianie bufora w zale¿noœci od punktu startowego podanego w SetProcedureParameters()
+	ret = fillBuffor();
+	if(BLAD==ret)
+		return ret;
+	// pobieranie granicy spawu z bufora
+	// w P0P1 jest ju¿ nastêpny punkt bo zosta³ wygenerowany w fillBuffor()
+	while(OK==ret)
+	{
 
+		// generowanie nast paramerów
+		evalNextParams();
+		// generowanie linii itp
+		// zapisanie jej do bufora
+		// dodanie kolejenej grnicy
+		// generowanie nast punktu start (zwrocone z  blad oznacza koniec spawu i wtedy tu przerywamy)
+		ret = evalNextStartPoint();
+	}
+	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::Start\n");
 }
 /** 
  * Procedura wype³nia bufory ko³owe. 

@@ -289,7 +289,7 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case1) {
 TEST_F(C_LinearWeld_Test1, C_LinearWeld_case2) {
 	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_case2 ------\n");
 	C_LinearWeld obj(rtg);
-	int x_poz = 10;
+	C_Point x_poz(10,0); C_Point delta(1,0);
 	obj.SetProcedureParameters(10,x_poz); // start of x=10
 	C_Point P0test;
 	C_Point P1test;
@@ -298,13 +298,13 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case2) {
 	for(int a=0;a<10;a++)	// 10 razy
 	{
 		access_P0P1(&obj,P0test,P1test);
-		ASSERT_EQ(x_poz,P0test.getX());
+		ASSERT_EQ(x_poz.getX(),P0test.getX());
 		ASSERT_EQ(0,P0test.getY());		
-		ASSERT_EQ(x_poz,P1test.getX());
+		ASSERT_EQ(x_poz.getX(),P1test.getX());
 		ASSERT_EQ(tmp->_rows-1,P1test.getY());
 		ok = evalNextStartPoint(&obj);	//przesówam punkt
 		ASSERT_TRUE(ok);
-		x_poz++;		
+		x_poz+=delta;		
 	}
 }
 /// test evalNextStartPoint - koniec obrazka 
@@ -312,7 +312,7 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
 	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_case3 ------\n");
 	C_LinearWeld obj(rtg);
 
-	int x_poz = 7831;
+	C_Point x_poz(7831,0); C_Point delta(1,0);
 	obj.SetProcedureParameters(10,x_poz); // start of x=10
 	C_Point P0test;
 	C_Point P1test;
@@ -321,13 +321,13 @@ TEST_F(C_LinearWeld_Test1, C_LinearWeld_case3) {
 	for(int a=0;a<10;a++)	// 10 razy
 	{
 		access_P0P1(&obj,P0test,P1test);
-		ASSERT_EQ(x_poz,P0test.getX());
+		ASSERT_EQ(x_poz.getX(),P0test.getX());
 		ASSERT_EQ(0,P0test.getY());		
-		ASSERT_EQ(x_poz,P1test.getX());
+		ASSERT_EQ(x_poz.getX(),P1test.getX());
 		ASSERT_EQ(tmp->_rows-1,P1test.getY());
 		ok = evalNextStartPoint(&obj);	//przesówam punkt
 		ASSERT_TRUE(ok);
-		x_poz++;		
+		x_poz+=delta;		
 	}
 	ok = evalNextStartPoint(&obj);	//przesówam punkt
 	ASSERT_FALSE(ok);
@@ -348,7 +348,8 @@ TEST_P(C_LinearWeld_FillBuffor, case1) {
 
 	C_LineInterp *tmp;
 	int ile_linii = 25;
-	obj->SetProcedureParameters(ile_linii,x_start); // start of x=10, ile_linii lini w buforze
+	C_Point cp_x_start(x_start,0);
+	obj->SetProcedureParameters(ile_linii,cp_x_start); // start of x=10, ile_linii lini w buforze
 	// start
 	access_fillBuffor(obj);
 	// pobieral adresy struktur z danymi

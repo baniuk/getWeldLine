@@ -30,8 +30,9 @@ public:
 	C_LinearWeld(const C_Matrix_Container *_rtg);
 	~C_LinearWeld();
 	/// Funkcja inicjalizacyjna œrodowiska.
-	void SetProcedureParameters(unsigned int _k,unsigned int _sp);
-	void Start();
+	void SetProcedureParameters(unsigned int _k, C_Point _StartPoint);
+	/// g³ówna funkcja startowa
+	bool Start();
 protected:
 	/// generuje nastêpny punkt startowy
 	bool evalNextStartPoint();

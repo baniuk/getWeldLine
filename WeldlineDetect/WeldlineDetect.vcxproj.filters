@@ -27,6 +27,9 @@
     <ClInclude Include="..\INCLUDE\C_LinearWeld.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\INCLUDE\C_WeldPos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SOURCE\C_LinearWeld.cpp">

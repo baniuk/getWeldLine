@@ -145,6 +145,7 @@
     <ClInclude Include="..\INCLUDE\C_CircBuff.h" />
     <ClInclude Include="..\INCLUDE\C_LinearWeld.h" />
     <ClInclude Include="..\INCLUDE\C_WeldlineDetect.h" />
+    <ClInclude Include="..\INCLUDE\C_WeldPos.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\SOURCE\C_LinearWeld.cpp" />
