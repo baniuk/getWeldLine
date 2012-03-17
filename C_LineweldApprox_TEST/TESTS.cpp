@@ -178,3 +178,22 @@ TEST(C_LineweldApprox_Test1,getApprox)
 	
 
 }
+
+/// test funkcji evalApproxFcn
+TEST(C_LineweldApprox_Test1, evalApproxFcn_Case_1) {
+	C_MATRIX_LOAD(data,"GaussLin_test_1.dat"); // parametry funkcji
+	C_MATRIX_LOAD(x,"GaussLin_test_1_x.dat"); // dane wejsciowe
+	C_MATRIX_LOAD(expected,"GaussLin_test_1_expected.dat"); // wyniki
+	C_MATRIX_LOAD(profil,"getLineApproxGaussLin_test_1.dat"); // profil do aproxymacji (nie uzywany tu)
+	C_Matrix_Container y; //wyjœcie - wartoœci funkcji
+	y.AllocateData(1,x.GetNumofElements());
+
+	C_LineWeldApprox obj;
+	obj.ManualConstructor(typeGaussLin,profil.data,x.data,x._cols);
+	obj.setApproxParmas(data.data,NULL,NULL,NULL,NULL);
+	for(int a=0;a<x.GetNumofElements();++a)
+		y.data[a] = obj.evalApproxFcn(x.data[a]);
+
+	for(unsigned int a=0;a<x._cols;a++)
+		EXPECT_FLOAT_EQ(expected.data[a],y.data[a]);
+}

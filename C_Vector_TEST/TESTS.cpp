@@ -15,7 +15,9 @@ void C_Vector_CMP(const C_Vector V0, const C_Vector V1)
 	C_Point_CMP(v0VEC,v1VEC);
 
 }
-// The fixture for testing class Foo.
+/** 
+ * Œrodowisko testowe 1 dla C_Vector.
+ */ 
 class C_VectorTest : public ::testing::Test {
 protected:
 	C_Point _P0;	// punkt pocz¹tkowy

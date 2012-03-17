@@ -247,8 +247,11 @@ for pp=1:length(PAR)
         title(num2str(x(a,1)))
     end
     disp('wunik testu getNextParams')
-    all([isequal(p_med,median(p)),...
+    rr = all([isequal(p_med,median(p)),...
         isequal(ub_med,median(ub)),...
         isequal(lb_med,median(lb)),...
-        isequal(w,mean(profil))])
+        isequalfloat(w,Scale01(mean(profil)),1e-8)])
+    if(rr==0)
+        break;
+    end
 end

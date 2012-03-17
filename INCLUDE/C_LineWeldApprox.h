@@ -33,6 +33,8 @@ public:
 	~C_LineWeldApprox();
 	/// konstruktor manualny - musi byæ u¿yty po konstruktorze bezparametrowym
 	void ManualConstructor(eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len);
+	/// oblicza wartoœæ funkcji apryxymuj¹cej dla parametru x
+	double evalApproxFcn(double _x);
 private:
 	/// wskaŸnik do danych y \warning Poprzez ten wskaŸnik nie mo¿na modyfikowaæ nic
 	double const *y;
@@ -70,7 +72,7 @@ public:
 	const double* getApproxParams_ub();
 	const double* getApproxParams_lb();
 	/// Zwraca wybran¹ informacjê o wyniku optymalizacji
-	double getInfo(eOptimInfo _res);
+	double getInfo(eOptimInfo _res) const;
 };
 
 

@@ -15,7 +15,7 @@
  Expression is evaluated in domain x passed through struct data
  * @param[in] p		table of parameters
  * @param[out] y	table of evaluated data
- * @param[in] m		
+ * @param[in] m		size of p
  * @param[in] n		size of y
  * @param[in] data	user data - values of domain of size n
 */

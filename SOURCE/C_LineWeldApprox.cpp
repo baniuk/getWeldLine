@@ -118,7 +118,7 @@ int C_LineWeldApprox::getLineApproxGaussLinWeighted(int iter)
 
 }
 /** 
- * Ustawia parametry aproxymacji. Zaden z parametrów nie jest modyfikowany. _p, _ub _lb _opts s¹ kopiowane do klasy. Jeœli
+ * Ustawia parametry aproxymacji. Zaden z parametrów nie jest modyfikowany. _p, _ub _lb _opts s¹ kopiowane do klasy. Wagi _w s¹ u¿ywane natychmiast do przemno¿enia danych przechowywanych w klasiei u¿ywanych póŸniej do aproxymacji. Jeœli
  * parametry s¹ NULL to u¿yte s¹ parametry domyœlne ustawiane w konstruktorze
  * @param[in] _w		weights to weight y data (NULL if no wieghts)
  * @param[in] _p	table of parameters
@@ -209,12 +209,34 @@ const double* C_LineWeldApprox::getApproxParams_lb()
  * \param[in] _res	nazwa parametru zgodna z wektor z eOptimInfo
  * \return wartosc parametru o nazwie _res
 */
-double C_LineWeldApprox::getInfo( eOptimInfo _res )
+double C_LineWeldApprox::getInfo( eOptimInfo _res ) const
 {
 	if(err==_res)
 		return sqrt(info[_res]);
 	else
 		return info[_res];
+}
+/** 
+ * Oblicza wartoœæ funkcji dla parametru x. U¿ywane s¹ dane z wektora _p. Funkcja nie sprawdza poprawnoœci tych danych.
+ * \param[in] _x wartoœæ dla której zostanie obliczona funkcja
+ * \return Obliczona wartoœæ
+ */
+double C_LineWeldApprox::evalApproxFcn( double _x )
+{
+	double y;
+	double x = _x;
+	xtradata X;
+
+	X.x = &x;
+	switch(typeApprox)
+	{
+	case typeGaussLin:
+		GaussLin(p, &y, 5, 1, (void*)&X);
+		break;
+	default:
+		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
+	}
+	return y;
 }
 
 

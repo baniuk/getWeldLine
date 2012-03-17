@@ -40,6 +40,10 @@ protected:
 	bool fillBuffor();
 	/// generuje zestaw parametrów do aproksymacji izwraca je
 	bool evalNextParams();
+	/// sprawdza poprawnoœæ uzyskanej aproxymacji/interpolacji
+	bool czyAccept(const C_LineWeldApprox *_approx, const C_LineInterp *_interp);
+	/// oblicza pozycjê spawu dla linii pionowej i aproxymacji gaussLin
+	void evalWeldPos(const C_LineWeldApprox *_approx, const C_LineInterp *_interp, C_WeldPos &_weldPos );
 private:
 	/// pozycja startowa - dla spawów linowych jedynie kolumna - te punkty zmieniaj¹ siê podczas dzia³ania algorytmu
 	C_Point P0;

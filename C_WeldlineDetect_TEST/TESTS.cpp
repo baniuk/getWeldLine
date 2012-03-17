@@ -414,7 +414,7 @@ TEST_P(C_LinearWeld_FillBuffor, case1) {
 	dump.AddEntry(&p_med,"p_med"); // parmaetry oblicone z ca³ego bufora (mediana)
 	dump.AddEntry(&ub_med,"ub_med");
 	dump.AddEntry(&lb_med,"lb_med");
-	dump.AddEntry(&w,"w"); // srednia wartoœæ z ca³ego bufora dla profilu
+	dump.AddEntry(&w,"w"); // srednia wartoœæ z ca³ego bufora dla profilu normowana do 01
 }
 
 INSTANTIATE_TEST_CASE_P(
