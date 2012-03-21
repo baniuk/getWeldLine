@@ -122,7 +122,7 @@ TEST_P(C_LinearWeld_Start, start) {
 }
 
 /// test start dla delta 0
-TEST_P(C_LinearWeld_Start, start0) {
+TEST_P(C_LinearWeld_Start, DISABLED_start0) {
 	_RPT0(_CRT_WARN,"------ Entering Test start0 ------\n");
 	_RPT1(_CRT_WARN,"PAR: %s\n",nazwa);
 	bool ret;

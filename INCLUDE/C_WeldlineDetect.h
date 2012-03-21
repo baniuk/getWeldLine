@@ -19,7 +19,15 @@
 
 using namespace std;
 /** 
- * Klasa abstrakcyjna implementuj¹ca metody u¿ywane do wykrywania linii spawu. Z tej klasy dziedziczone bêd¹ klasy do spawów liniowych i zakrzywionych. Wektory lineOK oraz WeldPos s¹ zsynchronizowane, dana pozycja dotyczy okreslonej linii. Dane w WeldPos s¹ wa¿ne tylko jesli w lineOK jest status OK na tej pozycji. Te dwa wektory obejmuj¹ wszystkie linie spawu - ³¹cznie z tymi niepoprawnymi. Dostêp do nich poprzez funkcje getLineOK() oraz getweldPos()
+ * Klasa abstrakcyjna implementuj¹ca metody u¿ywane do wykrywania linii spawu. Z tej klasy dziedziczone bêd¹ klasy do spawów liniowych i zakrzywionych. Wektory lineOK oraz WeldPos s¹ zsynchronizowane, dana pozycja dotyczy okreslonej linii. Dane w WeldPos s¹ wa¿ne tylko jesli w lineOK jest status OK na tej pozycji. Te dwa wektory obejmuj¹ wszystkie linie spawu - ³¹cznie z tymi niepoprawnymi. Dostêp do nich poprzez funkcje getLineOK() oraz getweldPos().\n
+ * W celu przyspieszenie procedury podczas wype³niania bufora od razu przeliczane s¹ wyniki aproxymacji i wstawiane do bufora recalculated_approx_data. Ten bufor idzie w parze z dobrymi liniami. Jest u¿ywany do wyznaczenia wag w procedurze evalNextParams(). Podczas obliczeñ dane s¹ przechowywane w 3 buforach - s¹ to obiekty interpolacji->aproxymacji->oraz przeliczone dane na podstawie obiektu aproxymacji. W buforach s¹ tylko dobre linie, tzn takie które maj¹ ma³y b³¹d aproxyamcji. Zrezygnowano z przechowywania przeliczonych dnych w obiekcie aproxymacji aby zaoszczêdziæ pamiêæ. W ka¿dej chwili mo¿na te dane jednak obliczyæ:
+ * \code
+  	double *evaldata = new double[_interp->getSizeofInterpData()]; // tablica na dane obliczone dla krzywej aproxymacyjnej
+	const double *x,*y;	// wskazniki na wektory x i y dla których zosta³a wykonan interpolacja i aproxymacja (wspó³rzêdne obrazu)
+	x = _interp->getInterpolated_X();
+	y = _interp->getInterpolated_Y();
+	_approx->evalApproxFcnVec(y,evaldata,_interp->getSizeofInterpData());
+ *	\endcode
  */
 class C_WeldlineDetect
 {
@@ -51,6 +59,8 @@ protected:
 	C_CircBuff<C_LineWeldApprox> approx_results;
 	/// przechowuje k ostatnich wyników interpolacji linii - dane do aproxymacji i generowania wag
 	C_CircBuff<C_LineInterp> interp_lines;
+	/// Bufor pomocniczy przechowuj¹cy przeliczone wartoœci funkcji aproxymuj¹cej - ma na celu przyspieszenie
+	C_CircBuff<double> recalculated_approx_data;
 	/** Przechowuje inforacjê czy linia jest poprawna czy nie - poprawnoœæ okreœlona na podstwie czyAccept. Jesli linia jest poprawna to jest OK a jeœli nie to BLAD*/
 	vector<bool> lineOK;
 	/// iloœæ poprzendich wyników brana pod uwagê
@@ -62,6 +72,8 @@ protected:
 	vector<C_WeldPos> weldPos;
 	/// funkcja sprawdza czy obliczona aproksymacja mo¿e byæzaakcepyowana czy nie
 	virtual bool czyAccept(const C_LineWeldApprox *_approx, const C_LineInterp *_interp) = 0;
+	/// funkcja oblicza pozycjespawu dla danej linii
+	virtual void evalWeldPos(const C_LineWeldApprox *_approx, const C_LineInterp *_interp, const double *_pre, C_WeldPos &_weldPos )=0;
 	/// funkcja oblicza pozycjespawu dla danej linii
 	virtual void evalWeldPos(const C_LineWeldApprox *_approx, const C_LineInterp *_interp, C_WeldPos &_weldPos )=0;
 };

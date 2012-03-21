@@ -24,6 +24,8 @@ public:
 	void BuffInit(unsigned int _S);
 	/// dodaje obiekt typu T do bufora na kolejn¹ pozycjê
 	T *AddObject();
+	/// dodaje obiekt typu T do bufora na kolejn¹ pozycjê. Umo¿liwia podanie rozmiaru obiektu
+	T *AddObject(unsigned int siz);
 	/// zwraca odres obiektu na pozycji n
 	T *GetObject(unsigned int _n);  
 	/// zwraca true jeœli bufor pe³ny
@@ -111,6 +113,20 @@ T * C_CircBuff<T>::AddObject()
 	if(last>S-1) {last = 0;}
 	SAFE_DELETE(buff[last]);	// kasownaie tego co tam jest na nowej pozycji
 	buff[last] = new T;
+	ostatni = (int)last;
+	ile++;
+	return GetObject(last++);
+}
+/** 
+ * \return Funkcja zwraca adres nowododanego obiektu. Umo¿liwia przekazanie rozmiaru tworzonego obiektu
+ */
+template<class T>
+T * C_CircBuff<T>::AddObject(unsigned int siz)
+{
+	_ASSERT(buff!=NULL);
+	if(last>S-1) {last = 0;}
+	SAFE_DELETE(buff[last]);	// kasownaie tego co tam jest na nowej pozycji
+	buff[last] = new T[siz];
 	ostatni = (int)last;
 	ile++;
 	return GetObject(last++);

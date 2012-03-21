@@ -55,7 +55,7 @@ public:
 	/// zwraca tablice ze wspó³rzêdnymi y
 	const double * getInterpolated_Y() const { return y; }
 	/// zwraca rozmiar danych w tablicach x, y, interpolated_data
-	unsigned int getSizeofApproxData() const { return Np; }
+	unsigned int getSizeofInterpData() const { return Np; }
 	virtual ~C_LineInterp();
 protected:
 //	void Interpolate

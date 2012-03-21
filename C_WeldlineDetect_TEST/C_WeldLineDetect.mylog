@@ -1,0 +1,155 @@
+The current local time is: Thu Mar 22 00:28:59 2012
+
+------ Entering Test C_LinearWeld_case1 ------
+	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test C_LinearWeld_case2 ------
+	Entering C_LinearWeld::SetProcedureParameters		k = 10		k=0.000, P0[10.0;0.0] P1[10.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[10.0;0.0] P1[10.0;1824.0]		Output: P0[11.0;0.0] P1[11.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[11.0;0.0] P1[11.0;1824.0]		Output: P0[12.0;0.0] P1[12.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[12.0;0.0] P1[12.0;1824.0]		Output: P0[13.0;0.0] P1[13.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[13.0;0.0] P1[13.0;1824.0]		Output: P0[14.0;0.0] P1[14.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[14.0;0.0] P1[14.0;1824.0]		Output: P0[15.0;0.0] P1[15.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[15.0;0.0] P1[15.0;1824.0]		Output: P0[16.0;0.0] P1[16.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[16.0;0.0] P1[16.0;1824.0]		Output: P0[17.0;0.0] P1[17.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[17.0;0.0] P1[17.0;1824.0]		Output: P0[18.0;0.0] P1[18.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[18.0;0.0] P1[18.0;1824.0]		Output: P0[19.0;0.0] P1[19.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[19.0;0.0] P1[19.0;1824.0]		Output: P0[20.0;0.0] P1[20.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test C_LinearWeld_case3 ------
+	Entering C_LinearWeld::SetProcedureParameters		k = 10		k=0.000, P0[7831.0;0.0] P1[7831.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7831.0;0.0] P1[7831.0;1824.0]		Output: P0[7832.0;0.0] P1[7832.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7832.0;0.0] P1[7832.0;1824.0]		Output: P0[7833.0;0.0] P1[7833.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7833.0;0.0] P1[7833.0;1824.0]		Output: P0[7834.0;0.0] P1[7834.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7834.0;0.0] P1[7834.0;1824.0]		Output: P0[7835.0;0.0] P1[7835.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7835.0;0.0] P1[7835.0;1824.0]		Output: P0[7836.0;0.0] P1[7836.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7836.0;0.0] P1[7836.0;1824.0]		Output: P0[7837.0;0.0] P1[7837.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7837.0;0.0] P1[7837.0;1824.0]		Output: P0[7838.0;0.0] P1[7838.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7838.0;0.0] P1[7838.0;1824.0]		Output: P0[7839.0;0.0] P1[7839.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7839.0;0.0] P1[7839.0;1824.0]		Output: P0[7840.0;0.0] P1[7840.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[7840.0;0.0] P1[7840.0;1824.0]		Output: P0[7841.0;0.0] P1[7841.0;1824.0]	Leaving C_LinearWeld::evalNextStartPoint
+	Entering C_LinearWeld::evalNextStartPoint	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test C_LinearWeld_case4 ------
+	Entering C_LinearWeld::SetProcedureParameters		k = 10		k=0.000, P0[7831.0;0.0] P1[7831.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::evalNextStartPoint	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test start ------
+PAR: testimag1.dat
+	Entering C_LinearWeld::SetProcedureParameters		k = 100		k=0.000, P0[10.0;0.0] P1[10.0;1847.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::Start	Entering C_LinearWeld::fillBuffor		Input: P0[10.0;0.0] P1[10.0;1847.0]		RES: A=1739.31 B=872.39 C=172.24 D=0.10 E=652.62 err=6.712e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2481.6		max_el_pos: 874		G: [10.0,1096.4]		S: [10.0,873.5]		D: [10.0,658.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[10.0;0.0] P1[10.0;1847.0]		Output: P0[11.0;0.0] P1[11.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[11.0;0.0] P1[11.0;1847.0]		RES: A=1742.00 B=871.89 C=172.07 D=0.11 E=649.84 err=6.661e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2486.5		max_el_pos: 873		G: [11.0,1095.4]		S: [11.0,872.5]		D: [11.0,658.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[11.0;0.0] P1[11.0;1847.0]		Output: P0[12.0;0.0] P1[12.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[12.0;0.0] P1[12.0;1847.0]		RES: A=1751.50 B=872.49 C=173.23 D=0.10 E=646.27 err=6.562e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2489.3		max_el_pos: 874		G: [12.0,1097.4]		S: [12.0,873.5]		D: [12.0,657.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[12.0;0.0] P1[12.0;1847.0]		Output: P0[13.0;0.0] P1[13.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[13.0;0.0] P1[13.0;1847.0]		RES: A=1755.30 B=872.86 C=173.80 D=0.10 E=646.50 err=6.437e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2492.6		max_el_pos: 874		G: [13.0,1098.4]		S: [13.0,873.5]		D: [13.0,657.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[13.0;0.0] P1[13.0;1847.0]		Output: P0[14.0;0.0] P1[14.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[14.0;0.0] P1[14.0;1847.0]		RES: A=1758.33 B=872.52 C=173.74 D=0.10 E=645.84 err=6.318e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2495.5		max_el_pos: 874		G: [14.0,1098.4]		S: [14.0,873.5]		D: [14.0,656.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[14.0;0.0] P1[14.0;1847.0]		Output: P0[15.0;0.0] P1[15.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[15.0;0.0] P1[15.0;1847.0]		RES: A=1765.49 B=872.12 C=173.93 D=0.11 E=640.31 err=6.256e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2499.5		max_el_pos: 874		G: [15.0,1098.4]		S: [15.0,873.5]		D: [15.0,656.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[15.0;0.0] P1[15.0;1847.0]		Output: P0[16.0;0.0] P1[16.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[16.0;0.0] P1[16.0;1847.0]		RES: A=1777.65 B=872.16 C=174.33 D=0.11 E=639.27 err=6.288e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2510.8		max_el_pos: 874		G: [16.0,1098.4]		S: [16.0,873.5]		D: [16.0,655.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[16.0;0.0] P1[16.0;1847.0]		Output: P0[17.0;0.0] P1[17.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[17.0;0.0] P1[17.0;1847.0]		RES: A=1773.62 B=871.97 C=174.72 D=0.11 E=641.35 err=6.229e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2512.1		max_el_pos: 873		G: [17.0,1099.4]		S: [17.0,872.5]		D: [17.0,655.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[17.0;0.0] P1[17.0;1847.0]		Output: P0[18.0;0.0] P1[18.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[18.0;0.0] P1[18.0;1847.0]		RES: A=1783.79 B=872.22 C=174.51 D=0.10 E=646.46 err=6.244e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2519.2		max_el_pos: 874		G: [18.0,1098.4]		S: [18.0,873.5]		D: [18.0,655.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[18.0;0.0] P1[18.0;1847.0]		Output: P0[19.0;0.0] P1[19.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[19.0;0.0] P1[19.0;1847.0]		RES: A=1786.23 B=872.44 C=174.97 D=0.11 E=644.00 err=6.146e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2521.9		max_el_pos: 874		G: [19.0,1099.4]		S: [19.0,873.5]		D: [19.0,655.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[19.0;0.0] P1[19.0;1847.0]		Output: P0[20.0;0.0] P1[20.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[20.0;0.0] P1[20.0;1847.0]		RES: A=1793.43 B=872.35 C=175.99 D=0.10 E=642.68 err=6.100e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2523.3		max_el_pos: 874		G: [20.0,1100.4]		S: [20.0,873.5]		D: [20.0,653.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[20.0;0.0] P1[20.0;1847.0]		Output: P0[21.0;0.0] P1[21.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[21.0;0.0] P1[21.0;1847.0]		RES: A=1796.89 B=872.94 C=175.72 D=0.11 E=640.55 err=6.057e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2529.2		max_el_pos: 874		G: [21.0,1101.4]		S: [21.0,873.5]		D: [21.0,654.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[21.0;0.0] P1[21.0;1847.0]		Output: P0[22.0;0.0] P1[22.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[22.0;0.0] P1[22.0;1847.0]		RES: A=1794.94 B=872.38 C=175.81 D=0.11 E=637.51 err=5.972e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2525.1		max_el_pos: 874		G: [22.0,1100.4]		S: [22.0,873.5]		D: [22.0,654.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[22.0;0.0] P1[22.0;1847.0]		Output: P0[23.0;0.0] P1[23.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[23.0;0.0] P1[23.0;1847.0]		RES: A=1800.59 B=873.13 C=176.60 D=0.10 E=640.29 err=5.890e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2529.5		max_el_pos: 874		G: [23.0,1102.4]		S: [23.0,873.5]		D: [23.0,653.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[23.0;0.0] P1[23.0;1847.0]		Output: P0[24.0;0.0] P1[24.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[24.0;0.0] P1[24.0;1847.0]		RES: A=1806.07 B=872.54 C=176.68 D=0.11 E=636.73 err=5.863e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2535.4		max_el_pos: 874		G: [24.0,1102.4]		S: [24.0,873.5]		D: [24.0,653.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[24.0;0.0] P1[24.0;1847.0]		Output: P0[25.0;0.0] P1[25.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[25.0;0.0] P1[25.0;1847.0]		RES: A=1811.57 B=872.34 C=176.58 D=0.11 E=636.39 err=5.915e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2543.1		max_el_pos: 874		G: [25.0,1101.4]		S: [25.0,873.5]		D: [25.0,653.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[25.0;0.0] P1[25.0;1847.0]		Output: P0[26.0;0.0] P1[26.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[26.0;0.0] P1[26.0;1847.0]		RES: A=1821.78 B=872.17 C=177.76 D=0.10 E=637.04 err=5.963e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2548.1		max_el_pos: 874		G: [26.0,1102.4]		S: [26.0,873.5]		D: [26.0,651.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[26.0;0.0] P1[26.0;1847.0]		Output: P0[27.0;0.0] P1[27.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[27.0;0.0] P1[27.0;1847.0]		RES: A=1818.50 B=872.63 C=177.45 D=0.10 E=642.18 err=5.885e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2551.0		max_el_pos: 874		G: [27.0,1102.4]		S: [27.0,873.5]		D: [27.0,652.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[27.0;0.0] P1[27.0;1847.0]		Output: P0[28.0;0.0] P1[28.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[28.0;0.0] P1[28.0;1847.0]		RES: A=1824.34 B=872.71 C=178.25 D=0.10 E=635.96 err=5.760e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2549.7		max_el_pos: 874		G: [28.0,1104.4]		S: [28.0,873.5]		D: [28.0,651.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[28.0;0.0] P1[28.0;1847.0]		Output: P0[29.0;0.0] P1[29.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[29.0;0.0] P1[29.0;1847.0]		RES: A=1831.94 B=872.98 C=178.07 D=0.11 E=635.74 err=5.635e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2559.7		max_el_pos: 874		G: [29.0,1104.4]		S: [29.0,873.5]		D: [29.0,651.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[29.0;0.0] P1[29.0;1847.0]		Output: P0[30.0;0.0] P1[30.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[30.0;0.0] P1[30.0;1847.0]		RES: A=1835.30 B=872.91 C=178.75 D=0.11 E=629.33 err=5.755e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2559.3		max_el_pos: 874		G: [30.0,1105.4]		S: [30.0,873.5]		D: [30.0,651.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[30.0;0.0] P1[30.0;1847.0]		Output: P0[31.0;0.0] P1[31.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[31.0;0.0] P1[31.0;1847.0]		RES: A=1842.69 B=872.30 C=178.51 D=0.11 E=628.55 err=5.647e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2566.5		max_el_pos: 874		G: [31.0,1104.4]		S: [31.0,873.5]		D: [31.0,650.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[31.0;0.0] P1[31.0;1847.0]		Output: P0[32.0;0.0] P1[32.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[32.0;0.0] P1[32.0;1847.0]		RES: A=1840.93 B=872.15 C=178.74 D=0.11 E=630.47 err=5.643e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2563.4		max_el_pos: 874		G: [32.0,1104.4]		S: [32.0,873.5]		D: [32.0,650.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[32.0;0.0] P1[32.0;1847.0]		Output: P0[33.0;0.0] P1[33.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[33.0;0.0] P1[33.0;1847.0]		RES: A=1841.60 B=872.24 C=178.67 D=0.11 E=628.66 err=5.694e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2567.6		max_el_pos: 874		G: [33.0,1104.4]		S: [33.0,873.5]		D: [33.0,650.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[33.0;0.0] P1[33.0;1847.0]		Output: P0[34.0;0.0] P1[34.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[34.0;0.0] P1[34.0;1847.0]		RES: A=1848.04 B=872.35 C=178.01 D=0.10 E=635.83 err=5.484e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2574.3		max_el_pos: 874		G: [34.0,1103.4]		S: [34.0,873.5]		D: [34.0,651.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[34.0;0.0] P1[34.0;1847.0]		Output: P0[35.0;0.0] P1[35.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[35.0;0.0] P1[35.0;1847.0]		RES: A=1848.18 B=872.59 C=178.98 D=0.10 E=637.47 err=5.554e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2575.8		max_el_pos: 874		G: [35.0,1104.4]		S: [35.0,873.5]		D: [35.0,650.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[35.0;0.0] P1[35.0;1847.0]		Output: P0[36.0;0.0] P1[36.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[36.0;0.0] P1[36.0;1847.0]		RES: A=1856.86 B=872.38 C=179.65 D=0.10 E=631.55 err=5.584e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2578.4		max_el_pos: 874		G: [36.0,1105.4]		S: [36.0,873.5]		D: [36.0,649.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[36.0;0.0] P1[36.0;1847.0]		Output: P0[37.0;0.0] P1[37.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[37.0;0.0] P1[37.0;1847.0]		RES: A=1858.28 B=872.32 C=179.38 D=0.10 E=630.78 err=5.530e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2580.3		max_el_pos: 874		G: [37.0,1105.4]		S: [37.0,873.5]		D: [37.0,649.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[37.0;0.0] P1[37.0;1847.0]		Output: P0[38.0;0.0] P1[38.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[38.0;0.0] P1[38.0;1847.0]		RES: A=1855.93 B=872.61 C=179.98 D=0.10 E=630.93 err=5.381e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2576.9		max_el_pos: 874		G: [38.0,1106.4]		S: [38.0,873.5]		D: [38.0,648.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[38.0;0.0] P1[38.0;1847.0]		Output: P0[39.0;0.0] P1[39.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[39.0;0.0] P1[39.0;1847.0]		RES: A=1862.16 B=872.44 C=180.08 D=0.10 E=632.84 err=5.381e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2583.5		max_el_pos: 874		G: [39.0,1106.4]		S: [39.0,873.5]		D: [39.0,648.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[39.0;0.0] P1[39.0;1847.0]		Output: P0[40.0;0.0] P1[40.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[40.0;0.0] P1[40.0;1847.0]		RES: A=1871.13 B=871.88 C=180.23 D=0.11 E=624.14 err=5.470e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2589.6		max_el_pos: 873		G: [40.0,1106.4]		S: [40.0,872.5]		D: [40.0,648.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[40.0;0.0] P1[40.0;1847.0]		Output: P0[41.0;0.0] P1[41.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[41.0;0.0] P1[41.0;1847.0]		RES: A=1870.38 B=872.24 C=179.98 D=0.11 E=626.81 err=5.384e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2592.2		max_el_pos: 874		G: [41.0,1106.4]		S: [41.0,873.5]		D: [41.0,648.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[41.0;0.0] P1[41.0;1847.0]		Output: P0[42.0;0.0] P1[42.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[42.0;0.0] P1[42.0;1847.0]		RES: A=1871.17 B=872.59 C=180.24 D=0.10 E=630.36 err=5.374e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2592.1		max_el_pos: 874		G: [42.0,1106.4]		S: [42.0,873.5]		D: [42.0,648.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[42.0;0.0] P1[42.0;1847.0]		Output: P0[43.0;0.0] P1[43.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[43.0;0.0] P1[43.0;1847.0]		RES: A=1873.32 B=872.63 C=179.96 D=0.11 E=629.42 err=5.381e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2595.5		max_el_pos: 874		G: [43.0,1106.4]		S: [43.0,873.5]		D: [43.0,649.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[43.0;0.0] P1[43.0;1847.0]		Output: P0[44.0;0.0] P1[44.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[44.0;0.0] P1[44.0;1847.0]		RES: A=1878.71 B=872.43 C=181.35 D=0.10 E=627.17 err=5.260e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2597.0		max_el_pos: 874		G: [44.0,1107.4]		S: [44.0,873.5]		D: [44.0,647.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[44.0;0.0] P1[44.0;1847.0]		Output: P0[45.0;0.0] P1[45.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[45.0;0.0] P1[45.0;1847.0]		RES: A=1882.43 B=873.15 C=181.24 D=0.11 E=623.49 err=5.287e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2598.5		max_el_pos: 875		G: [45.0,1108.4]		S: [45.0,874.5]		D: [45.0,648.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[45.0;0.0] P1[45.0;1847.0]		Output: P0[46.0;0.0] P1[46.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[46.0;0.0] P1[46.0;1847.0]		RES: A=1880.15 B=872.92 C=181.45 D=0.10 E=630.78 err=5.276e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2598.4		max_el_pos: 874		G: [46.0,1108.4]		S: [46.0,873.5]		D: [46.0,647.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[46.0;0.0] P1[46.0;1847.0]		Output: P0[47.0;0.0] P1[47.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[47.0;0.0] P1[47.0;1847.0]		RES: A=1886.83 B=873.11 C=181.06 D=0.10 E=626.21 err=5.217e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2603.9		max_el_pos: 874		G: [47.0,1108.4]		S: [47.0,873.5]		D: [47.0,648.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[47.0;0.0] P1[47.0;1847.0]		Output: P0[48.0;0.0] P1[48.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[48.0;0.0] P1[48.0;1847.0]		RES: A=1885.79 B=872.99 C=181.55 D=0.11 E=622.29 err=5.244e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2603.6		max_el_pos: 874		G: [48.0,1108.4]		S: [48.0,873.5]		D: [48.0,647.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[48.0;0.0] P1[48.0;1847.0]		Output: P0[49.0;0.0] P1[49.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[49.0;0.0] P1[49.0;1847.0]		RES: A=1890.06 B=872.38 C=181.03 D=0.11 E=625.10 err=5.269e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2612.7		max_el_pos: 874		G: [49.0,1107.4]		S: [49.0,873.5]		D: [49.0,647.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[49.0;0.0] P1[49.0;1847.0]		Output: P0[50.0;0.0] P1[50.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[50.0;0.0] P1[50.0;1847.0]		RES: A=1893.89 B=872.35 C=181.62 D=0.10 E=628.85 err=5.206e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2612.5		max_el_pos: 874		G: [50.0,1108.4]		S: [50.0,873.5]		D: [50.0,646.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[50.0;0.0] P1[50.0;1847.0]		Output: P0[51.0;0.0] P1[51.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[51.0;0.0] P1[51.0;1847.0]		RES: A=1894.89 B=871.79 C=181.78 D=0.11 E=625.71 err=5.218e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2612.4		max_el_pos: 873		G: [51.0,1107.4]		S: [51.0,872.5]		D: [51.0,645.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[51.0;0.0] P1[51.0;1847.0]		Output: P0[52.0;0.0] P1[52.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[52.0;0.0] P1[52.0;1847.0]		RES: A=1898.59 B=872.22 C=181.57 D=0.10 E=629.75 err=5.205e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2614.2		max_el_pos: 874		G: [52.0,1107.4]		S: [52.0,873.5]		D: [52.0,646.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[52.0;0.0] P1[52.0;1847.0]		Output: P0[53.0;0.0] P1[53.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[53.0;0.0] P1[53.0;1847.0]		RES: A=1890.80 B=872.82 C=182.08 D=0.10 E=626.79 err=5.078e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2607.9		max_el_pos: 874		G: [53.0,1109.4]		S: [53.0,873.5]		D: [53.0,646.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[53.0;0.0] P1[53.0;1847.0]		Output: P0[54.0;0.0] P1[54.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[54.0;0.0] P1[54.0;1847.0]		RES: A=1908.17 B=872.74 C=182.51 D=0.11 E=618.66 err=5.095e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2619.1		max_el_pos: 874		G: [54.0,1109.4]		S: [54.0,873.5]		D: [54.0,646.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[54.0;0.0] P1[54.0;1847.0]		Output: P0[55.0;0.0] P1[55.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[55.0;0.0] P1[55.0;1847.0]		RES: A=1897.99 B=872.33 C=182.82 D=0.11 E=623.42 err=4.890e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2614.0		max_el_pos: 874		G: [55.0,1109.4]		S: [55.0,873.5]		D: [55.0,645.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[55.0;0.0] P1[55.0;1847.0]		Output: P0[56.0;0.0] P1[56.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[56.0;0.0] P1[56.0;1847.0]		RES: A=1907.05 B=872.35 C=183.29 D=0.11 E=617.03 err=5.110e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2619.1		max_el_pos: 874		G: [56.0,1110.4]		S: [56.0,873.5]		D: [56.0,644.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[56.0;0.0] P1[56.0;1847.0]		Output: P0[57.0;0.0] P1[57.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[57.0;0.0] P1[57.0;1847.0]		RES: A=1908.33 B=872.56 C=182.38 D=0.11 E=619.50 err=5.080e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2624.5		max_el_pos: 874		G: [57.0,1109.4]		S: [57.0,873.5]		D: [57.0,646.6]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[57.0;0.0] P1[57.0;1847.0]		Output: P0[58.0;0.0] P1[58.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[58.0;0.0] P1[58.0;1847.0]		RES: A=1908.67 B=872.73 C=182.82 D=0.11 E=619.52 err=5.044e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2620.5		max_el_pos: 874		G: [58.0,1110.4]		S: [58.0,873.5]		D: [58.0,645.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[58.0;0.0] P1[58.0;1847.0]		Output: P0[59.0;0.0] P1[59.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[59.0;0.0] P1[59.0;1847.0]		RES: A=1908.15 B=872.92 C=183.17 D=0.11 E=624.45 err=5.008e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2624.6		max_el_pos: 874		G: [59.0,1110.4]		S: [59.0,873.5]		D: [59.0,645.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[59.0;0.0] P1[59.0;1847.0]		Output: P0[60.0;0.0] P1[60.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[60.0;0.0] P1[60.0;1847.0]		RES: A=1914.59 B=872.53 C=183.54 D=0.11 E=621.72 err=4.924e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2628.5		max_el_pos: 874		G: [60.0,1110.4]		S: [60.0,873.5]		D: [60.0,644.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[60.0;0.0] P1[60.0;1847.0]		Output: P0[61.0;0.0] P1[61.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[61.0;0.0] P1[61.0;1847.0]		RES: A=1919.04 B=872.77 C=183.29 D=0.11 E=616.83 err=4.953e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2631.3		max_el_pos: 874		G: [61.0,1110.4]		S: [61.0,873.5]		D: [61.0,645.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[61.0;0.0] P1[61.0;1847.0]		Output: P0[62.0;0.0] P1[62.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[62.0;0.0] P1[62.0;1847.0]		RES: A=1922.52 B=873.03 C=183.22 D=0.10 E=617.36 err=5.009e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2629.9		max_el_pos: 874		G: [62.0,1110.4]		S: [62.0,873.5]		D: [62.0,645.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[62.0;0.0] P1[62.0;1847.0]		Output: P0[63.0;0.0] P1[63.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[63.0;0.0] P1[63.0;1847.0]		RES: A=1919.50 B=873.40 C=183.40 D=0.10 E=623.02 err=4.911e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2631.5		max_el_pos: 875		G: [63.0,1111.4]		S: [63.0,874.5]		D: [63.0,645.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[63.0;0.0] P1[63.0;1847.0]		Output: P0[64.0;0.0] P1[64.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[64.0;0.0] P1[64.0;1847.0]		RES: A=1926.22 B=872.75 C=184.09 D=0.11 E=615.14 err=4.953e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2634.7		max_el_pos: 874		G: [64.0,1111.4]		S: [64.0,873.5]		D: [64.0,644.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[64.0;0.0] P1[64.0;1847.0]		Output: P0[65.0;0.0] P1[65.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[65.0;0.0] P1[65.0;1847.0]		RES: A=1921.85 B=872.62 C=184.31 D=0.12 E=608.74 err=5.029e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2631.5		max_el_pos: 874		G: [65.0,1112.4]		S: [65.0,873.5]		D: [65.0,644.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[65.0;0.0] P1[65.0;1847.0]		Output: P0[66.0;0.0] P1[66.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[66.0;0.0] P1[66.0;1847.0]		RES: A=1928.08 B=872.47 C=184.54 D=0.11 E=614.05 err=5.003e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2635.9		max_el_pos: 874		G: [66.0,1112.4]		S: [66.0,873.5]		D: [66.0,643.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[66.0;0.0] P1[66.0;1847.0]		Output: P0[67.0;0.0] P1[67.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[67.0;0.0] P1[67.0;1847.0]		RES: A=1921.65 B=873.13 C=183.94 D=0.11 E=617.92 err=4.923e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2634.6		max_el_pos: 875		G: [67.0,1112.4]		S: [67.0,874.5]		D: [67.0,644.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[67.0;0.0] P1[67.0;1847.0]		Output: P0[68.0;0.0] P1[68.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[68.0;0.0] P1[68.0;1847.0]		RES: A=1923.22 B=872.60 C=184.68 D=0.11 E=612.90 err=4.845e+003	Entering C_LinearWeld::evalWeldPos		max_el: 2632.1		max_el_pos: 874		G: [68.0,1112.4]		S: [68.0,873.5]		D: [68.0,643.7]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::evalNextStartPoint		Input: P0[68.0;0.0] P1[68.0;1847.0]		Output: P0[69.0;0.0] P1[69.0;1847.0]	Leaving C_LinearWeld::evalNextStartPoint
+		Input: P0[69.0;0.0] P1[69.0;1847.0]
