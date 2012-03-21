@@ -35,5 +35,14 @@
     <ClCompile Include="TESTS.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CircBuffor_TEST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FillBuffor_TEST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main_TEST.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

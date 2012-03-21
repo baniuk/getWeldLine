@@ -13,6 +13,7 @@ C_LineInterp::C_LineInterp() : C_Line()
 	interpolated_data = NULL;
 	x = NULL;
 	y = NULL;
+	rtg = NULL;
 }
 /** 
  * Tworzy obiekt Intepolacji, do³¹czony do okreœlonego obrazka (trzeba konwertowaæ z C_Matrix_Container
@@ -29,6 +30,8 @@ C_LineInterp::C_LineInterp( APPROX_TYPE type,const C_Point &_P0, const C_Point &
 	x = NULL;
 	y = NULL;
 	Np = 0;
+	image = NULL;
+	rtg = _image;
 }
 /** 
  * Tworzy oniekt Intepolacji, do³¹czony do okreœlonego obrazka (trzeba konwertowaæ z C_Matrix_Container
@@ -48,14 +51,11 @@ C_LineInterp::C_LineInterp( APPROX_TYPE type,const double &_a, const double &_b,
 	memcpy_s(im_size,sizeof(im_size),_size,3*sizeof(unsigned int));
 	// wype³anianie ilosci ementów danych wejsciowych (obrazu)
 	N = getNumOfElements();
-	// tworzenie bufora z danymi
-	image = new float[N];
-	// kopiowanie danych z zewnatrz do bufora
-	for (unsigned int a=0;a<N;a++)
-		image[a] = (float)_image[a];
 	interpolated_data = NULL;
 	x = NULL;
 	y = NULL;
+	image = NULL;
+	rtg = _image;
 }
 
 C_LineInterp::~C_LineInterp()
@@ -86,9 +86,17 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
 		return false;
 	if(!isPointOnLine(_P1))
 		return false;
+	// tworzenie bufora z danymi
+	image = new float[N];
+	// kopiowanie danych z zewnatrz do bufora
+	for (unsigned int a=0;a<N;a++)
+		image[a] = (float)rtg[a];
 	int Error = SamplesToCoefficients(image, im_size[1], im_size[0], 2);
 	if(Error)
+	{
 		_RPT0(_CRT_ERROR,"Error in C_LineApprox::getPointsOnLine->SamplesToCoefficients");
+		return false;
+	}
 	// wypeninie lini P0 P1 punktami równo roz³o¿onymi
 	Np = _Np;
 	SafeAllocateTab();
@@ -115,6 +123,7 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, doub
 	// kopiowanie na wyjœcie
 	DataCopy(_outx,x);
 	DataCopy(_outy,y);
+	SAFE_DELETE(image);
 	return true;
 }
 /** 
@@ -133,9 +142,17 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, unsi
 		return false;
 	if(!isPointOnLine(_P1))
 		return false;
+	// tworzenie bufora z danymi tymczasowymi dla InterpolatedValue
+	image = new float[N];
+	// kopiowanie danych z zewnatrz do bufora
+	for (unsigned int a=0;a<N;a++)
+		image[a] = (float)rtg[a];
 	int Error = SamplesToCoefficients(image, im_size[1], im_size[0], 2);
 	if(Error)
+	{
 		_RPT0(_CRT_ERROR,"Error in C_LineApprox::getPointsOnLine->SamplesToCoefficients");
+		return false;
+	}
 	// wypeninie lini P0 P1 punktami równo roz³o¿onymi
 	Np = _Np;
 	SafeAllocateTab();
@@ -160,6 +177,7 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, unsi
 	default:
 		_RPT0(_CRT_ERROR,"Error in C_LineApprox::getPointsOnLine->SamplesToCoefficients - wrong type");
 	}
+	SAFE_DELETE(image);
 	return true;
 }
 /** 
@@ -211,11 +229,7 @@ void C_LineInterp::ManualConstructor( APPROX_TYPE type,const C_Point &P0, const 
 	memcpy_s(im_size,sizeof(im_size),_size,3*sizeof(unsigned int));
 	// wype³anianie ilosci ementów obrzy wejœciowego
 	N = getNumOfElements();
-	// tworzenie bufora z danymi
-	image = new float[N];
-	// kopiowanie danych z zewnatrz do bufora
-	for (unsigned int a=0;a<N;a++)
-		image[a] = (float)_image[a];
+	rtg = _image;
 
 }
 

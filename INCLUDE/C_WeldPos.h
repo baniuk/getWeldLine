@@ -21,8 +21,12 @@ public:
 	C_Point G; /**< Punkt górny */
 	C_Point S;/**< Punkt srodkowy */
 	C_Point D;/**< Punkt dolny */
+	/// Kasuje wszyskie pola
+	void Clear();
 protected:
 private:
 };
+
+
 
 #endif // C_WeldPos_h__

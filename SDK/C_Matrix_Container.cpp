@@ -283,7 +283,7 @@ BOOL C_Matrix_Container::DumpBinary(char *filename)
 		return FALSE;
 }
 
-BOOL C_Matrix_Container::ReadBinary(char *filename)
+BOOL C_Matrix_Container::ReadBinary(const char *filename)
 {
 	FILE *stream;
 	unsigned int rows,cols;
@@ -605,9 +605,9 @@ void C_Matrix_Container::CopyfromTab( const double *src,unsigned int size_src )
 #ifdef _DEBUG
 	if(data==NULL)
 		_RPTF0(_CRT_ASSERT, "Matrix not initialized!!\n");
-#endif
 	if(size_src>GetNumofElements())
 		_RPTF0(_CRT_ASSERT, "CopyfromTab::Wrong size!!\n");
+#endif
 	for(unsigned int a=0;a<size_src;++a)
 		data[a] = src[a];
 }

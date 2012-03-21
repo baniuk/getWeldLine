@@ -2,7 +2,9 @@
  * \file GTEST_ADDONS.h
  *\brief Plik zawiera funkcje do testowania wiêkszych obiektów do u¿ycia wewnatrz testów google
  */
- 
+#ifndef GTEST_ADDONS_h__
+#define GTEST_ADDONS_h__
+
  /** \brief Funkcja obs³uguj¹ca porównaina punktów - obiektów C_Point
  * Funkcja porównuje P0==P1
  */ 
@@ -27,3 +29,4 @@ void C_Point_CMP(const C_Point P0, const C_Point P1)
 	EXPECT_EQ(y0, y1);
 }
 
+#endif // GTEST_ADDONS_h__

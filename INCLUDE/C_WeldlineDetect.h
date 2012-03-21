@@ -9,6 +9,8 @@
 #define C_WeldlineDetect_h__
 
 #include <vector>
+#include <algorithm>
+#include <iostream>
 #include "C_Matrix_Container.h"
 #include "C_CircBuff.h"
 #include "C_LineWeldApprox.h"
@@ -17,11 +19,12 @@
 
 using namespace std;
 /** 
- * Klasa abstrakcyjna implementuj¹ca metody u¿ywane do wykrywania linii spawu. Z tej klasy dziedziczone bêd¹ klasy do spawów liniowych i zakrzywionych. Wektory lineOK oraz WeldPos s¹ zsynchronizowane, dana pozycja dotyczy okreslonej linii. Dane w WeldPos s¹ wa¿ne tylko jesli w lineOK jest status OK na tej pozycji. Te dwa wektory obejmuj¹ wszystkie linie spawu - ³¹cznie z tymi niepoprawnymi.
+ * Klasa abstrakcyjna implementuj¹ca metody u¿ywane do wykrywania linii spawu. Z tej klasy dziedziczone bêd¹ klasy do spawów liniowych i zakrzywionych. Wektory lineOK oraz WeldPos s¹ zsynchronizowane, dana pozycja dotyczy okreslonej linii. Dane w WeldPos s¹ wa¿ne tylko jesli w lineOK jest status OK na tej pozycji. Te dwa wektory obejmuj¹ wszystkie linie spawu - ³¹cznie z tymi niepoprawnymi. Dostêp do nich poprzez funkcje getLineOK() oraz getweldPos()
  */
 class C_WeldlineDetect
 {
 	friend class C_LinearWeld_Test1;
+	friend class C_LinearWeld_Test2;
 	friend class C_LinearWeld_FillBuffor;
 public:
 	/// pobiera obrazek rtg
@@ -30,12 +33,16 @@ public:
 	/// ustawia parametry procedury i tworzy potrzebne struktury
 	virtual void SetProcedureParameters(unsigned int _k, C_Point _StartPoint)=0;
 	/// Znajduje profil spawu
-	virtual bool Start()=0;
+	virtual bool Start(unsigned int step)=0;
+	/// zwraca wyniki detekcji spawu
+	const vector<bool> *getLineOK() const { return &lineOK; }
+	/// zwraca wyniki detekcji spawu
+	const vector<C_WeldPos> *getweldPos() const { return &weldPos; }
 protected:
 	/// przechowuje wskaŸnik do obrazka
 	const C_Matrix_Container *rtg;
 	/// generuje zestaw paramstrów do detekcji kolejnej linii - punkty P0 i P1 
-	virtual bool evalNextStartPoint()=0;
+	virtual bool evalNextStartPoint(unsigned int step)=0;
 	/// generuje zestaw kolejnych parametrów aproxymacji oraz wagi
 	virtual bool evalNextParams()=0;
 	/// wype³nia bufory approxymuj¹c k poczatkowych linii

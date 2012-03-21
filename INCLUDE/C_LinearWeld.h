@@ -11,6 +11,8 @@
 
 /// maksymalny b³¹d aproxymacji który jest akceptowany. Powy¿ej tego b³êdu dane s¹ odrzucane
 #define MAX_ERROR_LEVEL 10000
+/// ile rpocent wysokoœci spawu to brzeg
+#define WELD_EDGE 0.2
 
 #ifndef BLAD
 #define BLAD false
@@ -20,11 +22,12 @@
 #endif
 
 /** 
- * Klasa implementujaca funkcje do wykrywania spawów liniowych. W ramach obiektu tworzonego z tej klasy realizowana jest pe³na procedura wykrywania. Sposób u¿ycia w testach parametrycznych C_LinearWeld_FillBuffor case1 i inne.
+ * Klasa implementujaca funkcje do wykrywania spawów liniowych. W ramach obiektu tworzonego z tej klasy realizowana jest pe³na procedura wykrywania. Sposób u¿ycia w testach parametrycznych C_LinearWeld_FillBuffor case1 i inne. Podstaw¹ jest funkcja start(), wyniki s¹ w struktyrach weldPos oraz lineOK. W tych strukturach s¹ wszystkie wyniki dla ka¿dej znalezionej linii
  */
 class C_LinearWeld : public C_WeldlineDetect
 {
 	friend class C_LinearWeld_Test1;
+	friend class C_LinearWeld_FillBuffor_test2;
 	friend class C_LinearWeld_FillBuffor;
 public:
 	C_LinearWeld(const C_Matrix_Container *_rtg);
@@ -32,10 +35,10 @@ public:
 	/// Funkcja inicjalizacyjna œrodowiska.
 	void SetProcedureParameters(unsigned int _k, C_Point _StartPoint);
 	/// g³ówna funkcja startowa
-	bool Start();
+	bool Start(unsigned int step);
 protected:
 	/// generuje nastêpny punkt startowy
-	bool evalNextStartPoint();
+	bool evalNextStartPoint(unsigned int step);
 	/// wype³nia bufor pocz¹tkowymi aproksymacjami
 	bool fillBuffor();
 	/// generuje zestaw parametrów do aproksymacji izwraca je

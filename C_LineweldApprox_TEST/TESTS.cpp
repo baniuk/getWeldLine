@@ -65,12 +65,12 @@ TEST(C_LineweldApprox_Test1,getLineApproxGaussLin)
 	double info[LM_INFO_SZ];
 	int ret;
 	C_DumpAll getLineApproxGaussLin_test_1("getLineApproxGaussLin_test_1_expected.out");
+	C_MATRIX_LOAD(p,"getLineApproxGaussLin_test_1_p.dat"); // parametry aproxymowanej krzywej
 	C_MATRIX_LOAD(lb,"getLineApproxGaussLin_test_1_lb.dat");
 	C_MATRIX_LOAD(ub,"getLineApproxGaussLin_test_1_ub.dat");
 	C_MATRIX_LOAD(profil,"getLineApproxGaussLin_test_1.dat"); // profil do aproxymacji
 	C_MATRIX_LOAD(x,"getLineApproxGaussLin_test_1_x.dat"); // dane wejsciowe
-	C_MATRIX_LOAD(p,"getLineApproxGaussLin_test_1_p.dat"); // parametry aproxymowanej krzywej
-	X.x = x.data;	// przypisanie danych dziedziny do struktury
+ 	X.x = x.data;	// przypisanie danych dziedziny do struktury
 	ret = getLineApproxGaussLin(p.data,
 		profil.data,
 		p._cols,
@@ -81,13 +81,13 @@ TEST(C_LineweldApprox_Test1,getLineApproxGaussLin)
 		NULL,
 		info,
 		X);
-	getLineApproxGaussLin_test_1.AddEntry(&p,"expected");
-	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getLineApproxGaussLin_test_1_expected.out" << "\n\n";
-	EXPECT_NEAR(761.1147,p.data[0],1e-4);
-	EXPECT_NEAR(1.079115936954478e+003,p.data[1],1e-4);
-	EXPECT_NEAR(1.152311635531913e+002,p.data[2],1e-3);
-	EXPECT_NEAR(-1.063228816386850e-002,p.data[3],1e-2);
-	EXPECT_NEAR(8.148828860093591e+002,p.data[4],1e-3);
+ 	getLineApproxGaussLin_test_1.AddEntry(&p,"expected");
+ 	std::cout << "\n\t" << "Wyniki do porownania w Matlabie getLineApproxGaussLin_test_1_expected.out" << "\n\n";
+ 	EXPECT_NEAR(761.1147,p.data[0],1e-4);
+ 	EXPECT_NEAR(1.079115936954478e+003,p.data[1],1e-4);
+ 	EXPECT_NEAR(1.152311635531913e+002,p.data[2],1e-3);
+ 	EXPECT_NEAR(-1.063228816386850e-002,p.data[3],1e-2);
+ 	EXPECT_NEAR(8.148828860093591e+002,p.data[4],1e-3);
 
 }
 /// test konstruktora
@@ -191,9 +191,9 @@ TEST(C_LineweldApprox_Test1, evalApproxFcn_Case_1) {
 	C_LineWeldApprox obj;
 	obj.ManualConstructor(typeGaussLin,profil.data,x.data,x._cols);
 	obj.setApproxParmas(data.data,NULL,NULL,NULL,NULL);
-	for(int a=0;a<x.GetNumofElements();++a)
-		y.data[a] = obj.evalApproxFcn(x.data[a]);
-
+// 	for(int a=0;a<x.GetNumofElements();++a)
+// 		y.data[a] = obj.evalApproxFcn(x.data[a]);
+	obj.evalApproxFcnVec(x.data,y.data,x.GetNumofElements());
 	for(unsigned int a=0;a<x._cols;a++)
 		EXPECT_FLOAT_EQ(expected.data[a],y.data[a]);
 }

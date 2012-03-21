@@ -36,16 +36,17 @@ void C_LinearWeld::SetProcedureParameters(unsigned int _k, C_Point _StartPoint)
 }
 /** 
  * Uruchamia w³aœciwy proces wykrywnia spawu.
- * \return OK jeœli uda³o siê zakoñczyæ, BLAD jeœli wystapi³ b³¹d
+ * \param[in] step Krok z jakimjest wykrywaie spawu. Bufor zawsze jest ype³niany z krokiem 1
+ * \return OK jeœli uda³o siê zakoñczyæ, BLAD jeœli wystapi³ b³¹d. BLAD jest zwracany jesli nie uda sie stworzyc bufora lub krok by³o równy 0
  */
-bool C_LinearWeld::Start()
+bool C_LinearWeld::Start(unsigned int step)
 {
 	// bierz¹ca pozycja spawu w przestrzeni obrazka
 	C_WeldPos currentPos;
 	C_LineInterp *obj;	// obiekt tymczasowy do ³atwiejszego adresowania
 	C_LineWeldApprox *app;
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::Start");
-	bool ret;
+	bool ret=OK;
 	// wype³nianie bufora w zale¿noœci od punktu startowego podanego w SetProcedureParameters()
 	ret = fillBuffor();
 	if(BLAD==ret)
@@ -80,6 +81,7 @@ bool C_LinearWeld::Start()
 		if(BLAD==czyAccept(app,obj))
 		{
 			lineOK.push_back(BLAD);	// te wektory zawieraj¹ ju¿ info o liniach bufora
+			currentPos.Clear();	// kasuje wszystko bo ten wpis nie wa¿ny
 			weldPos.push_back(currentPos);
 		} else {
 			lineOK.push_back(OK);	// linia ok
@@ -87,10 +89,12 @@ bool C_LinearWeld::Start()
 			weldPos.push_back(currentPos);
 		}
 		// generowanie nast punktu start (zwrocone z  blad oznacza koniec spawu i wtedy tu przerywamy)
-		ret = evalNextStartPoint();
+		ret = evalNextStartPoint(step);
+		if(!((int)P0.getX()%10))
+			std::cout<<P0.getX()<<"\n";
 	}
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::Start\n");
-	return OK;
+	return OK; // zwracamy ok normalnie, BLAD jest zwracany jesli nie uda sie stworzyc bufora
 }
 /** 
  * Procedura wype³nia bufory ko³owe. 
@@ -139,14 +143,15 @@ bool C_LinearWeld::fillBuffor()
 			approx_results.DelObject();
 			interp_lines.DelObject();
 			lineOK.push_back(BLAD);
+			currentPos.Clear();
 			weldPos.push_back(currentPos);	// wartoœci domyœlne
 		} else {
 			lineOK.push_back(OK);	// linia ok
 			evalWeldPos(app,obj,currentPos);	// wype³niam currentPos w³aœciwymi danymo
 			weldPos.push_back(currentPos);
 		}
-		// generuje nastêpne punkty
-		ret_evalnextparam = evalNextStartPoint();
+		// generuje nastêpne punkty, w buforze zawsze krok 1
+		ret_evalnextparam = evalNextStartPoint(1);
 	}
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::fillBuffor\n");
 	return ret_evalnextparam;
@@ -155,17 +160,19 @@ bool C_LinearWeld::fillBuffor()
  * Generuje zestaw parametrów startowych do obliczenia kolejenj aproxymacji. Obraz jest
  * interpolowany na linii P0P1 a nastêpnie ten profil bêdzie podlega³ aproxymacji. Ka¿de wywo³anie funkcji 
  * powoduje wygenerowanie nastêpnego zestawu parametrów.
+ * \param[in] step krok z jakim przesuwamy siê. Za³ozenie jest ¿e krok dotyczy tylko osi x
  * \return BLAD jeœli nie mo¿na wygenerowac kolejnych parametrów (na przyk³¹d koniec obrazka)
  * \warning Funkcja modyfikuje pola P0 i P1
  * 
  */
-bool C_LinearWeld::evalNextStartPoint()
+bool C_LinearWeld::evalNextStartPoint(unsigned int step)
 {
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextStartPoint");
 	// generowanie nowych wspó³rzêdnych dla linii inteprolacyjnej - do paproxymacji profilu
-	if(P0.getX()==rtg->_cols-1)	// jeœli jesteœmy na ostatniej kolumnie to nie mo¿na wygenerowac kolejnej
+//	_ASSERT(step!=0);
+	if(P0.getX()==rtg->_cols-1 || 0==step)	// jeœli jesteœmy na ostatniej kolumnie to nie mo¿na wygenerowac kolejnej
 		return BLAD;
-	C_Point delta(1,0);	// krok 1 po x
+	C_Point delta(step,0);	// krok 1 po x
 	_RPT4(_CRT_WARN,"\t\tInput: P0[%.1lf;%.1lf] P1[%.1lf;%.1lf]",P0.getX(),P0.getY(),P1.getX(),P1.getY());
 	P0+=delta;
 	P1+=delta;
@@ -180,7 +187,9 @@ bool C_LinearWeld::evalNextStartPoint()
 bool C_LinearWeld::evalNextParams()
 {
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextParams");
+#ifdef _DEBUG
 	if(approx_results.getNumElem()<=0)
+#endif
 		_RPT0(_CRT_ASSERT,"C_LinearWeld::evalNextParams->pusty bufor");
 	int num_el = approx_results.getNumElem();
 	int num_points = interp_lines.GetObject(0)->getSizeofApproxData();
@@ -243,13 +252,15 @@ bool C_LinearWeld::evalNextParams()
 	_lb[E] = e.Median();
 	// wagi
 	// wype³nienie zerami
+	waga.AllocateData(1,num_points);
 	for(int ld=0;ld<num_points;++ld)	// dzielenie oprzez ilosc kazdej warotsci
 		_w[ld] = 0.0;
 	for(int la=0;la<num_el;la++)	// po liniach w buforze
 	{
-		p_par = interp_lines.GetObject(la)->getInterpolated_data(); // biore obiekt z la linii w buforze
+		p_par = interp_lines.GetObject(la)->getInterpolated_Y(); // biore obiekt z la linii w buforze, dane x dla których oblicze wartoœi aproxymowanej funkcji
+		approx_results.GetObject(la)->evalApproxFcnVec(p_par,waga.data,num_points);	// dla danych x z p_par(w rzeczywistoœci y bo linia pionowa) obliczam wartoœci funkcji aproxymuj¹cej i umieszczam w waga
 		for(int ld=0;ld<num_points;ld++)
-			_w[ld]+=p_par[ld];	// dodaje do bufora wag
+			_w[ld]+=waga.data[ld];	// dodaje do bufora wag
 	}
 	for(int ld=0;ld<num_points;ld++)	// dzielenie oprzez ilosc kazdej warotsci
 		_w[ld]/=num_el;
@@ -257,7 +268,6 @@ bool C_LinearWeld::evalNextParams()
 	// skalowanie wag do zakresu 01
 	/// \todo Tu mo¿na przyspieszyæ znacznie wykonuj¹c te operacje w miejscu - funkcja albo metoda statyczna lub stl
 	/// \verbatim
-	waga.AllocateData(1,num_points);
 	waga.CopyfromTab(_w,num_points);
 	waga.Normalize(0,1);
 	/// \endverbatim
@@ -294,17 +304,68 @@ bool C_LinearWeld::czyAccept( const C_LineWeldApprox *_approx, const C_LineInter
  */ 
 void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInterp *_interp, C_WeldPos &_weldPos )
 {
+	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalWeldPos");
 	double *evaldata = new double[_interp->getSizeofApproxData()]; // tablica na dane obliczone dla krzywej aproxymacyjnej
+	unsigned int *indexy = new unsigned int[_interp->getSizeofApproxData()]; // tablica na indexy
+	unsigned int l,licznik;
+	const double *p;	// parametry aproxymacji
+	double pos;
 	const double *x,*y;	// wskazniki na wektory x i y dla których zosta³a wykonan interpolacja i aproxymacja (wspó³rzêdne obrazu)
-	double wartosc;
+	double max_el,max_lin;	// wartosc maksymalna funkcji aproxymuj¹cej
+
 	x = _interp->getInterpolated_X();
 	y = _interp->getInterpolated_Y();
-	for (unsigned int a=0;a<_interp->getSizeofApproxData();a++)
-	{
-		wartosc = y[a];
-		evaldata[a] = _approx->evalApproxFcn(wartosc);
-	}
-	///\todo znaleœæ min max itp
+	_approx->evalApproxFcnVec(y,evaldata,_interp->getSizeofApproxData());
+// 	for (unsigned int a=0;a<_interp->getSizeofApproxData();a++)
+// 		evaldata[a] = _approx->evalApproxFcn(y[a]); // wyznaczam wartoœci gaussa dla rzêdów obrazu
+	for(l=0,max_el = evaldata[0];l<_interp->getSizeofApproxData();++l)
+		if(evaldata[l]>max_el)
+			max_el = evaldata[l];	// w max_el wartoœæ maxymalna
+	// wartoœæ maxymalna nie jest od zera ale ma jakiœ liniowy trend dodany - trzeba to uwzglêdniæ. Dlatego liczona jest wartoœæ funkcji liniowej skojarzonej z gaussem i dopiero róznica jest brana jako wysokoœæ piku. Wszystko liczone jest wzglêdem punktu maximum, wiêc dla du¿ego tendu mo¿e byæ b³êdne
+	_RPT1(_CRT_WARN,"\t\tmax_el: %.1lf",max_el);
+	// znajdowanie indeksów z wartoœci¹ max
+	for (l=licznik=0;l<_interp->getSizeofApproxData();++l)
+		if(evaldata[l]==max_el)
+			indexy[licznik++] = l;	// w indexy pozycje elementów maksymalnych (jeœli wiêcej ni¿ 1 to liczymy œredni¹)
+	pos = 0.0;
+	for(l=0;l<licznik;++l)	// po wszyskich pozycjach el. maksymalnych
+		pos+=(double)indexy[l];
+	pos/=licznik;	// w pos pozycja œrodka, uœredniona jeœli by³o wiêcej maximów
+	pos = floor(pos+0.5);	// zaokraglona do ca³kowitej
+	_RPT1(_CRT_WARN,"\t\tmax_el_pos: %d",(int)pos);
+	_weldPos.S.setPoint(x[(int)pos],y[(int)pos]); // ustawiam pozycjê œrodka na wyjœciu
+	
+	p = _approx->getApproxParams_p();
+	max_lin = pos*p[D]+p[E]; // wartoœæ trendu dla pozycji max
+
+	// górna granica od œrodka do koñca
+	licznik = 0;
+	for(l=(int)pos;l<_interp->getSizeofApproxData();++l)
+		if(evaldata[l]<max_lin+(max_el-max_lin)*WELD_EDGE)	{	// procent wysokoœci piku + przesuniêcie liniowe
+			indexy[licznik++] = l;	// pierwszy element to pozycja górnej granicy
+			break;	// nie ma potrzeby analizowania pozosta³ych el
+		}
+	/// \warning Mo¿e siê zda¿yæ ze nie bedzie w ifie i wtedy wartoœæ indexy niezdefiniowana, wtedy przyjmuje ostatni i pierwszy element. Tak siê zda¿a gdy aproxymowane s¹ z³e dane i funkcja aproxymuj¹ca jest zbyt szeoka, tzn obeajmuje ca³y obraz i nie daje rady zmaleæ do ¿¹danego zakresu.
+	if(0==licznik)
+		indexy[0] = _interp->getSizeofApproxData()-1;// ostatni element
+	_weldPos.G.setPoint(x[indexy[0]],y[indexy[0]]); // ustawiam pozycjê œrodka na wyjœciu
+
+	// dolna granica do œrodka
+	licznik = 0;
+	for(l=0;l<(unsigned int)pos;++l)
+		if(evaldata[l]>max_lin+(max_el-max_lin)*WELD_EDGE)	{
+			indexy[licznik++] = l;	// pierwszy element to pozycja górnej granicy
+			break;	// nie ma potrzeby analizowania pozosta³ych el
+		}
+	if(0==licznik)
+		indexy[0] = 0;// pierwszy element
+	_weldPos.D.setPoint(x[indexy[0]],y[indexy[0]]); // ustawiam pozycjê œrodka na wyjœciu
+
+	_RPT2(_CRT_WARN,"\t\tG: [%.1lf,%.1lf]",_weldPos.G.getX(),_weldPos.G.getY());
+	_RPT2(_CRT_WARN,"\t\tS: [%.1lf,%.1lf]",_weldPos.S.getX(),_weldPos.S.getY());
+	_RPT2(_CRT_WARN,"\t\tD: [%.1lf,%.1lf]",_weldPos.D.getX(),_weldPos.D.getY());
 
 	SAFE_DELETE(evaldata);
+	SAFE_DELETE(indexy);
+	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::evalWeldPos\n");
 }

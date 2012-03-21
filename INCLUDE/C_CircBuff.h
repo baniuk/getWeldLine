@@ -79,8 +79,10 @@ void C_CircBuff<T>::DelObject()
 template<class T>
 void C_CircBuff<T>::BuffInit( unsigned int _S )
 {
+#ifdef _DEBUG
 	if(0==_S)
 		_RPT0(_CRT_ERROR,"void C_CircBuff<T>::BuffInit->Wrong size");
+#endif
 	S = _S;
 	buff = new T *[S];
 	for(unsigned int a=0;a<S;a++)

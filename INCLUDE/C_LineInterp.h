@@ -27,7 +27,7 @@ enum APPROX_TYPE {
  * elementowej okreœlaj¹cej iloœæ elementów w ka¿dym wymiarze.
  * Interpolowane dane oraz ich wspó³rzêdne s¹ przechowywane wewnêtrz klasy i dostêpne za pomoc¹ C_LineApprox::getInterpolated_data.
  * Schmemat dzia³ania:\n
- * \li Inicjalizacja obiektu = dane interpolowane interpolated_data ustawione na null oraz image te¿ - jeœli u¿yty jest domyœlny konstruktor to trzeba inicjalizowaæ funkcj¹ setLine2Points
+ * \li Inicjalizacja obiektu = dane interpolowane interpolated_data ustawione na null oraz image te¿ - jeœli u¿yty jest domyœlny konstruktor to trzeba inicjalizowaæ funkcj¹ manualConstructor()
  * \li Interpolacja getPointsOnLine wype³nione s¹ tablice oraz zwracane wspó³rzêdne x,y punktów dla których wykonana by³a interpolacja
  * \li Pobranie wyników za pomoc¹ funkcji read-only getInterpolated_data oraz getInterpolatedXY
  */
@@ -79,6 +79,8 @@ private:
 	double *x;
 	/// tablica z wsp y - zawiera wspó³rzêdne y punktów dla których wykonano interpolacje
 	double *y;
+	/// wskaŸnik rzechowuje oryginalny obraz
+	const double *rtg;
 };
 
 #endif // C_LineApprox_h__

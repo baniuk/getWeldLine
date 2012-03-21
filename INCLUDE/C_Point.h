@@ -9,7 +9,7 @@
 
 
 #define _USE_MATH_DEFINES
-#include <math.h>
+#include <cmath>
 
 /** 
  * Klasa implementuj¹ca punkt w przestreni dwuwymiarowej

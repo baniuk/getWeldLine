@@ -2,7 +2,7 @@
 
 C_DumpAll::C_DumpAll(const char* filename)
 {
-#ifdef _DEBUG
+#if defined(_DEBUG) || defined(_TEST)
 	unsigned int a;
 	unsigned long data=0;
 	if( fopen_s( &stream, filename, "wb" ) == 0 )
@@ -13,7 +13,9 @@ C_DumpAll::C_DumpAll(const char* filename)
 		for(a=0;a<MAX_ENTRY;a++)
 			fwrite(&data,sizeof(unsigned long),1,stream); // przesuwanie wskaznika pliku
 	} else	{
+#ifdef _DEBUG
 		_CrtDbgReport(_CRT_ASSERT, NULL, NULL, "C_DumpAll: Cant open file", NULL);
+#endif
 		openfileerror = true;
 	}
 #endif
@@ -143,7 +145,7 @@ void C_DumpAll::AddEntry(float* data,unsigned int size, char* name)
 
 C_DumpAll::~C_DumpAll(void)
 {
-#ifdef _DEBUG	
+#if defined(_DEBUG) || defined(_TEST)
 	unsigned int a;
 	fseek(stream,0,SEEK_SET);
 	fwrite(&lastpozindex,sizeof(unsigned int),1,stream);	// ilosc wpisów

@@ -45,7 +45,7 @@ public:
 	void Transpose(void);
 	unsigned long GetNumofElements(void) const;
 	BOOL DumpBinary(char *filename);
-	BOOL ReadBinary(char *filename);
+	BOOL ReadBinary(const char *filename);
 	double Mean(C_Matrix_Container* out,unsigned int col);
 	double Median(void);
 	void stdcol(C_Matrix_Container* output);

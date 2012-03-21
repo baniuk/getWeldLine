@@ -184,7 +184,7 @@ void C_LineWeldApprox::setDefaultParams()
  * Zwraca wybrane parmaetry. Jeœli optymalizacja nie by³a wykonana lub funkcja setApproxParams nie by³¹ u¿yta to zwraca domyœlne.
  * \return WskaŸnik do tablicy z parametrami p trzymanymi w obiekcie
 */
-const double* C_LineWeldApprox::getApproxParams_p()
+const double* C_LineWeldApprox::getApproxParams_p() const
 {
 	return p;
 }
@@ -192,7 +192,7 @@ const double* C_LineWeldApprox::getApproxParams_p()
  * Zwraca wybrane parmaetry. Jeœli optymalizacja nie by³a wykonana lub funkcja setApproxParams nie by³¹ u¿yta to zwraca domyœlne.
  * \return WskaŸnik do tablicy z parametrami ub trzymanymi w obiekcie
 */
-const double* C_LineWeldApprox::getApproxParams_ub()
+const double* C_LineWeldApprox::getApproxParams_ub() const
 {
 	return ub;
 }
@@ -200,7 +200,7 @@ const double* C_LineWeldApprox::getApproxParams_ub()
  * Zwraca wybrane parmaetry. Jeœli optymalizacja nie by³a wykonana lub funkcja setApproxParams nie by³¹ u¿yta to zwraca domyœlne.
  * \return WskaŸnik do tablicy z parametrami lb trzymanymi w obiekcie
 */
-const double* C_LineWeldApprox::getApproxParams_lb()
+const double* C_LineWeldApprox::getApproxParams_lb() const
 {
 	return lb;
 }
@@ -221,22 +221,43 @@ double C_LineWeldApprox::getInfo( eOptimInfo _res ) const
  * \param[in] _x wartoœæ dla której zostanie obliczona funkcja
  * \return Obliczona wartoœæ
  */
-double C_LineWeldApprox::evalApproxFcn( double _x )
+// double C_LineWeldApprox::evalApproxFcn( double _x ) const
+// {
+// 	double y;
+// 	double x = _x;
+// 	xtradata X;
+// 
+// 	X.x = &x;
+// 	switch(typeApprox)
+// 	{
+// 	case typeGaussLin:
+// 		GaussLin(p, &y, 5, 1, (void*)&X);
+// 		break;
+// 	default:
+// 		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
+// 	}
+// 	return y;
+// }
+
+/** 
+ * Oblicza wartoœæ funkcji dla parametru x. U¿ywane s¹ dane z wektora _p. Funkcja nie sprawdza poprawnoœci tych danych.
+ * \param[in] _x tablica dla której zostanie obliczona funkcja
+ * \param[in] siz rozmiar tablic
+ * \param[out] _y tablica wyjœciowa
+ */
+void C_LineWeldApprox::evalApproxFcnVec(const double *_x,double *_y,unsigned int siz ) const
 {
-	double y;
-	double x = _x;
 	xtradata X;
 
-	X.x = &x;
+	X.x = _x;
 	switch(typeApprox)
 	{
 	case typeGaussLin:
-		GaussLin(p, &y, 5, 1, (void*)&X);
+		for(unsigned int l=0;l<siz;l++)
+			GaussLin(p, _y, 5, siz, (void*)&X);
 		break;
 	default:
 		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
 	}
-	return y;
 }
-
 

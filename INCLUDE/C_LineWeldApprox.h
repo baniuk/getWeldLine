@@ -34,7 +34,9 @@ public:
 	/// konstruktor manualny - musi byæ u¿yty po konstruktorze bezparametrowym
 	void ManualConstructor(eApproxFcn _typeApprox,const double *_y, const double *_x,unsigned int _len);
 	/// oblicza wartoœæ funkcji apryxymuj¹cej dla parametru x
-	double evalApproxFcn(double _x);
+//	double evalApproxFcn(double _x) const;
+	/// oblicza wartoœæ funkcji apryxymuj¹cej dla wektora x
+	void evalApproxFcnVec(const double *_x,double *_y,unsigned int siz ) const;
 private:
 	/// wskaŸnik do danych y \warning Poprzez ten wskaŸnik nie mo¿na modyfikowaæ nic
 	double const *y;
@@ -68,9 +70,9 @@ public:
 	/// ustawia parametry optymalizacji i dane
 	void setApproxParmas(double *_p, double *_w, double *_ub, double *_lb, double *_opts=NULL);
 	/// Zwraca wybrane parametry, bez sprawdzania czy optymalizacja by³a wykoana
-	const double* getApproxParams_p();
-	const double* getApproxParams_ub();
-	const double* getApproxParams_lb();
+	const double* getApproxParams_p() const;
+	const double* getApproxParams_ub() const;
+	const double* getApproxParams_lb() const;
 	/// Zwraca wybran¹ informacjê o wyniku optymalizacji
 	double getInfo(eOptimInfo _res) const;
 };
