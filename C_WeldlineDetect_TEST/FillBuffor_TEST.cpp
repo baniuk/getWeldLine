@@ -66,7 +66,7 @@ protected:
 #endif //GTEST_HAS_PARAM_TEST
 
 /// test fillBuffor - wype³aniam bufor i sprawdzam aproksymacje dla ró¿nych punktów startowych oraz evalNextParam
-TEST_P(C_LinearWeld_FillBuffor, DISABLED_fillBuffor) {
+TEST_P(C_LinearWeld_FillBuffor, fillBuffor) {
 	_RPT0(_CRT_WARN,"------ Entering Test C_LinearWeld_FillBuffor_case1 ------ ");
 	_RPT1(_CRT_WARN,"PAR: %d\n",x_start);
 	char buff[6];_itoa_s(x_start,buff,6,10);std::string liczba(buff);

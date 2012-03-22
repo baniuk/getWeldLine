@@ -448,6 +448,69 @@ double C_Matrix_Container::Median(void)
 	}
 }
 
+
+
+/*
+ *  This Quickselect routine is based on the algorithm described in
+ *  "Numerical recipes in C", Second Edition,
+ *  Cambridge University Press, 1992, Section 8.5, ISBN 0-521-43108-5
+ *  This code by Nicolas Devillard - 1998. Public domain.
+ */
+#define ELEM_SWAP(a,b) { register double t=(a);(a)=(b);(b)=t; }
+// uwaga - modyfikuje tablicê !! dla parzystych zwraca ni¿szy index
+double C_Matrix_Container::quick_select() 
+{
+    int low, high ;
+    int median;
+    int middle, ll, hh;
+	int n = (int)GetNumofElements();
+    low = 0 ; high = n-1 ; median = (low + high) / 2;
+    for (;;) {
+        if (high <= low) /* One element only */
+            return data[median] ;
+
+        if (high == low + 1) {  /* Two elements only */
+            if (data[low] > data[high])
+                ELEM_SWAP(data[low], data[high]) ;
+            return data[median] ;
+        }
+
+    /* Find median of low, middle and high items; swap into position low */
+    middle = (low + high) / 2;
+    if (data[middle] > data[high])    ELEM_SWAP(data[middle], data[high]) ;
+    if (data[low] > data[high])       ELEM_SWAP(data[low], data[high]) ;
+    if (data[middle] > data[low])     ELEM_SWAP(data[middle], data[low]) ;
+
+    /* Swap low item (now in position middle) into position (low+1) */
+    ELEM_SWAP(data[middle], data[low+1]) ;
+
+    /* Nibble from each end towards middle, swapping items when stuck */
+    ll = low + 1;
+    hh = high;
+    for (;;) {
+        do ll++; while (data[low] > data[ll]) ;
+        do hh--; while (data[hh]  > data[low]) ;
+
+        if (hh < ll)
+        break;
+
+        ELEM_SWAP(data[ll], data[hh]) ;
+    }
+
+    /* Swap middle item (in position low) back into correct position */
+    ELEM_SWAP(data[low], data[hh]) ;
+
+    /* Re-set active partition */
+    if (hh <= median)
+        low = ll;
+        if (hh >= median)
+        high = hh - 1;
+    }
+}
+
+#undef ELEM_SWAP
+
+
 void C_Matrix_Container::CutMatrixCol(C_Matrix_Container* output, C_Matrix_Container* cols)
 {
 	#ifdef _DEBUG

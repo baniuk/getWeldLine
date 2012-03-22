@@ -64,7 +64,7 @@ protected:
 #endif
 
 /// test start
-TEST_P(C_LinearWeld_Start, start) {
+TEST_P(C_LinearWeld_Start, DISABLED_start) {
 	_RPT0(_CRT_WARN,"------ Entering Test start ------\n");
 	_RPT1(_CRT_WARN,"PAR: %s\n",nazwa);
 	std::string casename(nazwa);
@@ -85,7 +85,7 @@ TEST_P(C_LinearWeld_Start, start) {
 	bool ret;
 
 	C_Point cp_x_start(10,0);	// punkt startowy
-	obj->SetProcedureParameters(100,cp_x_start); // inicjalizacja srodowiska, wielkosc bufora 100
+	obj->SetProcedureParameters(25,cp_x_start); // inicjalizacja srodowiska, wielkosc bufora 100
 	ret = obj->Start(1);	// krok
 	ASSERT_TRUE(ret);	
 

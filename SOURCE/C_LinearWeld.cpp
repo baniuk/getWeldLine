@@ -223,47 +223,62 @@ bool C_LinearWeld::evalNextParams()
 	for (int la=0;la<num_el;la++)
 	{
 		p_par = approx_results.GetObject(la)->getApproxParams_p();
-		a.SetPixel(0,la,p_par[A]);
-		b.SetPixel(0,la,p_par[B]);
-		c.SetPixel(0,la,p_par[C]);
-		d.SetPixel(0,la,p_par[D]);
-		e.SetPixel(0,la,p_par[E]);
+		a.data[la] = p_par[A];
+		b.data[la] = p_par[B];
+		c.data[la] = p_par[C];
+		d.data[la] = p_par[D];
+		e.data[la] = p_par[E];
+// 		a.SetPixel(0,la,p_par[A]);
+// 		b.SetPixel(0,la,p_par[B]);
+// 		c.SetPixel(0,la,p_par[C]);
+// 		d.SetPixel(0,la,p_par[D]);
+// 		e.SetPixel(0,la,p_par[E]);
 	}
-	_p[A] = a.Median();
-	_p[B] = b.Median();
-	_p[C] = c.Median();
-	_p[D] = d.Median();
-	_p[E] = e.Median();
+	_p[A] = a.quick_select();
+	_p[B] = b.quick_select();
+	_p[C] = c.quick_select();
+	_p[D] = d.quick_select();
+	_p[E] = e.quick_select();
 
 	for (int la=0;la<num_el;la++)
 	{
 		p_par = approx_results.GetObject(la)->getApproxParams_ub();
-		a.SetPixel(0,la,p_par[A]);
-		b.SetPixel(0,la,p_par[B]);
-		c.SetPixel(0,la,p_par[C]);
-		d.SetPixel(0,la,p_par[D]);
-		e.SetPixel(0,la,p_par[E]);
+		a.data[la] = p_par[A];
+		b.data[la] = p_par[B];
+		c.data[la] = p_par[C];
+		d.data[la] = p_par[D];
+		e.data[la] = p_par[E];
+// 		a.SetPixel(0,la,p_par[A]);
+// 		b.SetPixel(0,la,p_par[B]);
+// 		c.SetPixel(0,la,p_par[C]);
+// 		d.SetPixel(0,la,p_par[D]);
+// 		e.SetPixel(0,la,p_par[E]);
 	}
-	_ub[A] = a.Median();
-	_ub[B] = b.Median();
-	_ub[C] = c.Median();
-	_ub[D] = d.Median();
-	_ub[E] = e.Median();
+	_ub[A] = a.quick_select();
+	_ub[B] = b.quick_select();
+	_ub[C] = c.quick_select();
+	_ub[D] = d.quick_select();
+	_ub[E] = e.quick_select();
 
 	for (int la=0;la<num_el;la++)
 	{
 		p_par = approx_results.GetObject(la)->getApproxParams_lb();
-		a.SetPixel(0,la,p_par[A]);
-		b.SetPixel(0,la,p_par[B]);
-		c.SetPixel(0,la,p_par[C]);
-		d.SetPixel(0,la,p_par[D]);
-		e.SetPixel(0,la,p_par[E]);
+		a.data[la] = p_par[A];
+		b.data[la] = p_par[B];
+		c.data[la] = p_par[C];
+		d.data[la] = p_par[D];
+		e.data[la] = p_par[E];
+// 		a.SetPixel(0,la,p_par[A]);
+// 		b.SetPixel(0,la,p_par[B]);
+// 		c.SetPixel(0,la,p_par[C]);
+// 		d.SetPixel(0,la,p_par[D]);
+// 		e.SetPixel(0,la,p_par[E]);
 	}
-	_lb[A] = a.Median();
-	_lb[B] = b.Median();
-	_lb[C] = c.Median();
-	_lb[D] = d.Median();
-	_lb[E] = e.Median();
+	_lb[A] = a.quick_select();
+	_lb[B] = b.quick_select();
+	_lb[C] = c.quick_select();
+	_lb[D] = d.quick_select();
+	_lb[E] = e.quick_select();
 	// wagi
 	// wype³nienie zerami
 
@@ -271,7 +286,7 @@ bool C_LinearWeld::evalNextParams()
 		_w[ld] = 0.0;
 	for(int la=0;la<num_el;la++)	// po liniach w buforze
 	{
-		p_par = recalculated_approx_data.GetObject(la); // biore dane z la linii w buforze - to s a wartoœci z aproxymacji
+		p_par = recalculated_approx_data.GetObject(la); // biore dane z la linii w buforze - to s a wartoœci z aproxymacji wype³nione w fillbufor i start na bierz¹co z innymi buforami razem
 		for(int ld=0;ld<num_points;ld++)
 			_w[ld]+=p_par[ld];	// dodaje do bufora wag
 	}
@@ -426,7 +441,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 	_weldPos.S.setPoint(x[(int)pos],y[(int)pos]); // ustawiam pozycjê œrodka na wyjœciu
 	
 	p = _approx->getApproxParams_p();
-	max_lin = pos*p[D]+p[E]; // wartoœæ trendu dla pozycji max
+	max_lin = y[(int)pos]*p[D]+p[E]; // wartoœæ trendu dla pozycji max
 
 	// górna granica od œrodka do koñca
 	licznik = 0;
