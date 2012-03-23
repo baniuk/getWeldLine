@@ -63,7 +63,7 @@ private:
 	/// Tworzy tablice w klasie
 	void SafeAllocateTab();
 	/// kopiuje dane pomiêdzy buforami
-	void DataCopy(double *src,double *dest);
+	inline void DataCopy(double *src,double *dest);
 	APPROX_TYPE typ_interpolacji;
 	/// wskaŸnik przechowuj¹cy obraz, jest modyfikowany przez getPointsOnLine
 	float *image;

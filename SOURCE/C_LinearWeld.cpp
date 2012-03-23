@@ -365,7 +365,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 	_weldPos.S.setPoint(x[(int)pos],y[(int)pos]); // ustawiam pozycjê œrodka na wyjœciu
 	
 	p = _approx->getApproxParams_p();
-	max_lin = pos*p[D]+p[E]; // wartoœæ trendu dla pozycji max
+	max_lin = y[(int)pos]*p[D]+p[E]; // wartoœæ trendu dla pozycji max 
 
 	// górna granica od œrodka do koñca
 	licznik = 0;
@@ -410,6 +410,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
  */ 
 void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInterp *_interp, C_WeldPos &_weldPos )
 {
+	_RPT0(_CRT_ASSERT,"Obsolete");
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalWeldPos");
 	double *evaldata = new double[_interp->getSizeofInterpData()]; // tablica na dane obliczone dla krzywej aproxymacyjnej
 	unsigned int *indexy = new unsigned int[_interp->getSizeofInterpData()]; // tablica na indexy

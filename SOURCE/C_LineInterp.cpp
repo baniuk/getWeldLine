@@ -209,7 +209,7 @@ void C_LineInterp::SafeAllocateTab()
 	y = new double[Np];
 }
 
-void C_LineInterp::DataCopy( double *src,double *dest )
+inline void C_LineInterp::DataCopy( double *src,double *dest )
 {
 	memcpy_s(dest,Np*sizeof(double),src,Np*sizeof(double));
 }
