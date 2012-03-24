@@ -1,3 +1,14 @@
+%% opracowanie wa¿enia
+%load wagi
+
+w = mean(etab); % uœrednione aproxymacje z bufora
+plot(w);hold on
+s = profil5(10,:); % z³y sygna³
+plot(s,'-r')
+d = Scale01(abs(s-w).^0.5);
+dd = 1-d;
+sr = w.*dd + s.*d;
+plot(sr,'-g');
 %% nowe testy dla projektu  z gtest
 % class C_LinearWeld_Test1 - dane wejsciowe musz¹ byc w katlaogu danego
 % testu
