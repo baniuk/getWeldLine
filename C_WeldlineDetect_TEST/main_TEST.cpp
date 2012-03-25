@@ -64,7 +64,7 @@ protected:
 #endif
 
 /// test start
-TEST_P(C_LinearWeld_Start, DISABLED_start) {
+TEST_P(C_LinearWeld_Start, start) {
 	_RPT0(_CRT_WARN,"------ Entering Test start ------\n");
 	_RPT1(_CRT_WARN,"PAR: %s\n",nazwa);
 	std::string casename(nazwa);
@@ -136,4 +136,4 @@ TEST_P(C_LinearWeld_Start, DISABLED_start0) {
 INSTANTIATE_TEST_CASE_P(
 	start,
 	C_LinearWeld_Start,
-	::testing::Values("testimag1.dat","testimag9.dat")); // te same wartosci sa w matlabie
+	::testing::Values("testimag9.dat")); // te same wartosci sa w matlabie

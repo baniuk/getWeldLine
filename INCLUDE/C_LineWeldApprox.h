@@ -9,6 +9,8 @@
 
 #include "C_Levmar_Warp.h"
 
+/// wspó³czynnik wa¿enia - podobieñstwa do wykresu wagi - \see patrz przyk³ad w matlabie
+#define WEIGTING_COEFF 1.2
 
 /** 
  * Wykonuje aproxymacjê jednej linii spawu i przechowuje wyniki takiej aproxymacji 
@@ -64,6 +66,8 @@ private:
 	void setDefaultParams();
 	/// rozmiar wektorów x i y
 	unsigned int len;
+	/// wazy sygna³ profilu za pomoc¹ wag
+	void WeightProfile(const double *_w);
 public:
 	/// Aproxymuje jedn¹ liniê wybran¹ funkcj¹ zgodnie z eApproxFcn
 	int getLineApprox(int _iter);

@@ -212,7 +212,7 @@ bool C_LinearWeld::evalNextParams()
 	C_Matrix_Container c(1,num_el);
 	C_Matrix_Container d(1,num_el);
 	C_Matrix_Container e(1,num_el);
-	C_Image_Container waga;	// pomocniczy do skalowania wag
+//	C_Image_Container waga;	// pomocniczy do skalowania wag
 	const double *p_par;	// parametry z bufora lub wektor wag
 	// meidana z p - poszczególne elementy tego wektora z ca³ego bufora s¹ zbierane do jednego wektora
 	_RPT1(_CRT_WARN,"\t\tSizebuff: %d",num_el);
@@ -296,12 +296,12 @@ bool C_LinearWeld::evalNextParams()
 	// skalowanie wag do zakresu 01
 	/// \todo Tu mo¿na przyspieszyæ znacznie wykonuj¹c te operacje w miejscu - funkcja albo metoda statyczna lub stl
 	/// \verbatim
-	waga.AllocateData(1,num_points);
-	waga.CopyfromTab(_w,num_points);
-	waga.Normalize(0,1);
+//	waga.AllocateData(1,num_points);
+//	waga.CopyfromTab(_w,num_points);
+//	waga.Normalize(0,1);
 	/// \endverbatim
 	// kopiowanie spowrotem
-	memcpy_s(_w,num_points*sizeof(double),waga.data,waga.GetNumofElements()*sizeof(double));
+//	memcpy_s(_w,num_points*sizeof(double),waga.data,waga.GetNumofElements()*sizeof(double));
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::evalNextParams\n");
 	return OK;
 }
