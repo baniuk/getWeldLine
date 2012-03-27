@@ -158,8 +158,10 @@ bool C_LineInterp::getPointsOnLine( const C_Point &_P0, const C_Point &_P1, unsi
 	SafeAllocateTab();
 	ret = C_Line::getPointsOnLine(_P0,_P1,x,y,Np);	// tu musi byæ wowo³ana funkcja z klasy podrzêdnej
 	if(ret==false)
+	{
+		SAFE_DELETE(image);
 		return false;	// punkty nie na linii
-	
+	}
 	switch(typ_interpolacji)
 	{
 	case SPLINE:

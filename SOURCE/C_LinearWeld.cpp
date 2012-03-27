@@ -1,3 +1,11 @@
+/**
+ * \file    C_LinearWeld.cpp
+ * \brief	Implementuje dekecje spawów liniowych
+ * \author  PB
+ * \date    2012/03/01
+ * \version 1.0
+ */
+
 #include "C_LinearWeld.h"
 
 
@@ -43,6 +51,7 @@ void C_LinearWeld::SetProcedureParameters(unsigned int _k, C_Point _StartPoint)
 bool C_LinearWeld::Start(unsigned int step)
 {
 	// bierz¹ca pozycja spawu w przestrzeni obrazka
+	bool liniaok = OK;	// czy aproxymacja bierzacej lini zakoñczy³a siê sukcesem. Jeœli tak to zosta³a ona w³¹czona do bufora i treba go przeliczyæ. Jesli nie to nie ma takiej potrzeby
 	C_WeldPos currentPos;
 	C_LineInterp *obj;	// obiekt tymczasowy do ³atwiejszego adresowania
 	C_LineWeldApprox *app;
@@ -58,7 +67,8 @@ bool C_LinearWeld::Start(unsigned int step)
 	while(OK==ret)
 	{
 		// generowanie nast paramerów na podstawie bufora wype³niane s¹ zmienne _p, _ub, _lb, _w
-		evalNextParams();
+		if(liniaok)	// przeliczamy nowe parametry jesli by³a zmiana w buforze
+			evalNextParams();
 		// generowanie linii itp
 		obj = interp_lines.AddObject();	// dodaje now¹ liniê
 		// ustawiam parametry interpolacji - P0 lezy na dole obrazu, P1 na górze, linia pionowa
@@ -71,7 +81,7 @@ bool C_LinearWeld::Start(unsigned int step)
 		if(obj->getjest_pion()==PIONOWA) // sprawdzam bo jak jest pionowa to aproxymacja jest w funkcji y a jeœli nie to x
 			app->ManualConstructor(typeGaussLin,obj->getInterpolated_data(),obj->getInterpolated_Y(),obj->getSizeofInterpData());
 		else
-			_RPTF0(_CRT_ASSERT,"C_LinearWeld::fillBuffor()->linia nie jest pionowa"); // to nie powinno byc nigdy wykonene w tej wersji
+			_RPT0(_CRT_ASSERT,"C_LinearWeld::fillBuffor()->linia nie jest pionowa"); // to nie powinno byc nigdy wykonene w tej wersji
 		// aproxymacja - parametry obliczone przez evalNextParams()
 		app->setApproxParmas(_p,_w,_ub,_lb,NULL);
 		// aproxymacja
@@ -83,14 +93,16 @@ bool C_LinearWeld::Start(unsigned int step)
 		// sprawdzam powodzenie interpolacji danej linii
 		if(BLAD==czyAccept(app,obj))
 		{
+			liniaok = BLAD;	// nie dodaliœmy nowej linii
 			approx_results.DelObject();
 			interp_lines.DelObject();
-			lineOK.push_back(BLAD);	// te wektory zawieraj¹ ju¿ info o liniach bufora
+			lineOK.push_back(liniaok);	// te wektory zawieraj¹ ju¿ info o liniach bufora
 			currentPos.Clear();	// kasuje wszystko bo ten wpis nie wa¿ny
 			weldPos.push_back(currentPos);
 		} else {
-			lineOK.push_back(OK);	// linia ok
-			pre = recalculated_approx_data.AddObject(obj->getSizeofInterpData());	// przeliczanie danych
+			liniaok = OK;	// dodlaiœmy nowa liniê
+			lineOK.push_back(liniaok);	// linia ok
+			pre = recalculated_approx_data.AddObject(obj->getSizeofInterpData());	// przeliczanie danych -dodawan etylko dla dobrych linii, wiec nie ma potrzeby kasownaia dla z³ych
 			y = obj->getInterpolated_Y();
 			app->evalApproxFcnVec(y,pre,obj->getSizeofInterpData());
 			evalWeldPos(app,obj,pre,currentPos);	// wype³niam currentPos w³aœciwymi danymo
@@ -205,8 +217,13 @@ bool C_LinearWeld::evalNextParams()
 	if(approx_results.getNumElem()<=0)
 #endif
 		_RPT0(_CRT_ASSERT,"C_LinearWeld::evalNextParams->pusty bufor");
-	int num_el = approx_results.getNumElem();
-	int num_points = interp_lines.GetObject(0)->getSizeofInterpData();
+	/// \warning Jeœli bufor nie pe³ny to mo¿e zajœæ rozbierznoœæ pomiêdzy buforami, tzn w ró¿nych buforach ko³owych mo¿e byæ ró¿na iloœæ danych. Rozmiar danch tez ma znaczneie przy innych spawach niz liniowe. Trzeba pilnowac zeby zawsze tyle smo punktów by³o
+	int num_el = approx_results.getNumElem(); // wielkoœæ bufora
+	int num_points = interp_lines.GetFirstInitialized()->getSizeofInterpData();
+#ifdef _DEBUG
+	int num_elrec = recalculated_approx_data.getNumElem(); // wielkoœæ bufora
+	_ASSERT(num_el==num_elrec); // powinny byæ tego samemgo rozmiaru te bufory
+#endif
 	C_Matrix_Container a(1,num_el);
 	C_Matrix_Container b(1,num_el);
 	C_Matrix_Container c(1,num_el);
@@ -218,11 +235,15 @@ bool C_LinearWeld::evalNextParams()
 	_RPT1(_CRT_WARN,"\t\tSizebuff: %d",num_el);
 	_RPT1(_CRT_WARN,"\t\tNumInterpElem: %d",num_points);
 	// inicjalizacja wektora wag (globalny) inicjalizowany tylko raz
+	_RPT1(_CRT_WARN,"\t\t_w = %p:",_w);
 	if(NULL==_w)
+	{
+		_RPT0(_CRT_WARN,"\t\t_w initialized");
 		_w = new double[num_points];
+	}
 	for (int la=0;la<num_el;la++)
 	{
-		p_par = approx_results.GetObject(la)->getApproxParams_p();
+		p_par = approx_results.GetObject(la)->getApproxParams_p(); if(NULL==p_par) continue;
 		a.data[la] = p_par[A];
 		b.data[la] = p_par[B];
 		c.data[la] = p_par[C];
@@ -242,7 +263,7 @@ bool C_LinearWeld::evalNextParams()
 
 	for (int la=0;la<num_el;la++)
 	{
-		p_par = approx_results.GetObject(la)->getApproxParams_ub();
+		p_par = approx_results.GetObject(la)->getApproxParams_ub(); if(NULL==p_par) continue;
 		a.data[la] = p_par[A];
 		b.data[la] = p_par[B];
 		c.data[la] = p_par[C];
@@ -262,7 +283,7 @@ bool C_LinearWeld::evalNextParams()
 
 	for (int la=0;la<num_el;la++)
 	{
-		p_par = approx_results.GetObject(la)->getApproxParams_lb();
+		p_par = approx_results.GetObject(la)->getApproxParams_lb(); if(NULL==p_par) continue;
 		a.data[la] = p_par[A];
 		b.data[la] = p_par[B];
 		c.data[la] = p_par[C];
@@ -284,14 +305,16 @@ bool C_LinearWeld::evalNextParams()
 
 	for(int ld=0;ld<num_points;++ld)	// dzielenie oprzez ilosc kazdej warotsci
 		_w[ld] = 0.0;
+	unsigned int real_num_el = 0;	// rzeczywista ilosc linii w buforze - gdy niektóre nie bêd¹ zainicjalizowane
 	for(int la=0;la<num_el;la++)	// po liniach w buforze
 	{
-		p_par = recalculated_approx_data.GetObject(la); // biore dane z la linii w buforze - to s a wartoœci z aproxymacji wype³nione w fillbufor i start na bierz¹co z innymi buforami razem
+		p_par = recalculated_approx_data.GetObject(la); if(NULL==p_par) continue; // biore dane z la linii w buforze - to s a wartoœci z aproxymacji wype³nione w fillbufor i start na bierz¹co z innymi buforami razem
+		real_num_el++;
 		for(int ld=0;ld<num_points;ld++)
 			_w[ld]+=p_par[ld];	// dodaje do bufora wag
 	}
 	for(int ld=0;ld<num_points;ld++)	// dzielenie oprzez ilosc kazdej warotsci
-		_w[ld]/=num_el;
+		_w[ld]/=real_num_el;
 
 	// skalowanie wag do zakresu 01
 	/// \todo Tu mo¿na przyspieszyæ znacznie wykonuj¹c te operacje w miejscu - funkcja albo metoda statyczna lub stl

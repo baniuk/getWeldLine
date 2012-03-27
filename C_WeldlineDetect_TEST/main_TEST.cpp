@@ -136,4 +136,4 @@ TEST_P(C_LinearWeld_Start, DISABLED_start0) {
 INSTANTIATE_TEST_CASE_P(
 	start,
 	C_LinearWeld_Start,
-	::testing::Values("testimag9.dat")); // te same wartosci sa w matlabie
+	::testing::Values("testimag9.dat","testimag1.dat")); // te same wartosci sa w matlabie

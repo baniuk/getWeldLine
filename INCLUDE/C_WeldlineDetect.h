@@ -28,6 +28,9 @@ using namespace std;
 	y = _interp->getInterpolated_Y();
 	_approx->evalApproxFcnVec(y,evaldata,_interp->getSizeofInterpData());
  *	\endcode
+ *	\remarks
+ *	Generalnie jedn¹ para zbierznych buforów jest lineOK oraz weldPos - te bufory obejmuj¹ wszystkie linie obrazka dla których jest liczona aproxymacja. Drugim zestawe s¹ wymienione wczeœniej bufory ko³owe, które tak¿e sa zgodne.\n
+ *	Rozmiar danch tez ma znaczneie przy innych spawach niz liniowe. Trzeba pilnowac zeby zawsze tyle smo punktów by³o\n
  */
 class C_WeldlineDetect
 {

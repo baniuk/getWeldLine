@@ -9,11 +9,14 @@
 
 /** 
  * Klasa obs³uguj¹ca bufor ko³owy. Umo¿liwia realziacjê bufora ko³owego ale przy indeksowaniu liniowym. Dane s¹ dopisuwane na kolejne 
- * miejsce zraz za oststnio dopisanym. T jest typem obiektu a S rozmiarem bufora. Bepoœrednio po zapisaniu elementu do bufora mo¿na go skasowaæ. Funkcja getNumElements() zwraca iloœæ elementów w buforze kompatybiln¹ z funkcj¹ GetObject, dziêki czemu mo¿na j¹ adresowaæ za pomoc¹ pêtli. Przyk³ady u¿ycia w pliku TESTS.cpp w C_WeldlineDetet_TESTS.\n
+ * miejsce zraz za oststnio dopisanym. T jest typem obiektu a S rozmiarem bufora. Bepoœrednio po zapisaniu elementu do bufora mo¿na go skasowaæ. Funkcja getNumElements() zwraca iloœæ elementów w buforze kompatybiln¹ z funkcj¹ GetObject, dziêki czemu mo¿na j¹ adresowaæ za pomoc¹ pêtli. Generalnie bufor dzia³a w nastêpuj¹cy sposób - dopóki nie zostanie ca³y zapisany to Czy_pelny zawsze zwraca false. Jeœli zostanie ca³y zapisany ale jeden ostatni zostanie skasowany to terz zwórci false. Po pirwszym przepe³nieniu funkcja zawsze zwrca true. Tak samo getNumElements - po przepe³nieniu zwraca pojemnoœæ bufora.
+ * \warning Nie jest zalecane wielokrotne kasowanie pod rz¹d wielu elementow. Powinno kasowaæ siê tylko ostatni.
+ * Przyk³ady u¿ycia w pliku TESTS.cpp w C_WeldlineDetet_TESTS.\n
  * Kolejnoœæ u¿ywania:\n
  * \li Stworzyæ obiekt u¿ywaj¹c konstruktora bezparametrowego
  * \li Dodaæ obiekty u¿ywaj¹c AddObject, która zwrca adres nowododanego obiektu
  * \li Po ka¿dej tej instrukcji mo¿na odwo³aæ siê do tego obiektu lub go skasowaæ
+ * \todo przemyslec czy funkcje informuj¹ce o ilosc zapisanych elementów maj¹ sens? Bo jesli jeden kasujemy to bufor nie jest pe³ny ale nie wiemy który jest póstu, wiêc to klient powinien sprawdzaæ (getElem zwraca NULL). Pozostawiæ jedynie funkcjê która wykrywa pierwsze wype³nienie bufora. Generalnie jest dobrze, te funkcjie powinny zostaæ ale wazny jest spsoób ich dzia³ania.
  */
 template<class T> class C_CircBuff
 {
@@ -34,6 +37,8 @@ public:
 	void DelObject();
 	/// zwraca iloœæ elementów w buforze
 	int getNumElem();
+	/// zwraca pierwszy zainicjalizowany
+	T *GetFirstInitialized();
 private:
 	/// tablica zawieraj¹ca obiekty w buforze ko³owym
 	T **buff;
@@ -49,7 +54,7 @@ private:
 };
 /** 
  * Zwraca iloœæ zapisanych elementów w buforze.
- * \return Iloœæ elementów. Jesli bufor pe³ny to zwraca jego pojemnoœæ, jeœli nie pe³ny to iloœæ zapisanych elementów.
+ * \return Iloœæ elementów. Jesli bufor pe³ny to zwraca jego pojemnoœæ, jeœli nie pe³ny to iloœæ zapisanych elementów. Jeœli choc raz bufor przy zapisie dojdzie do konca to jest uwazany zap pe³ny.
  */
 template<class T>
 int C_CircBuff<T>::getNumElem()
@@ -100,9 +105,27 @@ template<class T>
 T * C_CircBuff<T>::GetObject( unsigned int _n )
 {
 	_ASSERT(buff!=NULL);
+#ifdef _DEBUG
+	if(NULL==buff[_n%S])
+		_RPT1(_CRT_WARN,"\t\tAccess to empty element %d",_n);
+#endif
+//	_ASSERT(buff[_n%S]!=NULL);
 	return buff[_n%S];
 }
-
+/** 
+ * Funkcja zwraca pierwszy zaincjalizowany obiekt z bufora
+ * \return Zwraca pierwszy obiekt zainicjalizowany lub NULL jesli nie znajdzie takiego
+ */
+template<class T>
+T * C_CircBuff<T>::GetFirstInitialized()
+{
+	unsigned int l=0;
+	for(l=0;l<S;l++)
+		if(buff[l]!=NULL)
+			return buff[l];
+	_ASSERT(buff[l]);
+	return NULL;
+}
 /** 
  * \return Funkcja zwraca adres nowododanego obiektu
  */
