@@ -5,14 +5,29 @@ w = mean(etab); % uœrednione aproxymacje z bufora
 plot(w);hold on
 s = profil5(10,:); % z³y sygna³
 plot(s,'-r')
-d = abs(s-w).^1.2;
+d = abs(s-w).^3;
 mm = minmax(d);
 for l=1:length(d)
     d(l) = d(l)/(mm(2)-mm(1))-mm(1)/(mm(2)-mm(1));
 end
 
 dd = 1-d;
-sr = w.*dd + s.*d;
+sr = (w.*dd + s.*d);
+plot(sr,'-g');
+%%
+w = mean(etab); % uœrednione aproxymacje z bufora
+plot(w);hold on
+s = profil5(10,:); % z³y sygna³
+plot(s,'-r')
+d = sqrt(w);
+
+mm = minmax(d);
+for l=1:length(d)
+    d(l) = d(l)/(mm(2)-mm(1))-mm(1)/(mm(2)-mm(1));
+end
+
+dd = 1-d;
+sr = (w.*dd + s.*d);
 plot(sr,'-g');
 %% nowe testy dla projektu  z gtest
 % class C_LinearWeld_Test1 - dane wejsciowe musz¹ byc w katlaogu danego
