@@ -271,7 +271,7 @@ void C_LineWeldApprox::WeightProfile( const double *_w )
 	double minel, maxel, delta,wtab;
 	w_tab = new double[len];	// w len jest d³ugoœæ danych aproxymowanych
 	for(l=0;l<len;++l)
-		w_tab[l] = pow(fabs(_w[l] - copy_y[l]),WEIGTING_COEFF);
+		w_tab[l] = sqrt(_w[l]);
 	// skalowanie w_tab do zakresu 0-1
 	for(l=0,minel=maxel=w_tab[0];l<len;l++)	{
 		if(w_tab[l]<minel)	minel = w_tab[l];

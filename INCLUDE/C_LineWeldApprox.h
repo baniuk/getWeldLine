@@ -9,8 +9,6 @@
 
 #include "C_Levmar_Warp.h"
 
-/// wspó³czynnik wa¿enia - podobieñstwa do wykresu wagi - \see patrz przyk³ad w matlabie
-#define WEIGTING_COEFF 1.2
 
 /** 
  * Wykonuje aproxymacjê jednej linii spawu i przechowuje wyniki takiej aproxymacji 

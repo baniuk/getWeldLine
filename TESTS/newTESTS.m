@@ -14,7 +14,7 @@ end
 dd = 1-d;
 sr = (w.*dd + s.*d);
 plot(sr,'-g');
-%%
+%% wagi_3
 w = mean(etab); % uœrednione aproxymacje z bufora
 plot(w);hold on
 s = profil5(10,:); % z³y sygna³
