@@ -85,7 +85,7 @@ TEST_P(C_LinearWeld_Start, start) {
 	bool ret;
 
 	C_Point cp_x_start(10,0);	// punkt startowy
-	obj->SetProcedureParameters(25,cp_x_start); // inicjalizacja srodowiska, wielkosc bufora 100
+	obj->SetProcedureParameters(100,cp_x_start); // inicjalizacja srodowiska, wielkosc bufora 100
 	ret = obj->Start(1);	// krok
 	ASSERT_TRUE(ret);	
 

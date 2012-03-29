@@ -89,6 +89,10 @@ bool C_LinearWeld::Start(unsigned int step)
 #ifdef _DEBUG
 		const double *pdeb;pdeb = app->getApproxParams_p();
 		_RPT5(_CRT_WARN,"\t\tRES: A=%.2lf B=%.2lf C=%.2lf D=%.2lf E=%.2lf",pdeb[A],pdeb[B],pdeb[C],pdeb[D],pdeb[E]);
+		pdeb = app->getApproxParams_ub();
+		_RPT5(_CRT_WARN,"\t\tUB: A=%.2lf B=%.2lf C=%.2lf D=%.2lf E=%.2lf",pdeb[A],pdeb[B],pdeb[C],pdeb[D],pdeb[E]);
+		pdeb = app->getApproxParams_lb();
+		_RPT5(_CRT_WARN,"\t\tLB: A=%.2lf B=%.2lf C=%.2lf D=%.2lf E=%.2lf",pdeb[A],pdeb[B],pdeb[C],pdeb[D],pdeb[E]);
 #endif
 		// sprawdzam powodzenie interpolacji danej linii
 		if(BLAD==czyAccept(app,obj))
@@ -261,45 +265,20 @@ bool C_LinearWeld::evalNextParams()
 	_p[D] = d.quick_select();
 	_p[E] = e.quick_select();
 
-	for (int la=0;la<num_el;la++)
-	{
-		p_par = approx_results.GetObject(la)->getApproxParams_ub(); if(NULL==p_par) continue;
-		a.data[la] = p_par[A];
-		b.data[la] = p_par[B];
-		c.data[la] = p_par[C];
-		d.data[la] = p_par[D];
-		e.data[la] = p_par[E];
-// 		a.SetPixel(0,la,p_par[A]);
-// 		b.SetPixel(0,la,p_par[B]);
-// 		c.SetPixel(0,la,p_par[C]);
-// 		d.SetPixel(0,la,p_par[D]);
-// 		e.SetPixel(0,la,p_par[E]);
-	}
-	_ub[A] = a.quick_select();
-	_ub[B] = b.quick_select();
-	_ub[C] = c.quick_select();
-	_ub[D] = d.quick_select();
-	_ub[E] = e.quick_select();
 
-	for (int la=0;la<num_el;la++)
-	{
-		p_par = approx_results.GetObject(la)->getApproxParams_lb(); if(NULL==p_par) continue;
-		a.data[la] = p_par[A];
-		b.data[la] = p_par[B];
-		c.data[la] = p_par[C];
-		d.data[la] = p_par[D];
-		e.data[la] = p_par[E];
-// 		a.SetPixel(0,la,p_par[A]);
-// 		b.SetPixel(0,la,p_par[B]);
-// 		c.SetPixel(0,la,p_par[C]);
-// 		d.SetPixel(0,la,p_par[D]);
-// 		e.SetPixel(0,la,p_par[E]);
-	}
-	_lb[A] = a.quick_select();
-	_lb[B] = b.quick_select();
-	_lb[C] = c.quick_select();
-	_lb[D] = d.quick_select();
-	_lb[E] = e.quick_select();
+ 	_ub[A] = _p[A] + _p[A]*0.1;
+	_ub[B] = _p[B] + _p[B]*0.1;
+	_ub[C] = _p[C] + _p[C]*0.05;
+	_ub[D] = _p[D] + _p[D]*0.1;
+	_ub[E] = _p[E] + _p[E]*0.1;
+
+	_lb[A] = _p[A] - _p[A]*0.1;
+	_lb[B] = _p[B] - _p[B]*0.1;
+	_lb[C] = _p[C] - _p[C]*0.05;
+	_lb[D] = _p[D] - _p[D]*0.1;
+	_lb[E] = _p[E] - _p[E]*0.1;
+
+
 	// wagi
 	// wype³nienie zerami
 
