@@ -122,7 +122,8 @@ TEST(C_LineweldApprox_Test1,setParam)
 	double ubset[5] = {6,7,8,9,10};
 	double lbset[5] = {9,8,7,6,5};
 	C_Matrix_Container w(1,x._cols);
-	w.Ones();
+	for(int a=0;a<x._cols;a++)
+		w.SetPixel(0,a,a);
 
 	C_LineWeldApprox obj;
 	obj.ManualConstructor(typeGaussLin,profil.data,x.data,x._cols);

@@ -59,6 +59,7 @@ bool C_LinearWeld::Start(unsigned int step)
 	double *pre;	// wskaŸnik na dan¹ w buforze precalculated_approx_data
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::Start");
 	bool ret=OK;
+	int iter;
 	// wype³nianie bufora w zale¿noœci od punktu startowego podanego w SetProcedureParameters()
 	ret = fillBuffor();
 	if(BLAD==ret)
@@ -85,7 +86,9 @@ bool C_LinearWeld::Start(unsigned int step)
 		// aproxymacja - parametry obliczone przez evalNextParams()
 		app->setApproxParmas(_p,_w,_ub,_lb,NULL);
 		// aproxymacja
-		app->getLineApprox(100);
+		/// \todo dodaæ tu sprawdzanie czy zwraca poprawn¹ iloœæ iteracji
+		iter = app->getLineApprox(100);
+		_RPT1(_CRT_WARN,"\t\tITER: %d",iter);
 #ifdef _DEBUG
 		const double *pdeb;pdeb = app->getApproxParams_p();
 		_RPT5(_CRT_WARN,"\t\tRES: A=%.2lf B=%.2lf C=%.2lf D=%.2lf E=%.2lf",pdeb[A],pdeb[B],pdeb[C],pdeb[D],pdeb[E]);
@@ -163,6 +166,10 @@ bool C_LinearWeld::fillBuffor()
 #ifdef _DEBUG
 		const double *pdeb;pdeb = app->getApproxParams_p();
 		_RPT5(_CRT_WARN,"\t\tRES: A=%.2lf B=%.2lf C=%.2lf D=%.2lf E=%.2lf",pdeb[A],pdeb[B],pdeb[C],pdeb[D],pdeb[E]);
+		pdeb = app->getApproxParams_ub();
+		_RPT5(_CRT_WARN,"\t\tUB: A=%.2lf B=%.2lf C=%.2lf D=%.2lf E=%.2lf",pdeb[A],pdeb[B],pdeb[C],pdeb[D],pdeb[E]);
+		pdeb = app->getApproxParams_lb();
+		_RPT5(_CRT_WARN,"\t\tLB: A=%.2lf B=%.2lf C=%.2lf D=%.2lf E=%.2lf",pdeb[A],pdeb[B],pdeb[C],pdeb[D],pdeb[E]);
 #endif
 		// sprawdzam poprawnoœæ danych
 		if(BLAD==czyAccept(app,obj))
@@ -245,40 +252,40 @@ bool C_LinearWeld::evalNextParams()
 		_RPT0(_CRT_WARN,"\t\t_w initialized");
 		_w = new double[num_points];
 	}
-	for (int la=0;la<num_el;la++)
+	unsigned int l;
+	for (int la=l=0;la<num_el;la++)
 	{
 		p_par = approx_results.GetObject(la)->getApproxParams_p(); if(NULL==p_par) continue;
-		a.data[la] = p_par[A];
-		b.data[la] = p_par[B];
-		c.data[la] = p_par[C];
-		d.data[la] = p_par[D];
-		e.data[la] = p_par[E];
-// 		a.SetPixel(0,la,p_par[A]);
-// 		b.SetPixel(0,la,p_par[B]);
-// 		c.SetPixel(0,la,p_par[C]);
-// 		d.SetPixel(0,la,p_par[D]);
-// 		e.SetPixel(0,la,p_par[E]);
+		a.data[l] = p_par[A];
+		b.data[l] = p_par[B];
+		c.data[l] = p_par[C];
+		d.data[l] = p_par[D];
+		e.data[l] = p_par[E];
+		l++;
 	}
+	_ASSERT(l==num_el);	// jeden element by³ NULL i mediana moze byæ fa³szywa bo nie wszystkie elementy wype³nione
 	_p[A] = a.quick_select();
 	_p[B] = b.quick_select();
 	_p[C] = c.quick_select();
 	_p[D] = d.quick_select();
 	_p[E] = e.quick_select();
 
+	// sprawdzanie czy parametry ub i lb nie s¹ takie same (dla 0 moga byæ)
 
- 	_ub[A] = _p[A] + _p[A]*0.1;
-	_ub[B] = _p[B] + _p[B]*0.1;
-	_ub[C] = _p[C] + _p[C]*0.05;
-	_ub[D] = _p[D] + _p[D]*0.1;
-	_ub[E] = _p[E] + _p[E]*0.1;
+ 	_ub[A] = _p[A] + _p[A]*0.2; if(0==_ub[A]) _ub[A] = 0.2;
+	_ub[B] = _p[B] + _p[B]*0.2; if(0==_ub[B]) _ub[B] = 0.2;
+	_ub[C] = _p[C] + _p[C]*0.1; if(0==_ub[C]) _ub[C] = 0.1;
+	_ub[D] = _p[D] + _p[D]*0.2; if(0==_ub[D]) _ub[D] = 0.2;
+	_ub[E] = _p[E] + _p[E]*0.2; if(0==_ub[E]) _ub[E] = 0.2;
 
-	_lb[A] = _p[A] - _p[A]*0.1;
-	_lb[B] = _p[B] - _p[B]*0.1;
-	_lb[C] = _p[C] - _p[C]*0.05;
-	_lb[D] = _p[D] - _p[D]*0.1;
-	_lb[E] = _p[E] - _p[E]*0.1;
+	_lb[A] = _p[A] - _p[A]*0.2; if(0==_lb[A]) _lb[A] = -0.2;
+	_lb[B] = _p[B] - _p[B]*0.2; if(0==_lb[B]) _lb[B] = -0.2;
+	_lb[C] = _p[C] - _p[C]*0.1; if(0==_lb[C]) _lb[C] = -0.1;
+	_lb[D] = _p[D] - _p[D]*0.2; if(0==_lb[D]) _lb[D] = -0.2;
+	_lb[E] = _p[E] - _p[E]*0.2; if(0==_lb[E]) _lb[E] = -0.2;
 
-
+	
+	
 	// wagi
 	// wype³nienie zerami
 
