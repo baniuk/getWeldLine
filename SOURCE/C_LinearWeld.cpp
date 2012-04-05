@@ -272,17 +272,19 @@ bool C_LinearWeld::evalNextParams()
 
 	// sprawdzanie czy parametry ub i lb nie s¹ takie same (dla 0 moga byæ)
 
- 	_ub[A] = _p[A] + _p[A]*0.2; if(0==_ub[A]) _ub[A] = 0.2;
-	_ub[B] = _p[B] + _p[B]*0.2; if(0==_ub[B]) _ub[B] = 0.2;
-	_ub[C] = _p[C] + _p[C]*0.1; if(0==_ub[C]) _ub[C] = 0.1;
-	_ub[D] = _p[D] + _p[D]*0.2; if(0==_ub[D]) _ub[D] = 0.2;
-	_ub[E] = _p[E] + _p[E]*0.2; if(0==_ub[E]) _ub[E] = 0.2;
+	/// \bug Dla parametru ujemnego mo¿e byæ ¿e ub<lb. Poprawione poprzez dodanie fabs do parametrów.
 
-	_lb[A] = _p[A] - _p[A]*0.2; if(0==_lb[A]) _lb[A] = -0.2;
-	_lb[B] = _p[B] - _p[B]*0.2; if(0==_lb[B]) _lb[B] = -0.2;
-	_lb[C] = _p[C] - _p[C]*0.1; if(0==_lb[C]) _lb[C] = -0.1;
-	_lb[D] = _p[D] - _p[D]*0.2; if(0==_lb[D]) _lb[D] = -0.2;
-	_lb[E] = _p[E] - _p[E]*0.2; if(0==_lb[E]) _lb[E] = -0.2;
+ 	_ub[A] = _p[A] + fabs(_p[A])*0.4; if(0==_ub[A]) _ub[A] = 0.2;
+	_ub[B] = _p[B] + fabs(_p[B])*0.4; if(0==_ub[B]) _ub[B] = 0.2;
+	_ub[C] = _p[C] + fabs(_p[C])*0.2; if(0==_ub[C]) _ub[C] = 0.1;
+	_ub[D] = _p[D] + fabs(_p[D])*0.4; if(0==_ub[D]) _ub[D] = 0.2;
+	_ub[E] = _p[E] + fabs(_p[E])*0.4; if(0==_ub[E]) _ub[E] = 0.2;
+
+	_lb[A] = _p[A] - fabs(_p[A])*0.4; if(0==_lb[A]) _lb[A] = -0.2;
+	_lb[B] = _p[B] - fabs(_p[B])*0.4; if(0==_lb[B]) _lb[B] = -0.2;
+	_lb[C] = _p[C] - fabs(_p[C])*0.2; if(0==_lb[C]) _lb[C] = -0.1;
+	_lb[D] = _p[D] - fabs(_p[D])*0.4; if(0==_lb[D]) _lb[D] = -0.2;
+	_lb[E] = _p[E] - fabs(_p[E])*0.4; if(0==_lb[E]) _lb[E] = -0.2;
 
 	
 	
