@@ -63,7 +63,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(WX_ROOT)\include;$(WX_ROOT)\include\msvc;$(LEVMAR_ROOT);$(LAPACK_ROOT)\include;$(WX_MATHPLOT_ROOT);$(SolutionDir)SDK;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <IncludePath>$(WX_ROOT)\include;$(WX_ROOT)\include\msvc;$(LEVMAR_ROOT);$(LAPACK_ROOT)\include;$(WX_MATHPLOT_ROOT);$(SolutionDir)SDK;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include</IncludePath>
     <LibraryPath>$(WX_ROOT)\lib\vc_lib\mswd;$(WX_ROOT)\lib\vc_lib;$(LEVMAR_ROOT);$(LAPACK_ROOT)\lib;$(SolutionDir)SDK;$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSdkDir)lib\x64;</LibraryPath>
     <SourcePath>$(WX_MATHPLOT_ROOT);$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;</SourcePath>
   </PropertyGroup>

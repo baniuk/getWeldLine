@@ -226,8 +226,8 @@ bool C_LinearWeld::evalNextParams()
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextParams");
 #ifdef _DEBUG
 	if(approx_results.getNumElem()<=0)
-#endif
 		_RPT0(_CRT_ASSERT,"C_LinearWeld::evalNextParams->pusty bufor");
+#endif
 	/// \warning Jeœli bufor nie pe³ny to mo¿e zajœæ rozbierznoœæ pomiêdzy buforami, tzn w ró¿nych buforach ko³owych mo¿e byæ ró¿na iloœæ danych. Rozmiar danch tez ma znaczneie przy innych spawach niz liniowe. Trzeba pilnowac zeby zawsze tyle smo punktów by³o
 	int num_el = approx_results.getNumElem(); // wielkoœæ bufora
 	int num_points = interp_lines.GetFirstInitialized()->getSizeofInterpData();
@@ -274,17 +274,17 @@ bool C_LinearWeld::evalNextParams()
 
 	/// \bug Dla parametru ujemnego mo¿e byæ ¿e ub<lb. Poprawione poprzez dodanie fabs do parametrów.
 
- 	_ub[A] = _p[A] + fabs(_p[A])*0.4; if(0==_ub[A]) _ub[A] = 0.2;
-	_ub[B] = _p[B] + fabs(_p[B])*0.4; if(0==_ub[B]) _ub[B] = 0.2;
+ 	_ub[A] = _p[A] + fabs(_p[A])*0.3; if(0==_ub[A]) _ub[A] = 0.2;
+	_ub[B] = _p[B] + fabs(_p[B])*0.3; if(0==_ub[B]) _ub[B] = 0.2;
 	_ub[C] = _p[C] + fabs(_p[C])*0.2; if(0==_ub[C]) _ub[C] = 0.1;
-	_ub[D] = _p[D] + fabs(_p[D])*0.4; if(0==_ub[D]) _ub[D] = 0.2;
-	_ub[E] = _p[E] + fabs(_p[E])*0.4; if(0==_ub[E]) _ub[E] = 0.2;
+	_ub[D] = _p[D] + fabs(_p[D])*0.3; if(0==_ub[D]) _ub[D] = 0.2;
+	_ub[E] = _p[E] + fabs(_p[E])*0.3; if(0==_ub[E]) _ub[E] = 0.2;
 
-	_lb[A] = _p[A] - fabs(_p[A])*0.4; if(0==_lb[A]) _lb[A] = -0.2;
-	_lb[B] = _p[B] - fabs(_p[B])*0.4; if(0==_lb[B]) _lb[B] = -0.2;
+	_lb[A] = _p[A] - fabs(_p[A])*0.3; if(0==_lb[A]) _lb[A] = -0.2;
+	_lb[B] = _p[B] - fabs(_p[B])*0.3; if(0==_lb[B]) _lb[B] = -0.2;
 	_lb[C] = _p[C] - fabs(_p[C])*0.2; if(0==_lb[C]) _lb[C] = -0.1;
-	_lb[D] = _p[D] - fabs(_p[D])*0.4; if(0==_lb[D]) _lb[D] = -0.2;
-	_lb[E] = _p[E] - fabs(_p[E])*0.4; if(0==_lb[E]) _lb[E] = -0.2;
+	_lb[D] = _p[D] - fabs(_p[D])*0.3; if(0==_lb[D]) _lb[D] = -0.2;
+	_lb[E] = _p[E] - fabs(_p[E])*0.3; if(0==_lb[E]) _lb[E] = -0.2;
 
 	
 	
@@ -380,7 +380,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 
 	// górna granica od œrodka do koñca
 	licznik = 0;
-	for(l=(int)pos;l<_interp->getSizeofInterpData();++l)
+	for(l=(unsigned int)pos;l<_interp->getSizeofInterpData();++l)
 		if(_pre[l]<max_lin+(max_el-max_lin)*WELD_EDGE)	{	// procent wysokoœci piku + przesuniêcie liniowe
 			indexy[licznik++] = l;	// pierwszy element to pozycja górnej granicy
 			break;	// nie ma potrzeby analizowania pozosta³ych el
@@ -388,12 +388,12 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 	/// \warning Mo¿e siê zda¿yæ ze nie bedzie w ifie i wtedy wartoœæ indexy niezdefiniowana, wtedy przyjmuje ostatni i pierwszy element. Tak siê zda¿a gdy aproxymowane s¹ z³e dane i funkcja aproxymuj¹ca jest zbyt szeoka, tzn obeajmuje ca³y obraz i nie daje rady zmaleæ do ¿¹danego zakresu.
 	if(0==licznik)
 		indexy[0] = _interp->getSizeofInterpData()-1;// ostatni element
-	_weldPos.G.setPoint(x[indexy[0]],y[indexy[0]]); // ustawiam pozycjê œrodka na wyjœciu
+	_weldPos.G.setPoint(x[indexy[0]],y[indexy[0]]); // ustawiam pozycjê góry na wyjœciu
 
 	// dolna granica do œrodka
 	licznik = 0;
-	for(l=0;l<(unsigned int)pos;++l)
-		if(_pre[l]>max_lin+(max_el-max_lin)*WELD_EDGE)	{
+	for(l=(unsigned int)pos;l>=0;--l)
+		if(_pre[l]<max_lin+(max_el-max_lin)*WELD_EDGE)	{
 			indexy[licznik++] = l;	// pierwszy element to pozycja górnej granicy
 			break;	// nie ma potrzeby analizowania pozosta³ych el
 		}
@@ -401,6 +401,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 		indexy[0] = 0;// pierwszy element
 	_weldPos.D.setPoint(x[indexy[0]],y[indexy[0]]); // ustawiam pozycjê œrodka na wyjœciu
 
+	_RPT1(_CRT_WARN,"\t\tmaxlin: %.3lf",max_lin);
 	_RPT2(_CRT_WARN,"\t\tG: [%.1lf,%.1lf]",_weldPos.G.getX(),_weldPos.G.getY());
 	_RPT2(_CRT_WARN,"\t\tS: [%.1lf,%.1lf]",_weldPos.S.getX(),_weldPos.S.getY());
 	_RPT2(_CRT_WARN,"\t\tD: [%.1lf,%.1lf]",_weldPos.D.getX(),_weldPos.D.getY());
