@@ -22,7 +22,7 @@
 #endif
 
 /** 
- * Klasa implementujaca funkcje do wykrywania spawów liniowych. W ramach obiektu tworzonego z tej klasy realizowana jest pe³na procedura wykrywania. Sposób u¿ycia w testach parametrycznych C_LinearWeld_FillBuffor case1 i inne. Podstaw¹ jest funkcja start(), wyniki s¹ w struktyrach weldPos oraz lineOK. W tych strukturach s¹ wszystkie wyniki dla ka¿dej znalezionej linii
+ * Klasa implementujaca funkcje do wykrywania spawów liniowych. W ramach obiektu tworzonego z tej klasy realizowana jest pe³na procedura wykrywania. Sposób u¿ycia w testach parametrycznych C_LinearWeld_FillBuffor case1 i inne. Podstaw¹ jest funkcja start(), wyniki s¹ w struktyrach weldPos oraz lineOK. W tych strukturach s¹ wszystkie wyniki dla ka¿dej znalezionej linii. Bufory weldPos oraz lineOK s¹ zbierzne, to jest na odpowiednich pozycjach s¹ odpowiadaj¹ce sobie dane. 
  */
 class C_LinearWeld : public C_WeldlineDetect
 {
@@ -45,6 +45,8 @@ protected:
 	bool evalNextParams();
 	/// sprawdza poprawnoœæ uzyskanej aproxymacji/interpolacji
 	bool czyAccept(const C_LineWeldApprox *_approx, const C_LineInterp *_interp);
+	/// oblicza pozycjê spawu dla linii pionowej i aproxymacji gaussLin
+	void evalWeldPos(const C_LineWeldApprox *_approx, const C_LineInterp *_interp,const double *_pre, C_WeldPos &_weldPos );
 	/// oblicza pozycjê spawu dla linii pionowej i aproxymacji gaussLin
 	void evalWeldPos(const C_LineWeldApprox *_approx, const C_LineInterp *_interp, C_WeldPos &_weldPos );
 private:

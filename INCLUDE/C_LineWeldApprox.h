@@ -64,6 +64,8 @@ private:
 	void setDefaultParams();
 	/// rozmiar wektorów x i y
 	unsigned int len;
+	/// wazy sygna³ profilu za pomoc¹ wag
+	void WeightProfile(const double *_w);
 public:
 	/// Aproxymuje jedn¹ liniê wybran¹ funkcj¹ zgodnie z eApproxFcn
 	int getLineApprox(int _iter);

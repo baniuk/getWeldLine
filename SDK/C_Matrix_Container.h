@@ -48,6 +48,7 @@ public:
 	BOOL ReadBinary(const char *filename);
 	double Mean(C_Matrix_Container* out,unsigned int col);
 	double Median(void);
+	double quick_select(void); 
 	void stdcol(C_Matrix_Container* output);
 	void std(C_Matrix_Container* output);
 	double std(void);

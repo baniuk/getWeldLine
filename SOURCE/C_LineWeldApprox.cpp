@@ -119,9 +119,10 @@ int C_LineWeldApprox::getLineApproxGaussLinWeighted(int iter)
 }
 /** 
  * Ustawia parametry aproxymacji. Zaden z parametrów nie jest modyfikowany. _p, _ub _lb _opts s¹ kopiowane do klasy. Wagi _w s¹ u¿ywane natychmiast do przemno¿enia danych przechowywanych w klasiei u¿ywanych póŸniej do aproxymacji. Jeœli
- * parametry s¹ NULL to u¿yte s¹ parametry domyœlne ustawiane w konstruktorze
- * @param[in] _w		weights to weight y data (NULL if no wieghts)
- * @param[in] _p	table of parameters
+ * parametry s¹ NULL to u¿yte s¹ parametry domyœlne ustawiane w konstruktorze.\n
+ * Zawiera tak¿e procedurê skalowania
+ * @param[in] _w weights to weight y data (NULL if no wieghts)
+ * @param[in] _p table of parameters
  * @param[in] _lb lower bounds - size of m
  * @param[in] _ub upper bounds - size of m
  * @param[in] _opts minim. options \latexonly [\tau, \epsilon_1, \epsilon_2, \epsilon_3]. Respectively the scale factor for initial \mu,stopping thresholds for ||J^T e||_inf, ||Dp||_2 and ||e||_2. \endlatexonly
@@ -133,8 +134,6 @@ void C_LineWeldApprox::setApproxParmas( double *_p, double *_w, double *_ub, dou
 	switch(typeApprox)
 	{
 	case typeGaussLin:
-		if(NULL!=_w)
-			for(unsigned a=0;a<len;a++) copy_y[a]*=_w[a];
 		if(NULL!=_p)
 			memcpy_s(p,5*sizeof(double),_p,5*sizeof(double));
 		if(NULL!=_ub)
@@ -144,11 +143,12 @@ void C_LineWeldApprox::setApproxParmas( double *_p, double *_w, double *_ub, dou
 		if(NULL!=_opts)
 			for (a=0;a<LM_OPTS_SZ;a++)
 				opts[a] = _opts[a];
+		if(NULL!=_w)
+			WeightProfile(_w);
 		break;
 	default:
 		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
 	}
-
 }
 /** 
  * Ustawia domyœlne parametry wzale¿noœci od typu krzywej u¿ytej do aproksymacji.
@@ -259,5 +259,33 @@ void C_LineWeldApprox::evalApproxFcnVec(const double *_x,double *_y,unsigned int
 	default:
 		_RPTF0(_CRT_ASSERT, "C_LineWeldApprox::Wrong type of approximation\n");
 	}
+}
+/** 
+* Procedura wa¿y sygna³ copy_y za pomoc¹ wektora wag _w o tym samym rozmiarze. Funkcja modyfikuje tablicê copy_y. Wagi wchodz¹ jako œrednia nienormowana. Procedura z matlaba z testów
+ * \param[in] _w tablica wag
+ */
+void C_LineWeldApprox::WeightProfile( const double *_w )
+{
+	double *w_tab = NULL;
+	unsigned int l;
+	double minel, maxel, delta,wtab;
+	w_tab = new double[len];	// w len jest d³ugoœæ danych aproxymowanych
+	for(l=0;l<len;++l)
+		w_tab[l] = sqrt(_w[l]);
+	// skalowanie w_tab do zakresu 0-1
+	for(l=0,minel=maxel=w_tab[0];l<len;l++)	{
+		if(w_tab[l]<minel)	minel = w_tab[l];
+		if(w_tab[l]>maxel) maxel = w_tab[l];
+	}
+	delta = maxel - minel;
+	_ASSERT(delta!=0);
+	if(delta!=0)
+		for(l=0;l<len;++l)	{
+			wtab = (w_tab[l]-minel)/delta; // wartosc wagi przeskalowana do 0-1
+			copy_y[l] = copy_y[l]*wtab + _w[l]*(1-wtab); // srednia wa¿ona
+		}
+	
+	SAFE_DELETE(w_tab);
+
 }
 

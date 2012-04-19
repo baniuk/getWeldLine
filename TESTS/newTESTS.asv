@@ -1,3 +1,34 @@
+%% opracowanie wa¿enia
+%load wagi
+
+w = mean(etab); % uœrednione aproxymacje z bufora
+plot(w);hold on
+s = profil5(10,:); % z³y sygna³
+plot(s,'-r')
+d = abs(s-w).^3;
+mm = minmax(d);
+for l=1:length(d)
+    d(l) = d(l)/(mm(2)-mm(1))-mm(1)/(mm(2)-mm(1));
+end
+
+dd = 1-d;
+sr = (w.*dd + s.*d);
+plot(sr,'-g');
+%% wagi_3
+w = mean(etab); % uœrednione aproxymacje z bufora
+plot(w);hold on
+s = profil5(10,:); % z³y sygna³
+plot(s,'-r')
+d = sqrt(w);
+
+mm = minmax(d);
+for l=1:length(d)
+    d(l) = d(l)/(mm(2)-mm(1))-mm(1)/(mm(2)-mm(1));
+end
+
+dd = 1-d;
+sr = (w.*dd + s.*d);
+plot(sr,'-g');
 %% nowe testy dla projektu  z gtest
 % class C_LinearWeld_Test1 - dane wejsciowe musz¹ byc w katlaogu danego
 % testu
@@ -295,7 +326,7 @@ for pp=1:length(PAR)
     rr = all([isequal(p_med,median(p)),...
         isequal(ub_med,median(ub)),...
         isequal(lb_med,median(lb)),...
-        isequalfloat(w,Scale01(mean(etab)),1e-8)])
+        isequalfloat(w,mean(etab),1e-8)])
     if(rr==0)
         break;
     end
@@ -355,3 +386,16 @@ for a=1:length(nazwa)
         end
     end
 end
+%% weryfikacja rêczna na podstawie logu
+clear all
+pa = '..\C_WeldlineDetect_TEST\';
+nazwa = 'testimag9.dat';
+
+l = 2510;% numer linii x z logu
+
+rtg1 = readbinarymatrix([pa,nazwa]);
+pr = rtg1(:,l+1);   % profil z obrazu na podstawie linii l
+figure;plot(pr); grid on;hold on
+A=552.38; B=1070.65; C=88.54; D=-0.29; E=1327.35;   % skopiowane z logu
+e = gausslinear(0:size(rtg1,1)-1,A,B,C,D,E);
+plot(e,'-r')

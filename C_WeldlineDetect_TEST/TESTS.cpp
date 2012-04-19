@@ -47,9 +47,9 @@ protected:
 	{
 		return obj->evalNextParams();
 	}
-	void access_evalWeldPos(C_LinearWeld *obj,const C_LineWeldApprox *_approx, const C_LineInterp *_interp, C_WeldPos &_weldPos )
+	void access_evalWeldPos(C_LinearWeld *obj,const C_LineWeldApprox *_approx, const C_LineInterp *_interp, const double *_pre, C_WeldPos &_weldPos )
 	{
-		obj->evalWeldPos(_approx, _interp, _weldPos );
+		obj->evalWeldPos(_approx, _interp, _pre, _weldPos );
 	}
 	C_LinearWeld_Test1()
 	{

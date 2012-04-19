@@ -16,6 +16,8 @@
 * \section sec4 Testy
 * Testy s¹ wykonane za pomoc¹ biblioteki GLib. Nie ma jej dodanej w ISARInstaller, wiec nale¿y j¹ zainstalowac samodzielnie. Kompilacja na podstawie projektu VS do³¹czonego do œrodowiska. Po kompilacji nalezy dodaæ zmienna GTEST do katalogu c:\gtest-1.6.0. Jeœli u¿ywamy opcji kompilatora md to trzeba kompilowaæ odpowiednie biblioteki z koñcówk¹ md\n
 * Jeœli kompilujemy do testów release to trzeba w projekcie SDK ustawiæ _TEST bo inaczej nie zostanie skompilownay konstruktor. Tych testów nie mo¿na kompilowaæ w czystym release poniewa¿ dla tego przypadku nie jest inicjalizowany konstruktor i inne metody (.AddEntry) nie dzia³aj¹. Trzeba by ka¿d¹ zamykaæ w #ifdef...
+* \section sec5 Opis
+* G³ówny opis struktur jest w opisie klasy C_WeldlineDetect
 
 
  */

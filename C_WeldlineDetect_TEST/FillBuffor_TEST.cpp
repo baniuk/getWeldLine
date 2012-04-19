@@ -38,10 +38,11 @@ protected:
 	{
 		obj->fillBuffor();
 	}
-	void access_interpaprox(C_LinearWeld *obj, C_CircBuff<C_LineWeldApprox> **approx,C_CircBuff<C_LineInterp> **interp)
+	void access_interpaprox(C_LinearWeld *obj, C_CircBuff<C_LineWeldApprox> **approx,C_CircBuff<C_LineInterp> **interp,C_CircBuff<double> **rec)
 	{
 		*(approx) = &obj->approx_results;
 		*(interp) = &obj->interp_lines;
+		*(rec) = &obj->recalculated_approx_data;
 	}
 	void access_pwublb(C_LinearWeld *obj, double **p,double **ub,double **lb,double **w)
 	{
@@ -53,9 +54,9 @@ protected:
 	bool access_evalNextParams(C_LinearWeld *obj){
 		return obj->evalNextParams();
 	}
-	void access_evalWeldPos(C_LinearWeld *obj,const C_LineWeldApprox *_approx, const C_LineInterp *_interp, C_WeldPos &_weldPos )
+	void access_evalWeldPos(C_LinearWeld *obj,const C_LineWeldApprox *_approx, const C_LineInterp *_interp, const double *_pre, C_WeldPos &_weldPos )
 	{
-		obj->evalWeldPos(_approx, _interp, _weldPos );
+		obj->evalWeldPos(_approx, _interp, _pre, _weldPos );
 	}
 	C_CircBuff<C_LineWeldApprox> *approx;
 	C_CircBuff<C_LineInterp> *interp;
@@ -75,6 +76,8 @@ TEST_P(C_LinearWeld_FillBuffor, DISABLED_fillBuffor) {
 	std::cout<< "\n\t Wyniki do testu w matlabie " << nazwa <<"\n\n";
 	C_DumpAll dump(nazwa.c_str());
 
+	C_CircBuff<double> *rec; // nie u¿ywane tu
+
 	C_LineInterp *tmp;
 	int ile_linii = 25;
 	C_Point cp_x_start(x_start,0);
@@ -82,7 +85,7 @@ TEST_P(C_LinearWeld_FillBuffor, DISABLED_fillBuffor) {
 	// start
 	access_fillBuffor(obj);
 	// pobieral adresy struktur z danymi
-	access_interpaprox(obj,&approx,&interp);
+	access_interpaprox(obj,&approx,&interp,&rec);
 	// sprawdzam czy bufor pe³en - powinien byc ze wzgledu na sposób dzia³ania fillbuffor
 	ASSERT_TRUE(approx->Czy_pelny());
 	ASSERT_TRUE(interp->Czy_pelny());
@@ -90,7 +93,7 @@ TEST_P(C_LinearWeld_FillBuffor, DISABLED_fillBuffor) {
 	ASSERT_EQ(ile_linii,approx->getNumElem());
 	ASSERT_EQ(ile_linii,interp->getNumElem());
 	// czy pionowe
-	tmp = interp->GetObject(0);
+	tmp = interp->GetFirstInitialized();
 	ASSERT_EQ(PIONOWA,tmp->getjest_pion());
 
 	// test funkcji evalnextparams
@@ -98,13 +101,13 @@ TEST_P(C_LinearWeld_FillBuffor, DISABLED_fillBuffor) {
 	C_Matrix_Container p_med(1,5); // mediana  z ca³ego bufora
 	C_Matrix_Container ub_med(1,5); 
 	C_Matrix_Container lb_med(1,5); 
-	C_Matrix_Container w(1,interp->GetObject(0)->getSizeofApproxData()); // srednia z aproxymacjiz ca³ego bufora
+	C_Matrix_Container w(1,interp->GetFirstInitialized()->getSizeofInterpData()); // srednia z aproxymacjiz ca³ego bufora
 	access_evalNextParams(obj);
 	access_pwublb(obj,&pp_med,&pud_med,&plb_med,&pw); // dostêp do wskaŸników paramerów prywatnych
 	p_med.CopyfromTab(pp_med,5); // kopiowanie ze wskaŸników do obiektów C_Matrix_Container
 	ub_med.CopyfromTab(pud_med,5);
 	lb_med.CopyfromTab(plb_med,5);
-	w.CopyfromTab(pw,interp->GetObject(0)->getSizeofApproxData());
+	w.CopyfromTab(pw,interp->GetFirstInitialized()->getSizeofInterpData());
 
 	// wyniki zwracane na zewn¹trz
 	// 
@@ -112,16 +115,16 @@ TEST_P(C_LinearWeld_FillBuffor, DISABLED_fillBuffor) {
 	// zrucam wyniki p pod postaci¹ wsp³ó³czynników
 	// dane x i y interpolacji
 	// wartoœci interpolownego profilu profil
-	C_Matrix_Container x(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
-	C_Matrix_Container y(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
-	C_Matrix_Container profil(interp->getNumElem(),interp->GetObject(0)->getSizeofApproxData());
+	C_Matrix_Container x(interp->getNumElem(),interp->GetFirstInitialized()->getSizeofInterpData());
+	C_Matrix_Container y(interp->getNumElem(),interp->GetFirstInitialized()->getSizeofInterpData());
+	C_Matrix_Container profil(interp->getNumElem(),interp->GetFirstInitialized()->getSizeofInterpData());
 	C_Matrix_Container p(approx->getNumElem(),5);
 	C_Matrix_Container ub(approx->getNumElem(),5);
 	C_Matrix_Container lb(approx->getNumElem(),5);
 	// kopiowanie danych do matlaba
 	for (int a=0,k=0;a<interp->getNumElem();a++)	// po ca³ym buforze
 	{
-		for (k=0;k<interp->GetObject(a)->getSizeofApproxData();k++)
+		for (k=0;k<interp->GetObject(a)->getSizeofInterpData();k++)
 		{
 			x.SetPixel(a,k,interp->GetObject(a)->getInterpolated_X()[k]);
 			y.SetPixel(a,k,interp->GetObject(a)->getInterpolated_Y()[k]);
@@ -158,19 +161,26 @@ TEST_P(C_LinearWeld_FillBuffor, DISABLED_evalWeldPos) {
 	C_DumpAll dump(nazwa.c_str());
 
 	C_CircBuff<C_LineWeldApprox> *approx;
+	C_CircBuff<double> *rec;
 	C_WeldPos pos;	// pozycja spawu
 	C_Matrix_Container p(1,5);
 	C_Matrix_Container points(3,2); // punkty wyjsciowe
 	const double *_p;
+	double *pre_data;
 
 	C_Point cp_x_start(x_start,0);
 	obj->SetProcedureParameters(1,cp_x_start); // start
 	// start
 	access_fillBuffor(obj);
 	// pobieral adresy struktur z danymi
-	access_interpaprox(obj,&approx,&interp);
-	access_evalWeldPos(obj,approx->GetObject(0),interp->GetObject(0),pos);
-	_p = approx->GetObject(0)->getApproxParams_p();	// parametry approxymacji
+	access_interpaprox(obj,&approx,&interp,&rec);
+
+	pre_data = new double[interp->GetFirstInitialized()->getSizeofInterpData()];
+	const double *y = interp->GetFirstInitialized()->getInterpolated_Y();
+	approx->GetFirstInitialized()->evalApproxFcnVec(y,pre_data,interp->GetFirstInitialized()->getSizeofInterpData());
+
+	access_evalWeldPos(obj,approx->GetFirstInitialized(),interp->GetFirstInitialized(),pre_data,pos);
+	_p = approx->GetFirstInitialized()->getApproxParams_p();	// parametry approxymacji
 	p.CopyfromTab(_p,5);	// kopiuje do matrixa
 	points.SetPixel(0,0,pos.D.getX());points.SetPixel(0,1,pos.D.getY());
 	points.SetPixel(1,0,pos.S.getX());points.SetPixel(1,1,pos.S.getY());

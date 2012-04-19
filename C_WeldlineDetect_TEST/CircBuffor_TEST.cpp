@@ -34,6 +34,13 @@ TEST_F(C_CircBuff_Test1, CircBuff_case1) {
 	test1->AddObject();
 	ASSERT_TRUE(test1->Czy_pelny());	// pe³ny
 	ASSERT_EQ(3,test1->getNumElem());
+	test1->AddObject();
+	ASSERT_TRUE(test1->Czy_pelny());	// pe³ny
+	ASSERT_EQ(3,test1->getNumElem());
+	test1->DelObject();
+	ASSERT_TRUE(test1->Czy_pelny());	// pe³ny
+	ASSERT_EQ(3,test1->getNumElem()); // po przekreceniu bufora zawsze zwracane jest pe³ny
+//	ASSERT_EQ(NULL,test1->GetObject(0)); // zwracam ten skasowany
 }
 /// test czy bufora 1
 TEST_F(C_CircBuff_Test1, CircBuff_case2) {
@@ -126,6 +133,7 @@ TEST_F(C_CircBuff_Test1, CircBuff_case6) {
 	ASSERT_EQ(5,*(test1->GetObject(1)));
 	ASSERT_EQ(30,*(test1->GetObject(2)));
 	ASSERT_EQ(4,*(test1->GetObject(3)));
+	ASSERT_EQ(4,*(test1->GetObject(0)));
 
 }
 // w pêtli tworzenie
@@ -157,4 +165,20 @@ TEST(_C_CircularBuffer,CircBuff_case8)
 		l++;
 	}
 	ASSERT_EQ(4,l); // wykona sie o raz wiêcej bo jeden skasowany
+}
+
+TEST(_C_CircularBuffer,CircBuff_case9)
+{
+	C_CircBuff<double> buff;
+	buff.BuffInit(3);
+	*(buff.AddObject())=1;
+	ASSERT_EQ(1,*(buff.GetFirstInitialized()));
+	*(buff.AddObject())=2;
+	ASSERT_EQ(1,*(buff.GetFirstInitialized()));
+	*(buff.AddObject())=3;
+	*(buff.AddObject())=4; // na poz 1
+	ASSERT_EQ(4,*(buff.GetFirstInitialized()));
+	buff.DelObject();	// kasuje 4, czyli pierwszy jest 2
+	ASSERT_EQ(2,*(buff.GetFirstInitialized()));
+
 }
