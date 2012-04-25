@@ -207,7 +207,7 @@ bool C_LinearWeld::evalNextStartPoint(unsigned int step)
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextStartPoint");
 	// generowanie nowych wspó³rzêdnych dla linii inteprolacyjnej - do paproxymacji profilu
 //	_ASSERT(step!=0);
-	if(P0.getX()==rtg->_cols-1 || 0==step)	// jeœli jesteœmy na ostatniej kolumnie to nie mo¿na wygenerowac kolejnej
+	if(P0.getX()>=rtg->_cols-1 || 0==step)	// jeœli jesteœmy na ostatniej kolumnie to nie mo¿na wygenerowac kolejnej
 		return BLAD;
 	C_Point delta(step,0);	// krok 1 po x
 	_RPT4(_CRT_WARN,"\t\tInput: P0[%.1lf;%.1lf] P1[%.1lf;%.1lf]",P0.getX(),P0.getY(),P1.getX(),P1.getY());

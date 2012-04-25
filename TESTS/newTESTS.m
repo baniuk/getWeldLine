@@ -386,6 +386,62 @@ for a=1:length(nazwa)
         end
     end
 end
+%% C_LinearWeld_Start, start_step10
+clear all
+pa = '..\C_WeldlineDetect_TEST\';
+nazwa = {'testimag1.dat','testimag2.dat','testimag3.dat','testimag4.dat','testimag5.dat','testimag6.dat','testimag7.dat','testimag8.dat','testimag9.dat'};
+for a=1:length(nazwa)
+    figure
+    rtg1 = readbinarymatrix([pa,nazwa{a}]);
+    ImportDumpFile([pa,'C_LinearWeld_Start_start10_',nazwa{a},'.out']);
+    start = 10+1;% piksel od którego starujemy z testu
+
+    lineoke = [NaN(1,start-1) lineok];
+    lineoke = repmat(lineoke,size(rtg1,1),1);
+    subplot(2,1,1)
+    imshow(rtg1,[]); hold on
+    D = weldpos(1:2,:)';
+    S = weldpos(3:4,:)';
+    G = weldpos(5:6,:)';
+    plot(D(:,1),D(:,2),'marker','o','markerfacecolor','r','markersize',2,'LineStyle','-')
+    plot(S(:,1),S(:,2),'marker','.','markerfacecolor','g','markersize',2,'LineStyle','none')
+    plot(G(:,1),G(:,2),'marker','o','markerfacecolor','r','markersize',2,'LineStyle','-')
+    subplot(2,1,2)
+    imshow(rtg1,[]);hold on
+    for aa=1:length(lineok)
+        if lineok(aa)==0
+            plot(aa,size(rtg1,1)/2,'x','markerfacecolor','r','markersize',10)
+        end
+    end
+end
+%% C_LinearWeld_Start, start_step100
+clear all
+pa = '..\C_WeldlineDetect_TEST\';
+nazwa = {'testimag1.dat','testimag2.dat','testimag3.dat','testimag4.dat','testimag5.dat','testimag6.dat','testimag7.dat','testimag8.dat','testimag9.dat'};
+for a=1:length(nazwa)
+    figure
+    rtg1 = readbinarymatrix([pa,nazwa{a}]);
+    ImportDumpFile([pa,'C_LinearWeld_Start_start100_',nazwa{a},'.out']);
+    start = 10+1;% piksel od którego starujemy z testu
+
+    lineoke = [NaN(1,start-1) lineok];
+    lineoke = repmat(lineoke,size(rtg1,1),1);
+    subplot(2,1,1)
+    imshow(rtg1,[]); hold on
+    D = weldpos(1:2,:)';
+    S = weldpos(3:4,:)';
+    G = weldpos(5:6,:)';
+    plot(D(:,1),D(:,2),'marker','o','markerfacecolor','r','markersize',2,'LineStyle','-')
+    plot(S(:,1),S(:,2),'marker','.','markerfacecolor','g','markersize',2,'LineStyle','-')
+    plot(G(:,1),G(:,2),'marker','o','markerfacecolor','r','markersize',2,'LineStyle','-')
+    subplot(2,1,2)
+    imshow(rtg1,[]);hold on
+    for aa=1:length(lineok)
+        if lineok(aa)==0
+            plot(aa,size(rtg1,1)/2,'x','markerfacecolor','r','markersize',10)
+        end
+    end
+end
 %% weryfikacja rêczna na podstawie logu
 clear all
 pa = '..\C_WeldlineDetect_TEST\';
