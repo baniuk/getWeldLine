@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <math.h>
 #include <crtdbg.h>
-#include <wx/defs.h>
-#include <wx/debug.h>
+//#include <wx/defs.h>
+//#include <wx/debug.h>
 
 // Ver 1.3.3 by PB
 

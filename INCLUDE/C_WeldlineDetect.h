@@ -44,11 +44,13 @@ public:
 	/// ustawia parametry procedury i tworzy potrzebne struktury
 	virtual void SetProcedureParameters(unsigned int _k, C_Point _StartPoint)=0;
 	/// Znajduje profil spawu
-	virtual bool Start(unsigned int step)=0;
+	virtual bool Start(unsigned int step,unsigned int ile)=0;
 	/// zwraca wyniki detekcji spawu
 	const vector<bool> *getLineOK() const { return &lineOK; }
 	/// zwraca wyniki detekcji spawu
 	const vector<C_WeldPos> *getweldPos() const { return &weldPos; }
+	/// oblicza aprxymacje jednej linii
+	virtual bool getOneApproxLine(C_WeldPos &weldpos)=0;
 protected:
 	/// przechowuje wskaünik do obrazka
 	const C_Matrix_Container *rtg;

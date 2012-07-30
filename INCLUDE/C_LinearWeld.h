@@ -35,7 +35,9 @@ public:
 	/// Funkcja inicjalizacyjna œrodowiska.
 	void SetProcedureParameters(unsigned int _k, C_Point _StartPoint);
 	/// g³ówna funkcja startowa
-	bool Start(unsigned int step);
+	bool Start(unsigned int step,unsigned int ile);
+	/// oblicza aprxymacje jednej linii
+	bool getOneApproxLine(C_WeldPos &weldpos);
 protected:
 	/// generuje nastêpny punkt startowy
 	bool evalNextStartPoint(unsigned int step);

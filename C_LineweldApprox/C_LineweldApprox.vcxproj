@@ -65,7 +65,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>$(WX_ROOT)\include;$(WX_ROOT)\include\msvc;$(LEVMAR_ROOT);$(LAPACK_ROOT)\include;$(WX_MATHPLOT_ROOT);$(SolutionDir)SDK;$(SolutionDir)INCLUDE;$(LEVMAR_ROOT);$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
     <SourcePath>$(SolutionDir)SOURCE;$(VCInstallDir)atlmfc\src\mfc;$(VCInstallDir)atlmfc\src\mfcm;$(VCInstallDir)atlmfc\src\atl;$(VCInstallDir)crt\src;</SourcePath>
-    <LibraryPath>$(WX_ROOT)\lib\vc_lib\mswd;$(WX_ROOT)\lib\vc_lib;$(LEVMAR_ROOT);$(LAPACK_ROOT)\lib;$(SolutionDir)SDK;$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSdkDir)lib\x64;</LibraryPath>
+    <LibraryPath>$(WX_ROOT)\lib\vc_lib\mswd;$(WX_ROOT)\lib\vc_lib;$(LEVMAR_ROOT);$(LAPACK_ROOT)\lib;$(SolutionDir)SDK;$(VCInstallDir)lib\amd64;$(VCInstallDir)atlmfc\lib\amd64;$(WindowsSdkDir)lib\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <IncludePath>$(GTEST)\include;$(WX_ROOT)\include;$(WX_ROOT)\include\msvc;$(LEVMAR_ROOT);$(LAPACK_ROOT)\include;$(WX_MATHPLOT_ROOT);$(SolutionDir)SDK;$(SolutionDir)INCLUDE;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>

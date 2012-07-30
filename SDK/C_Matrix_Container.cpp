@@ -140,10 +140,10 @@ void C_Matrix_Container::SetPixel(unsigned int row, unsigned int col,double pixe
 		_RPTF0(_CRT_ASSERT, "Matrix not initialized!!\n");
 	#endif
 	*/
-	wxASSERT( data != NULL );
+	_ASSERT( data != NULL );
 #ifndef _EXTERNALDLL
-	wxASSERT(row<_rows);
-	wxASSERT(col<_cols);
+	_ASSERT(row<_rows);
+	_ASSERT(col<_cols);
 #endif
 	data[row*_cols+col] = pixel;
 }

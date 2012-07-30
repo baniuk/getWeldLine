@@ -455,3 +455,53 @@ figure;plot(pr); grid on;hold on
 A=552.38; B=1070.65; C=88.54; D=-0.29; E=1327.35;   % skopiowane z logu
 e = gausslinear(0:size(rtg1,1)-1,A,B,C,D,E);
 plot(e,'-r')
+%% testy procedur cf
+
+% point 1
+clear all
+pa = '..\CalcFeatures_TEST\';
+nazwa = 'testimag9.dat';
+ImportDumpFile([pa,'point1.out']);
+
+poz = poz+1; x=x+1; y = y+1;
+rtg1 = readbinarymatrix([pa,nazwa]);
+figure; imshow(rtg1,[]);
+hold on
+plot(poz(1,1),poz(1,2),'bo');
+plot(poz(2,1),poz(2,2),'rx');
+plot(poz(3,1),poz(3,2),'bs');
+plot(x,y,'gs');
+title(inout)
+
+% point 2
+clear all
+pa = '..\CalcFeatures_TEST\';
+nazwa = 'testimag9.dat';
+ImportDumpFile([pa,'point2.out']);
+
+poz = poz+1; x=x+1; y = y+1;
+rtg1 = readbinarymatrix([pa,nazwa]);
+figure; imshow(rtg1,[]);
+hold on
+plot(poz(1,1),poz(1,2),'bo');
+plot(poz(2,1),poz(2,2),'rx');
+plot(poz(3,1),poz(3,2),'bs');
+plot(x,y,'gs');
+title(inout)
+
+
+% point 3
+clear all
+pa = '..\CalcFeatures_TEST\';
+nazwa = 'testimag9.dat';
+ImportDumpFile([pa,'point3.out']);
+
+poz = poz+1; x=x+1; y = y+1;
+rtg1 = readbinarymatrix([pa,nazwa]);
+figure; imshow(rtg1,[]);
+hold on
+plot(poz(1,1),poz(1,2),'bo');
+plot(poz(2,1),poz(2,2),'rx');
+plot(poz(3,1),poz(3,2),'bs');
+plot(x,y,'gs');
+title(inout)
