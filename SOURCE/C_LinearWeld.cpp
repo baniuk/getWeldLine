@@ -12,12 +12,21 @@
 
 C_LinearWeld::C_LinearWeld( const C_Matrix_Container *_rtg ) : C_WeldlineDetect(_rtg)
 {
-	
+	interp_lines = new C_CircBuff<C_LineInterp>;
+	approx_results = new C_CircBuff<C_LineWeldApprox>;
+	recalculated_approx_data = new C_CircBuff<double>;
+	lineOK = new vector<bool>;
+	weldPos = new vector<C_WeldPos>;
 }
 
 C_LinearWeld::~C_LinearWeld()
 {
 	SAFE_DELETE(_w);
+	SAFE_DELETE(interp_lines);
+	SAFE_DELETE(approx_results);
+	SAFE_DELETE(recalculated_approx_data);
+	SAFE_DELETE(lineOK);
+	SAFE_DELETE(weldPos);
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::~C_LinearWeld\n");
 }
 /** 
@@ -30,15 +39,17 @@ void C_LinearWeld::SetProcedureParameters(unsigned int _k, C_Point _StartPoint)
 {
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::SetProcedureParameters");
 	k = _k;
+	_ASSERT(!(_StartPoint.getX()<1) ||
+			!(_StartPoint.getX()>rtg->_cols-1)); // punkt poza obrazem
 	P0.setPoint(_StartPoint.getX(),0); // dó³ obrazka
 	P1.setPoint(_StartPoint.getX(),rtg->_rows-1);	// góra obrazka
 	// tworzenie buforów na przechowanie danych
 	if(k>0)
 	{
 		_RPT1(_CRT_WARN,"\t\tk = %d",k);
-		approx_results.BuffInit(k);
-		interp_lines.BuffInit(k);
-		recalculated_approx_data.BuffInit(k);
+		approx_results->BuffInit(k);
+		interp_lines->BuffInit(k);
+		recalculated_approx_data->BuffInit(k);
 	}
 	_RPT5(_CRT_WARN,"\t\tk=%.3lf, P0[%.1lf;%.1lf] P1[%.1lf;%.1lf]",k,P0.getX(),P0.getY(),P1.getX(),P1.getY());
 	_RPT0(_CRT_WARN,"\tLeaving C_LinearWeld::SetProcedureParameters\n");
@@ -75,14 +86,14 @@ bool C_LinearWeld::Start(unsigned int step,unsigned int ile)
 		if(liniaok)	// przeliczamy nowe parametry jesli by³a zmiana w buforze
 			evalNextParams();
 		// generowanie linii itp
-		obj = interp_lines.AddObject();	// dodaje now¹ liniê
+		obj = interp_lines->AddObject();	// dodaje now¹ liniê
 		// ustawiam parametry interpolacji - P0 lezy na dole obrazu, P1 na górze, linia pionowa
 		_RPT4(_CRT_WARN,"\t\tInput: P0[%.1lf;%.1lf] P1[%.1lf;%.1lf]",P0.getX(),P0.getY(),P1.getX(),P1.getY());
 		obj->ManualConstructor(SPLINE,P0,P1,rtg->data,rtgsize);
 		// wykonuje interpolacjê - biorê tyle punktów ile jest rzêdów w obrazie + punkty koñcowe. Wyniki s¹ zapamiêtywane w klasie i dostêpne poprzez getInterpolated
 		obj->getPointsOnLine(P0,P1,rtg->_rows+1);
 		// aproksymacja - dodaje obiekt aprox
-		app = approx_results.AddObject();
+		app = approx_results->AddObject();
 		if(obj->getjest_pion()==PIONOWA) // sprawdzam bo jak jest pionowa to aproxymacja jest w funkcji y a jeœli nie to x
 			app->ManualConstructor(typeGaussLin,obj->getInterpolated_data(),obj->getInterpolated_Y(),obj->getSizeofInterpData());
 		else
@@ -105,19 +116,19 @@ bool C_LinearWeld::Start(unsigned int step,unsigned int ile)
 		if(BLAD==czyAccept(app,obj))
 		{
 			liniaok = BLAD;	// nie dodaliœmy nowej linii
-			approx_results.DelObject();
-			interp_lines.DelObject();
-			lineOK.push_back(liniaok);	// te wektory zawieraj¹ ju¿ info o liniach bufora
+			approx_results->DelObject();
+			interp_lines->DelObject();
+			lineOK->push_back(liniaok);	// te wektory zawieraj¹ ju¿ info o liniach bufora
 			currentPos.Clear();	// kasuje wszystko bo ten wpis nie wa¿ny
-			weldPos.push_back(currentPos);
+			weldPos->push_back(currentPos);
 		} else {
 			liniaok = OK;	// dodlaiœmy nowa liniê
-			lineOK.push_back(liniaok);	// linia ok
-			pre = recalculated_approx_data.AddObject(obj->getSizeofInterpData());	// przeliczanie danych -dodawan etylko dla dobrych linii, wiec nie ma potrzeby kasownaia dla z³ych
+			lineOK->push_back(liniaok);	// linia ok
+			pre = recalculated_approx_data->AddObject(obj->getSizeofInterpData());	// przeliczanie danych -dodawan etylko dla dobrych linii, wiec nie ma potrzeby kasownaia dla z³ych
 			y = obj->getInterpolated_Y();
 			app->evalApproxFcnVec(y,pre,obj->getSizeofInterpData());
 			evalWeldPos(app,obj,pre,currentPos);	// wype³niam currentPos w³aœciwymi danymo
-			weldPos.push_back(currentPos);
+			weldPos->push_back(currentPos);
 		}
 		// generowanie nast punktu start (zwrocone z  blad oznacza koniec spawu i wtedy tu przerywamy)
 		ile_done++;
@@ -162,7 +173,7 @@ bool C_LinearWeld::getOneApproxLine(C_WeldPos &weldpos)
 	double sr = app->getInfo(stopreason);
 	_RPT1(_CRT_WARN,"\t\tSTOPREASON: %lf",sr);
 
-	pre = recalculated_approx_data.AddObject(obj->getSizeofInterpData());	// przeliczanie danych
+	pre = recalculated_approx_data->AddObject(obj->getSizeofInterpData());	// przeliczanie danych
 	y = obj->getInterpolated_Y();
 	app->evalApproxFcnVec(y,pre,obj->getSizeofInterpData());
 	evalWeldPos(app,obj,pre,weldpos);	// wype³niam currentPos w³aœciwymi danymo
@@ -191,16 +202,16 @@ bool C_LinearWeld::fillBuffor()
 	bool ret_evalnextparam = OK; // jeœli false to koniec obrazka
 	const double *y;	// dane x do aproxymacji
 	double *pre;	// wskaŸnik na dan¹ w buforze precalculated_approx_data
-	while(!interp_lines.Czy_pelny() && interp_lines.getNumElem()>-1 && ret_evalnextparam==OK)	// dopuki bufor nie jest pe³ny i jednoczeœnie jest zainicjowany
+	while(!interp_lines->Czy_pelny() && interp_lines->getNumElem()>-1 && ret_evalnextparam==OK)	// dopuki bufor nie jest pe³ny i jednoczeœnie jest zainicjowany
 	{
-		obj = interp_lines.AddObject();	// dodaje now¹ liniê
+		obj = interp_lines->AddObject();	// dodaje now¹ liniê
 		// ustawiam parametry interpolacji - P0 lezy na dole obrazu, P1 na górze, linia pionowa
 		_RPT4(_CRT_WARN,"\t\tInput: P0[%.1lf;%.1lf] P1[%.1lf;%.1lf]",P0.getX(),P0.getY(),P1.getX(),P1.getY());
 		obj->ManualConstructor(SPLINE,P0,P1,rtg->data,rtgsize);
 		// wykonuje interpolacjê - biorê tyle punktów ile jest rzêdów w obrazie + punkty koñcowe. Wyniki s¹ zapamiêtywane w klasie i dostêpne poprzez getInterpolated
 		obj->getPointsOnLine(P0,P1,rtg->_rows+1);
 		// aproksymacja - dodaje obiekt aprox
-		app = approx_results.AddObject();
+		app = approx_results->AddObject();
 		// konstruktor manualne
 		if(obj->getjest_pion()==PIONOWA) // sprawdzam bo jak jest pionowa to aproxymacja jest w funkcji y a jeœli nie to x
 			app->ManualConstructor(typeGaussLin,obj->getInterpolated_data(),obj->getInterpolated_Y(),obj->getSizeofInterpData());
@@ -225,18 +236,18 @@ bool C_LinearWeld::fillBuffor()
 		// sprawdzam poprawnoœæ danych
 		if(BLAD==czyAccept(app,obj))
 		{
-			approx_results.DelObject();
-			interp_lines.DelObject();
-			lineOK.push_back(BLAD);
+			approx_results->DelObject();
+			interp_lines->DelObject();
+			lineOK->push_back(BLAD);
 			currentPos.Clear();
-			weldPos.push_back(currentPos);	// wartoœci domyœlne
+			weldPos->push_back(currentPos);	// wartoœci domyœlne
 		} else {
-			lineOK.push_back(OK);	// linia ok
-			pre = recalculated_approx_data.AddObject(obj->getSizeofInterpData());	// przeliczanie danych
+			lineOK->push_back(OK);	// linia ok
+			pre = recalculated_approx_data->AddObject(obj->getSizeofInterpData());	// przeliczanie danych
 			y = obj->getInterpolated_Y();
 			app->evalApproxFcnVec(y,pre,obj->getSizeofInterpData());
 			evalWeldPos(app,obj,pre,currentPos);	// wype³niam currentPos w³aœciwymi danymo
-			weldPos.push_back(currentPos);
+			weldPos->push_back(currentPos);
 		}
 		// generuje nastêpne punkty, w buforze zawsze krok 1
 		ret_evalnextparam = evalNextStartPoint(1);
@@ -276,14 +287,14 @@ bool C_LinearWeld::evalNextParams()
 {
 	_RPT0(_CRT_WARN,"\tEntering C_LinearWeld::evalNextParams");
 #ifdef _DEBUG
-	if(approx_results.getNumElem()<=0)
+	if(approx_results->getNumElem()<=0)
 		_RPT0(_CRT_ASSERT,"C_LinearWeld::evalNextParams->pusty bufor");
 #endif
 	/// \warning Jeœli bufor nie pe³ny to mo¿e zajœæ rozbierznoœæ pomiêdzy buforami, tzn w ró¿nych buforach ko³owych mo¿e byæ ró¿na iloœæ danych. Rozmiar danch tez ma znaczneie przy innych spawach niz liniowe. Trzeba pilnowac zeby zawsze tyle smo punktów by³o
-	int num_el = approx_results.getNumElem(); // wielkoœæ bufora
-	int num_points = interp_lines.GetFirstInitialized()->getSizeofInterpData();
+	int num_el = approx_results->getNumElem(); // wielkoœæ bufora
+	int num_points = interp_lines->GetFirstInitialized()->getSizeofInterpData();
 #ifdef _DEBUG
-	int num_elrec = recalculated_approx_data.getNumElem(); // wielkoœæ bufora
+	int num_elrec = recalculated_approx_data->getNumElem(); // wielkoœæ bufora
 	_ASSERT(num_el==num_elrec); // powinny byæ tego samemgo rozmiaru te bufory
 #endif
 	C_Matrix_Container a(1,num_el);
@@ -306,7 +317,7 @@ bool C_LinearWeld::evalNextParams()
 	unsigned int l;
 	for (int la=l=0;la<num_el;la++)
 	{
-		p_par = approx_results.GetObject(la)->getApproxParams_p(); if(NULL==p_par) continue;
+		p_par = approx_results->GetObject(la)->getApproxParams_p(); if(NULL==p_par) continue;
 		a.data[l] = p_par[A];
 		b.data[l] = p_par[B];
 		c.data[l] = p_par[C];
@@ -347,7 +358,7 @@ bool C_LinearWeld::evalNextParams()
 	unsigned int real_num_el = 0;	// rzeczywista ilosc linii w buforze - gdy niektóre nie bêd¹ zainicjalizowane
 	for(int la=0;la<num_el;la++)	// po liniach w buforze
 	{
-		p_par = recalculated_approx_data.GetObject(la); if(NULL==p_par) continue; // biore dane z la linii w buforze - to s a wartoœci z aproxymacji wype³nione w fillbufor i start na bierz¹co z innymi buforami razem
+		p_par = recalculated_approx_data->GetObject(la); if(NULL==p_par) continue; // biore dane z la linii w buforze - to s a wartoœci z aproxymacji wype³nione w fillbufor i start na bierz¹co z innymi buforami razem
 		real_num_el++;
 		for(int ld=0;ld<num_points;ld++)
 			_w[ld]+=p_par[ld];	// dodaje do bufora wag

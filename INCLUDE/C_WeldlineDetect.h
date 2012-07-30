@@ -46,9 +46,9 @@ public:
 	/// Znajduje profil spawu
 	virtual bool Start(unsigned int step,unsigned int ile)=0;
 	/// zwraca wyniki detekcji spawu
-	const vector<bool> *getLineOK() const { return &lineOK; }
+	const vector<bool> *getLineOK() const { return lineOK; }
 	/// zwraca wyniki detekcji spawu
-	const vector<C_WeldPos> *getweldPos() const { return &weldPos; }
+	const vector<C_WeldPos> *getweldPos() const { return weldPos; }
 	/// oblicza aprxymacje jednej linii
 	virtual bool getOneApproxLine(C_WeldPos &weldpos)=0;
 protected:
@@ -61,20 +61,20 @@ protected:
 	/// wype³nia bufory approxymuj¹c k poczatkowych linii
 	virtual bool fillBuffor()=0;
 	/// przechowuje k poprzednich wyników aproxymacji
-	C_CircBuff<C_LineWeldApprox> approx_results;
+	C_CircBuff<C_LineWeldApprox> *approx_results;
 	/// przechowuje k ostatnich wyników interpolacji linii - dane do aproxymacji i generowania wag
-	C_CircBuff<C_LineInterp> interp_lines;
+	C_CircBuff<C_LineInterp> *interp_lines;
 	/// Bufor pomocniczy przechowuj¹cy przeliczone wartoœci funkcji aproxymuj¹cej - ma na celu przyspieszenie
-	C_CircBuff<double> recalculated_approx_data;
+	C_CircBuff<double> *recalculated_approx_data;
 	/** Przechowuje inforacjê czy linia jest poprawna czy nie - poprawnoœæ okreœlona na podstwie czyAccept. Jesli linia jest poprawna to jest OK a jeœli nie to BLAD*/
-	vector<bool> lineOK;
+	vector<bool> *lineOK;
 	/// iloœæ poprzendich wyników brana pod uwagê
 	unsigned int k;
 	/// rozmiar obrazka wejœciowego potrzebny do funkcji interpoluj¹cej
 	unsigned int rtgsize[3];
 	double *_w; /**< Tablica wag. Jest inicjalizowana jednorazowo w funkcji evalNextParams*/
 	/// tablica przechowuj¹cej obiekty C_WeldPos
-	vector<C_WeldPos> weldPos;
+	vector<C_WeldPos> *weldPos;
 	/// funkcja sprawdza czy obliczona aproksymacja mo¿e byæzaakcepyowana czy nie
 	virtual bool czyAccept(const C_LineWeldApprox *_approx, const C_LineInterp *_interp) = 0;
 	/// funkcja oblicza pozycjespawu dla danej linii

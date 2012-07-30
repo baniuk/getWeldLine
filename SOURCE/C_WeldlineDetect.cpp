@@ -11,7 +11,12 @@
 C_WeldlineDetect::C_WeldlineDetect( const C_Matrix_Container *_rtg ) :
 					rtg(_rtg),
 					k(0),
-					_w(NULL)
+					_w(NULL),
+					approx_results(NULL),
+					interp_lines(NULL),
+					recalculated_approx_data(NULL),
+					lineOK(NULL),
+					weldPos(NULL)
 {
 	rtgsize[0] = rtg->_rows;
 	rtgsize[1] = rtg->_cols;
