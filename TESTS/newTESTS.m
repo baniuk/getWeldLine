@@ -505,3 +505,6 @@ plot(poz(2,1),poz(2,2),'rx');
 plot(poz(3,1),poz(3,2),'bs');
 plot(x,y,'gs');
 title(inout)
+%% testy procedur cf
+pa = '..\CalcFeatures_TEST\';
+ImportDumpFile([pa,'getLineApproxGaussLinWeighted_QFXGGDTKMG.out']);

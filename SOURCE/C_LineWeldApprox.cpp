@@ -92,12 +92,32 @@ int C_LineWeldApprox::getLineApprox(int _iter)
  * @param[in] iter	maximum number of iterations			
  * \return Number of iterations or -1 if failed
  * \warning Zawsze uzywane s¹ parametry domyœlne
+ * \remarks Funkcja zrzuca dane wejœciowe do dlevmar_bc_der do pliku o losowej nazwie
 */
 int C_LineWeldApprox::getLineApproxGaussLinWeighted(int iter)
 {
 	int ret;
 	xtradata X;
 	X.x = x;
+
+#if _DEBUG
+	char randstring[11];
+	srand( (unsigned)time( NULL ) );
+	RangedRand(65,91,10,randstring); randstring[10] = 0;
+	std::string nazwa_pliku("getLineApproxGaussLinWeighted_");
+	std::string Randstring(randstring);
+	nazwa_pliku+=Randstring;
+	nazwa_pliku+=".out";
+	C_DumpAll *dump = new C_DumpAll(nazwa_pliku.c_str());
+	// konwersja i zrucanie
+	dump->AddEntry(p,5,"p");
+	dump->AddEntry(copy_y,len,"copy_y");
+	dump->AddEntry(lb,5,"lb");
+	dump->AddEntry(ub,5,"ub");
+	dump->AddEntry(X.x,len,"x");
+	SAFE_DELETE(dump);
+#endif
+
 	ret = dlevmar_bc_der(GaussLin,
 						jGaussLin,
 						p,
@@ -288,4 +308,22 @@ void C_LineWeldApprox::WeightProfile( const double *_w )
 	SAFE_DELETE(w_tab);
 
 }
-
+/** 
+ * Generate random numbers in the half-closed interval [range_min, range_max). In other words,
+ * range_min <= random number < range_max 
+ * \param[in] range_min min bound
+ * \param[in] range_max max bound
+ * \param[in] n number of chars
+ * \param[out] *tab target table of size n
+ */
+void C_LineWeldApprox::RangedRand( int range_min, int range_max, int n, char *tab )
+{
+	int i;
+	char u;
+	for ( i = 0; i < n; i++ )
+	{
+		u = (char)((double)rand() / (RAND_MAX + 1) * (range_max - range_min)
+			+ range_min);
+		tab[i] = u;
+	}
+}

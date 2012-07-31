@@ -8,7 +8,9 @@
 #define _LineWeldApprox_H_
 
 #include "C_Levmar_Warp.h"
-
+#include <string>
+#include "C_DumpAll.h"
+#include <time.h>
 
 /** 
  * Wykonuje aproxymacjê jednej linii spawu i przechowuje wyniki takiej aproxymacji 
@@ -77,6 +79,8 @@ public:
 	const double* getApproxParams_lb() const;
 	/// Zwraca wybran¹ informacjê o wyniku optymalizacji
 	double getInfo(eOptimInfo _res) const;
+	/// Generuje pseudolosowe znaki
+	void RangedRand( int range_min, int range_max, int n, char *tab );
 };
 
 

@@ -198,3 +198,34 @@ TEST(C_LineweldApprox_Test1, evalApproxFcn_Case_1) {
 	for(unsigned int a=0;a<x._cols;a++)
 		EXPECT_FLOAT_EQ(expected.data[a],y.data[a]);
 }
+
+/// test funkcji Ranged rand - bez inicjalizacji generatora - ka¿de uruchomienie takie same
+TEST(C_LineweldApprox_Test1, RangedRand_Case_1) {
+	C_LineWeldApprox obj;
+	int n = 10;
+	char out[10];
+
+	obj.RangedRand(65,91,10,out);
+
+	std::cout << "RandomStr: ";
+	for(int a=0;a<n;a++)
+		std::cout << out[a];
+	std::cout << "\n";
+
+}
+
+/// test funkcji Ranged rand - z inicjalizacj¹ generatora
+TEST(C_LineweldApprox_Test1, RangedRand_Case_2) {
+	C_LineWeldApprox obj;
+	int n = 10;
+	char out[10];
+
+	srand( (unsigned)time( NULL ) );
+	obj.RangedRand(65,91,10,out);
+
+	std::cout << "RandomStr: ";
+	for(int a=0;a<n;a++)
+		std::cout << out[a];
+	std::cout << "\n";
+
+}
