@@ -508,3 +508,27 @@ title(inout)
 %% testy procedur cf
 pa = '..\CalcFeatures_TEST\';
 ImportDumpFile([pa,'getLineApproxGaussLinWeighted_QFXGGDTKMG.out']);
+%% testy cf - szukanie problemów e stosem
+pa = '..\CalcFeatures_TEST\';
+
+im1 = double(imread('100_01s.tif'));
+im2 = double(imread('14-35-49_257A_flaw1A_normal.tif'));
+
+savebinarymatrix(im1,[pa,'100_01s.dat']);
+savebinarymatrix(im1,[pa,'14-35-49_257A_flaw1A_normal.dat']);
+
+% point 1
+clear all
+pa = '..\CalcFeatures_TEST\';
+nazwa = '100_01s.dat';
+ImportDumpFile([pa,'point1_1.out']);
+
+poz = poz+1; x=x+1; y = y+1;
+rtg1 = readbinarymatrix([pa,nazwa]);
+figure; imshow(rtg1,[]);
+hold on
+plot(poz(1,1),poz(1,2),'bo');
+plot(poz(2,1),poz(2,2),'rx');
+plot(poz(3,1),poz(3,2),'bs');
+plot(x,y,'gs');
+title(inout)

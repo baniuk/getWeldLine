@@ -39,8 +39,8 @@ protected:
 	/// dostêp do danych prywatnych
 	void access_interpaprox(C_LinearWeld *obj, C_CircBuff<C_LineWeldApprox> **approx,C_CircBuff<C_LineInterp> **interp)
 	{
-		*(approx) = &obj->approx_results;
-		*(interp) = &obj->interp_lines;
+		*(approx) = obj->approx_results;
+		*(interp) = obj->interp_lines;
 	}
 	/// dostêp do funkcji prywatnej
 	bool access_evalNextParams(C_LinearWeld *obj)

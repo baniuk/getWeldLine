@@ -1,21 +1,28 @@
-The current local time is: Tue Jul 31 22:49:42 2012
+The current local time is: Wed Aug 01 22:26:18 2012
 
 ------ Entering Test point1 ------
 Start Point: [100.0,100.0]
 	Entering C_LinearWeld::SetProcedureParameters		k = 1		k=0.000, P0[100.0;0.0] P1[100.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
-	Entering C_LinearWeld::getOneApproxLine		ITER: 24		STOPREASON: 2.000000	Entering C_LinearWeld::evalWeldPos		max_el: 1791.1		max_el_pos: 1035		_weldPos.S.setPoint(100.000000.1,1034.432877.1])		max_lin = 992.866691.1		_weldPos.G.setPoint(100.000000.1,1198.343014.1])		_weldPos.D.setPoint(100.000000.1,869.523288.1])		maxlin: 992.867		G: [100.0,1198.3]		S: [100.0,1034.4]		D: [100.0,869.5]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::getOneApproxLine		ITER: 24		STOPREASON: 2.000000	Entering C_LinearWeld::evalWeldPos		max_el: 1791.1		max_el_pos: 1035		_weldPos.S.setPoint(100.0,1034.4])		max_lin = 992.866691.1		_weldPos.G.setPoint(100.0,1198.3])		_weldPos.D.setPoint(100.0,869.5])		maxlin: 992.867		G: [100.0,1198.3]		S: [100.0,1034.4]		D: [100.0,869.5]	Leaving C_LinearWeld::evalWeldPos
 	Entering C_LinearWeld::czyAccept		err=2.750e+003	Leaving C_LinearWeld::czyAccept
 	Leaving C_LinearWeld::getOneApproxLine
 		G S D RET: [1098.3, 934.4, 769.5, 1]	Entering C_LinearWeld::~C_LinearWeld
 ------ Entering Test point2 ------
 Start Point: [2389.0,181.0]
 	Entering C_LinearWeld::SetProcedureParameters		k = 1		k=0.000, P0[2389.0;0.0] P1[2389.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
-	Entering C_LinearWeld::getOneApproxLine		ITER: 49		STOPREASON: 2.000000	Entering C_LinearWeld::evalWeldPos		max_el: 1642.1		max_el_pos: 1071		_weldPos.S.setPoint(2389.000000.1,1070.413151.1])		max_lin = 958.025646.1		_weldPos.G.setPoint(2389.000000.1,1173.356712.1])		_weldPos.D.setPoint(2389.000000.1,952.477808.1])		maxlin: 958.026		G: [2389.0,1173.4]		S: [2389.0,1070.4]		D: [2389.0,952.5]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::getOneApproxLine		ITER: 49		STOPREASON: 2.000000	Entering C_LinearWeld::evalWeldPos		max_el: 1642.1		max_el_pos: 1071		_weldPos.S.setPoint(2389.0,1070.4])		max_lin = 958.025646.1		_weldPos.G.setPoint(2389.0,1173.4])		_weldPos.D.setPoint(2389.0,952.5])		maxlin: 958.026		G: [2389.0,1173.4]		S: [2389.0,1070.4]		D: [2389.0,952.5]	Leaving C_LinearWeld::evalWeldPos
 	Entering C_LinearWeld::czyAccept		err=1.091e+004		 Deleted: error	Leaving C_LinearWeld::getOneApproxLine
 		G S D RET: [992.4, 889.4, 771.5, 0]	Entering C_LinearWeld::~C_LinearWeld
 ------ Entering Test point3 ------
 Start Point: [4166.0,1029.0]
 	Entering C_LinearWeld::SetProcedureParameters		k = 1		k=0.000, P0[4166.0;0.0] P1[4166.0;1824.0]	Leaving C_LinearWeld::SetProcedureParameters
-	Entering C_LinearWeld::getOneApproxLine		ITER: 200		STOPREASON: 3.000000	Entering C_LinearWeld::evalWeldPos		max_el: 1914.0		max_el_pos: 513		_weldPos.S.setPoint(4166.000000.1,512.718904.1])		max_lin = 251.255232.1		_weldPos.G.setPoint(4166.000000.1,1824.000000.1])		_weldPos.D.setPoint(4166.000000.1,0.000000.1])		maxlin: 251.255		G: [4166.0,1824.0]		S: [4166.0,512.7]		D: [4166.0,0.0]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::getOneApproxLine		ITER: 200		STOPREASON: 3.000000	Entering C_LinearWeld::evalWeldPos		max_el: 1914.0		max_el_pos: 513		_weldPos.S.setPoint(4166.0,512.7])		max_lin = 251.255232.1		_weldPos.G.setPoint(4166.0,1824.0])		_weldPos.D.setPoint(4166.0,0.0])		maxlin: 251.255		G: [4166.0,1824.0]		S: [4166.0,512.7]		D: [4166.0,0.0]	Leaving C_LinearWeld::evalWeldPos
 	Entering C_LinearWeld::czyAccept		err=1.203e+004		 Deleted: error	Leaving C_LinearWeld::getOneApproxLine
 		G S D RET: [795.0, 516.3, 1029.0, 0]	Entering C_LinearWeld::~C_LinearWeld
+------ Entering Test point1 ------
+Start Point: [767.0,100.0]
+	Entering C_LinearWeld::SetProcedureParameters		k = 1		k=0.000, P0[767.0;0.0] P1[767.0;598.0]	Leaving C_LinearWeld::SetProcedureParameters
+	Entering C_LinearWeld::getOneApproxLine		ITER: 200		STOPREASON: 3.000000	Entering C_LinearWeld::evalWeldPos		max_el: 450.2		max_el_pos: 415		_weldPos.S.setPoint(767.0,414.3])		max_lin = -485.276233.1		_weldPos.G.setPoint(767.0,598.0])		_weldPos.D.setPoint(767.0,0.0])		maxlin: -485.276		G: [767.0,598.0]		S: [767.0,414.3]		D: [767.0,0.0]	Leaving C_LinearWeld::evalWeldPos
+	Entering C_LinearWeld::czyAccept		err=4.809e+003	Leaving C_LinearWeld::czyAccept
+	Leaving C_LinearWeld::getOneApproxLine
+		G S D RET: [498.0, 314.3, 100.0, 1]	Entering C_LinearWeld::~C_LinearWeld

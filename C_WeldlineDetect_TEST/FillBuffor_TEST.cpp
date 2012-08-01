@@ -40,9 +40,9 @@ protected:
 	}
 	void access_interpaprox(C_LinearWeld *obj, C_CircBuff<C_LineWeldApprox> **approx,C_CircBuff<C_LineInterp> **interp,C_CircBuff<double> **rec)
 	{
-		*(approx) = &obj->approx_results;
-		*(interp) = &obj->interp_lines;
-		*(rec) = &obj->recalculated_approx_data;
+		*(approx) = obj->approx_results;
+		*(interp) = obj->interp_lines;
+		*(rec) = obj->recalculated_approx_data;
 	}
 	void access_pwublb(C_LinearWeld *obj, double **p,double **ub,double **lb,double **w)
 	{

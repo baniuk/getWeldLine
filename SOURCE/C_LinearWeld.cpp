@@ -438,7 +438,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 	pos = floor(pos+0.5);	// zaokraglona do ca³kowitej
 	_RPT1(_CRT_WARN,"\t\tmax_el_pos: %d",(int)pos);
 	_weldPos.S.setPoint(x[(int)pos],y[(int)pos]); // ustawiam pozycjê œrodka na wyjœciu
-	_RPT2(_CRT_WARN,"\t\t_weldPos.S.setPoint(%lf.1,%lf.1])",x[(int)pos],y[(int)pos]);
+	_RPT2(_CRT_WARN,"\t\t_weldPos.S.setPoint(%.1lf,%.1lf])",x[(int)pos],y[(int)pos]);
 
 	p = _approx->getApproxParams_p();
 	max_lin = y[(int)pos]*p[D]+p[E]; // wartoœæ trendu dla pozycji max 
@@ -455,7 +455,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 	if(0==licznik)
 		indexy[0] = _interp->getSizeofInterpData()-1;// ostatni element
 	_weldPos.G.setPoint(x[indexy[0]],y[indexy[0]]); // ustawiam pozycjê góry na wyjœciu
-	_RPT2(_CRT_WARN,"\t\t_weldPos.G.setPoint(%lf.1,%lf.1])",x[indexy[0]],y[indexy[0]]);
+	_RPT2(_CRT_WARN,"\t\t_weldPos.G.setPoint(%.1lf,%.1lf])",x[indexy[0]],y[indexy[0]]);
 
 	// dolna granica do œrodka
 	licznik = 0;
@@ -483,7 +483,7 @@ void C_LinearWeld::evalWeldPos( const C_LineWeldApprox *_approx, const C_LineInt
 	if(0==licznik)
 		indexy[0] = 0;// pierwszy element
 	_weldPos.D.setPoint(x[indexy[0]],y[indexy[0]]); // ustawiam pozycjê œrodka na wyjœciu
-	_RPT2(_CRT_WARN,"\t\t_weldPos.D.setPoint(%lf.1,%lf.1])",x[indexy[0]],y[indexy[0]]);
+	_RPT2(_CRT_WARN,"\t\t_weldPos.D.setPoint(%.1lf,%.1lf])",x[indexy[0]],y[indexy[0]]);
 
 	_RPT1(_CRT_WARN,"\t\tmaxlin: %.3lf",max_lin);
 	_RPT2(_CRT_WARN,"\t\tG: [%.1lf,%.1lf]",_weldPos.G.getX(),_weldPos.G.getY());
